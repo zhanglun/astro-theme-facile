@@ -16,16 +16,21 @@ export interface CircleArrowProps {
 export function CircleArrow(props: CircleArrowProps) {
   const { size = 24, rotate = 0, theme = "dark", className } = props;
 
-  const style = {
+  const svgStyle = {
     transform: `rotate(${rotate}deg)`,
     width: `${size * 16}px`,
     height: `${size * 16}px`,
   };
 
+  const boxClass = `
+    inline-block text-0 p-1 border-[var(--color-text-base)] border leading-none rounded-full transition-all duration-150 ease-in-out 
+     ${theme === 'dark' ? 'bg-[var(--color-text-base)] text-[white]' : 'bg-[white] text-[var(--color-text-base)]'} 
+     ${theme === 'dark' ? '' : 'hover:bg-[var(--color-text-base)] hover:text-[white]'} 
+     ${className}
+  `;
+
   return (
-    <div
-      className={`inline-block text-0 p-1 border-[var(--color-text-base)] rounded-full transition-all duration-150 ease-in-out ${styles[theme]} ${className}`}
-    >
+    <div className={boxClass}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -33,7 +38,7 @@ export function CircleArrow(props: CircleArrowProps) {
         height="24"
         fill="none"
         className="group-hover:fill-[var(--color-text-base)]"
-        style={style}
+        style={svgStyle}
       >
         <path
           stroke="currentColor"
