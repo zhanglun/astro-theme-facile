@@ -26,11 +26,15 @@ const next = pageNum < totalPages ? "" : "disabled";
 <Layout title={`Posts | ${SITE.title}`}>
   <Header activeNav="blogs" />
   <Main pageTitle="Blogs" pageDesc="All the articles I've posted.">
-    <ul>
+    <ul class="grid w-full lg:gap-y-14 lg:grid-cols-[repeat(12,1fr)] lg:gap-6">
       {
-        posts.map(({ frontmatter }) => {
+        posts.map(({ frontmatter, compiledContent }) => {
           return (
-            <Card href={`/posts/${slugify(frontmatter)}`} post={frontmatter} />
+            <Card
+              href={`/blogs/${slugify(frontmatter)}`}
+              frontmatter={frontmatter}
+              rawContent={compiledContent()}
+            />
           );
         })
       }
@@ -53,7 +57,7 @@ const next = pageNum < totalPages ? "" : "disabled";
         </LinkButton>
         <LinkButton
           disabled={next === "disabled"}
-          href={`/posts/${pageNum + 1}`}
+          href={`/blogs/${pageNum + 1}`}
           className={`ml-4 select-none ${next}`}
           ariaLabel="Next"
         >
@@ -73,7 +77,7 @@ const next = pageNum < totalPages ? "" : "disabled";
             ? ""
             : `/posts${pageNum - 1 !== 1 ? "/" + (pageNum - 1) : ""}`
         }
-        nextPage={next === "disabled" ? "" : `/posts/${pageNum + 1}`}
+        nextPage={next === "disabled" ? "" : `/blogs/${pageNum + 1}`}
       />
     )
   }

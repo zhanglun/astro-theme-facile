@@ -10,7 +10,6 @@ export interface Props {
 const { pageTitle, pageDesc } = Astro.props;
 ---
 
-<Breadcrumbs />
 <main id="main-content">
   <PageHero title={pageTitle} subTitle={pageDesc || ''} />
   <slot />

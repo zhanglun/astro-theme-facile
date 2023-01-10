@@ -3,29 +3,34 @@ import type { Frontmatter } from "src/types";
 
 export interface Props {
   href?: string;
-  post: Frontmatter;
+  frontmatter: Frontmatter;
   secHeading?: boolean;
+  rawContent: string;
 }
 
 const styles = {
-  cardContainer: "my-6",
+  cardContainer: "lg:col-[span_3] sm:col-[span_2]",
   titleLink:
     "text-skin-accent font-medium text-lg underline-offset-4 decoration-dashed focus-visible:no-underline focus-visible:underline-offset-0 inline-block",
   titleHeading: "font-medium text-lg decoration-dashed hover:underline",
 };
 
-export default function Card({ href, post, secHeading = true }: Props) {
+export default function Card({ href, frontmatter, secHeading = true, rawContent }: Props) {
+  const text = rawContent.replace(/<[^>]+>/ig, '')
+  const firstPeriodIdx = text.search(/\.\s|。/ig)
+  const description = frontmatter.description || text.slice(0, Math.min(250, firstPeriodIdx + 1))
+
   return (
     <li className={styles.cardContainer}>
       <a href={href} className={styles.titleLink}>
         {secHeading ? (
-          <h2 className={styles.titleHeading}>{post.title}</h2>
+          <h2 className={styles.titleHeading}>{frontmatter.title}</h2>
         ) : (
-          <h3 className={styles.titleHeading}>{post.title}</h3>
+          <h3 className={styles.titleHeading}>{frontmatter.title}</h3>
         )}
       </a>
-      <Datetime datetime={post.datetime} />
-      <p>{post.description}</p>
+      <Datetime datetime={frontmatter.datetime} />
+      <p>{description}</p>
     </li>
   );
 }

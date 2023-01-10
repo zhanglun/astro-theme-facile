@@ -9,6 +9,7 @@ type SearchItem = {
   description: string;
   headings: string[];
   frontmatter: Frontmatter;
+  compiledContent: string;
 };
 
 interface Props {
@@ -56,6 +57,7 @@ export default function SearchBar({ searchList }: Props) {
     // Add search result only if
     // input value is more than one character
     let inputResult = inputVal.length > 1 ? fuse.search(inputVal) : [];
+    
     setSearchResults(inputResult);
 
     // Update search string in URL
@@ -108,9 +110,10 @@ export default function SearchBar({ searchList }: Props) {
         {searchResults &&
           searchResults.map(({ item, refIndex }) => (
             <Card
-              post={item.frontmatter}
-              href={`/posts/${slugify(item.frontmatter)}`}
+              frontmatter={item.frontmatter}
+              href={`/blogs/${slugify(item.frontmatter)}`}
               key={`${refIndex}-${slugify(item.frontmatter)}`}
+              rawContent={item.compiledContent}
             />
           ))}
       </ul>
