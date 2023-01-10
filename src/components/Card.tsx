@@ -15,10 +15,16 @@ const styles = {
   titleHeading: "font-medium text-lg decoration-dashed hover:underline",
 };
 
-export default function Card({ href, frontmatter, secHeading = true, rawContent }: Props) {
-  const text = rawContent.replace(/<[^>]+>/ig, '')
-  const firstPeriodIdx = text.search(/\.\s|。/ig)
-  const description = frontmatter.description || text.slice(0, Math.min(250, firstPeriodIdx + 1))
+export default function Card({
+  href,
+  frontmatter,
+  secHeading = true,
+  rawContent,
+}: Props) {
+  const text = rawContent.replace(/<[^>]+>/gi, "");
+  const firstPeriodIdx = text.search(/\.\s|。/gi);
+  const description =
+    frontmatter.description || text.slice(0, Math.min(250, firstPeriodIdx + 1));
 
   return (
     <li className={styles.cardContainer}>

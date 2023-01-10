@@ -3,8 +3,8 @@ import React from "react";
 import * as styles from "./index.module.css";
 
 export enum CircleArrowThemeEnum {
-  "dark" = "dark",
-  "light" = "light",
+  dark = "dark",
+  light = "light",
 }
 export interface CircleArrowProps {
   size?: number;

@@ -25,7 +25,7 @@ export default function SearchBar({ searchList }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputVal, setInputVal] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[] | null>(
-    null
+    null,
   );
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -57,7 +57,7 @@ export default function SearchBar({ searchList }: Props) {
     // Add search result only if
     // input value is more than one character
     let inputResult = inputVal.length > 1 ? fuse.search(inputVal) : [];
-    
+
     setSearchResults(inputResult);
 
     // Update search string in URL

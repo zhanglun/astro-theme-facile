@@ -10,7 +10,7 @@ const postImportResult = import.meta.glob<MarkdownInstance<Frontmatter>>(
   "../contents/**/**/*.md",
   {
     eager: true,
-  }
+  },
 );
 const posts = Object.values(postImportResult);
 
