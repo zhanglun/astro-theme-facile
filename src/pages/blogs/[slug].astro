@@ -1,6 +1,6 @@
 ---
 import { SITE } from "src/config";
-import Posts from "@layouts/Posts.astro";
+import Blogs from "@layouts/Blogs.astro";
 import PostDetails from "@layouts/PostDetails.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
@@ -29,7 +29,6 @@ type PagePaths = {
 
 export async function getStaticPaths() {
   const posts = await Astro.glob<Frontmatter>("../../contents/**/*.md");
-
   const filteredPosts = posts.filter(({ frontmatter }) => !frontmatter.draft);
 
   let postResult: PostResult = filteredPosts.map(post => {
@@ -75,7 +74,7 @@ const paginatedPosts = sortedPosts.slice(startPost, lastPost);
   post ? (
     <PostDetails post={post} />
   ) : (
-    <Posts
+    <Blogs
       posts={paginatedPosts}
       pageNum={currentPage}
       totalPages={totalPages.length}

@@ -1,4 +1,4 @@
-# astro-theme-facile 📄
+# astro-theme-facile :construction: :WIP:
 
 ![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![GitHub](https://img.shields.io/github/license/zhanglun/astro-theme-facile?color=%232F3741&style=for-the-badge)

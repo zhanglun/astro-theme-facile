@@ -1,5 +1,5 @@
 ---
-import { LOGO_IMAGE, SITE } from "src/config";
+import { LOGO_IMAGE, SITE, MENU } from "src/config";
 import Hr from "./Hr.astro";
 import LinkButton from "./LinkButton.astro";
 
@@ -7,7 +7,7 @@ import logoPNG from "/assets/logo.png";
 import logoSVG from "/assets/logo.svg";
 
 export interface Props {
-  activeNav?: "posts" | "tags" | "about" | "search";
+  activeNav?: "blogs" | "tags" | "about" | "search";
 }
 
 const { activeNav } = Astro.props;
@@ -45,21 +45,15 @@ const { activeNav } = Astro.props;
           </div>
         </button>
         <ul id="menu-items" class="display-none sm:flex">
-          <li>
-            <a href="/posts" class={activeNav === "posts" ? "active" : ""}>
-              Posts
-            </a>
-          </li>
-          <li>
-            <a href="/tags" class={activeNav === "tags" ? "active" : ""}>
-              Tags
-            </a>
-          </li>
-          <li>
-            <a href="/about" class={activeNav === "about" ? "active" : ""}>
-              About
-            </a>
-          </li>
+          {
+            (MENU || []).map((item: any) => (
+              <li>
+                <a class={activeNav === item.id ? "active" : ""}href={item.url}>
+                  <span>{item.name}</span>
+                </a>
+              </li>
+            ))
+          }
           <li>
             <LinkButton
               href="/search"
@@ -102,7 +96,6 @@ const { activeNav } = Astro.props;
       </nav>
     </div>
   </div>
-  <Hr />
 </header>
 
 <style>
@@ -110,13 +103,13 @@ const { activeNav } = Astro.props;
     @apply bg-skin-accent text-skin-inverted py-2 px-3 absolute -top-full focus:top-4 left-16 z-50 transition-all;
   }
   .nav-container {
-    @apply max-w-3xl mx-auto flex flex-col sm:flex-row justify-between items-center;
+    @apply max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center;
   }
   .top-nav-wrap {
-    @apply relative w-full p-4 sm:py-8 flex justify-between items-start sm:items-center;
+    @apply relative w-full flex justify-between items-start sm:py-5 sm:items-center;
   }
   .logo {
-    @apply absolute sm:static font-semibold text-xl sm:text-2xl py-1;
+    @apply absolute sm:static font-semibold text-xl sm:text-2xl py-1 shrink-0;
   }
   .hamburger-menu {
     @apply self-end p-2 sm:hidden;

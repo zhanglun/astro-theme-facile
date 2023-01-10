@@ -24,8 +24,8 @@ const next = pageNum < totalPages ? "" : "disabled";
 ---
 
 <Layout title={`Posts | ${SITE.title}`}>
-  <Header activeNav="posts" />
-  <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
+  <Header activeNav="blogs" />
+  <Main pageTitle="Blogs" pageDesc="All the articles I've posted.">
     <ul>
       {
         posts.map(({ frontmatter }) => {

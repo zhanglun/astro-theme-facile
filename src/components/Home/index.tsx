@@ -1,9 +1,6 @@
 import React from "react";
 import Icon from "../../assets/icon.png";
-import * as styles from "./index.module.css";
 import { CircleArrow, CircleArrowThemeEnum } from "../CircleArrow";
-
-console.log("🚀 ~ file: index.tsx:4 ~ styles", styles);
 
 export interface HomeProps {
   siteInfo: any;

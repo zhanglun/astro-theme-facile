@@ -3,10 +3,7 @@ import type { SocialObjects } from "./types";
 export const SITE = {
   website: "https://zhanglun.github.io",
   title: "Astro blog facile",
-  author: {
-    name: "zhanglun",
-    summary: "感受生活",
-  },
+  author: "zhanglun",
   description: "A clean, responsive and SEO-friendly Astro blog theme.",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
@@ -22,22 +19,22 @@ export const MENU = [
     url: "/",
   },
   {
-    id: "blog",
+    id: "blogs",
     name: "博文",
     url: "/blogs",
   },
   {
-    id: "category",
+    id: "categories",
     name: "分类",
     url: "/categories",
   },
   {
-    id: "archive",
+    id: "archives",
     name: "归档",
     url: "/archives",
   },
   {
-    id: "lab",
+    id: "labs",
     name: "实验室",
     url: "/labs",
   },
