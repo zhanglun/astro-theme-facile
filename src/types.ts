@@ -8,6 +8,7 @@ export interface Frontmatter {
   featured: boolean;
   draft: boolean;
   tags: string[];
+  categories: string[];
 }
 
 export type SocialObjects = {
