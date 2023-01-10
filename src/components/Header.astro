@@ -1,13 +1,12 @@
 ---
 import { LOGO_IMAGE, SITE, MENU } from "src/config";
-import Hr from "./Hr.astro";
 import LinkButton from "./LinkButton.astro";
 
 import logoPNG from "/assets/logo.png";
 import logoSVG from "/assets/logo.svg";
 
 export interface Props {
-  activeNav?: "blogs" | "tags" | "about" | "search";
+  activeNav?: "blogs" | 'categories' | "archives" | "tags" | "about" | "search";
 }
 
 const { activeNav } = Astro.props;

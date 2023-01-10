@@ -2,18 +2,18 @@ import { slugifyStr } from "./slugify";
 import type { MarkdownInstance } from "astro";
 import type { Frontmatter } from "../types";
 
-const getUniqueTags = (posts: MarkdownInstance<Frontmatter>[]) => {
-  let tags: string[] = [];
+const getUniqueCategories = (posts: MarkdownInstance<Frontmatter>[]) => {
+  let categories: string[] = [];
   const filteredPosts = posts.filter(({ frontmatter }) => !frontmatter.draft);
   filteredPosts.forEach((post) => {
-    tags = [...tags, ...(post.frontmatter.tags || [])]
-      .map((tag) => slugifyStr(tag))
+    categories = categories.concat(post.frontmatter.categories)
+      .map((category) => slugifyStr(category))
       .filter(
         (value: string, index: number, self: string[]) =>
-          self.indexOf(value) === index,
+          self.indexOf(value) === index && value
       );
   });
-  return tags;
+  return categories;
 };
 
-export default getUniqueTags;
+export default getUniqueCategories;

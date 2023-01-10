@@ -36,7 +36,7 @@ export default function Card({
         )}
       </a>
       <Datetime datetime={frontmatter.datetime} />
-      <p>{description}</p>
+      <p className="break-all">{description}</p>
     </li>
   );
 }
