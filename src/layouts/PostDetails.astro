@@ -13,7 +13,7 @@ export interface Props {
 
 const { frontmatter, Content } = Astro.props.post;
 
-const { title, author, description, ogImage, datetime, tags } = frontmatter;
+const { title, author, description, ogImage, date, tags } = frontmatter;
 
 console.log("🚀 ~ file: PostDetails.astro:17 ~ frontmatter", frontmatter)
 
@@ -37,7 +37,7 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
   </div>
   <main id="main-content">
     <h1 class="post-title">{title}</h1>
-    <Datetime datetime={datetime} size="lg" className="my-2" />
+    <Datetime datetime={date} size="lg" className="my-2" />
     <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose">
       <Content />
     </article>

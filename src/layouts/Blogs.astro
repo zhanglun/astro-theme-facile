@@ -27,7 +27,7 @@ const next = pageNum < totalPages ? "" : "disabled";
 <Layout title={`Posts | ${SITE.title}`}>
   <Header activeNav="blogs" />
   <Main pageTitle="Blogs" pageDesc="All the articles I've posted.">
-    <BlogList allPosts={allPosts} />
+    <BlogList allPosts={allPosts} client:load />
     <!-- <ul class="grid w-full lg:gap-y-14 lg:grid-cols-[repeat(12,1fr)] lg:gap-6">
       {
         posts.map(({ frontmatter, compiledContent }) => {
@@ -43,7 +43,7 @@ const next = pageNum < totalPages ? "" : "disabled";
     </ul> -->
   </Main>
 
-  {
+  <!-- {
     totalPages > 1 && (
       <nav class="pagination-wrapper" aria-label="Pagination">
         <ListPagination
@@ -57,14 +57,14 @@ const next = pageNum < totalPages ? "" : "disabled";
         />
       </nav>
     )
-  }
+  } -->
 
   <Footer noMarginTop={totalPages > 1} />
 </Layout>
 
 <style>
   .pagination-wrapper {
-    @apply max-w-7xl mx-auto w-full flex justify-center mt-auto mb-8;
+    @apply max-w-screen-2xl mx-auto w-full flex justify-center mt-auto mb-8;
   }
   .disabled {
     @apply opacity-50 hover:text-skin-base group-hover:fill-skin-base pointer-events-none select-none;

@@ -5,38 +5,31 @@ export interface Props {
   href?: string;
   frontmatter: Frontmatter;
   secHeading?: boolean;
-  rawContent: string;
+  rawContent?: string;
 }
 
 const styles = {
-  cardContainer: "lg:col-[span_3] sm:col-[span_2]",
+  cardContainer: "relative lg:col-[span_3] sm:col-[span_2]",
   titleLink:
-    "text-skin-accent font-medium text-lg underline-offset-4 decoration-dashed focus-visible:no-underline focus-visible:underline-offset-0 inline-block",
-  titleHeading: "font-medium text-lg decoration-dashed hover:underline",
+    `block text-skin-accent 
+    font-medium text-2xl underline-offset-4 
+    decoration-dashed 
+    mb-2
+    focus-visible:no-underline focus-visible:underline-offset-0`,
+  titleHeading: "tracking font-medium text-lg decoration-dashed hover:underline",
 };
 
-export default function Card({
-  href,
-  frontmatter,
-  secHeading = true,
-  rawContent,
-}: Props) {
-  const text = rawContent.replace(/<[^>]+>/gi, "");
-  const firstPeriodIdx = text.search(/\.\s|。/gi);
-  const description =
-    frontmatter.description || text.slice(0, Math.min(250, firstPeriodIdx + 1));
-
+export default function Card({ href, frontmatter, secHeading = true }: Props) {
   return (
     <li className={styles.cardContainer}>
       <a href={href} className={styles.titleLink}>
         {secHeading ? (
-          <h2 className={styles.titleHeading}>{frontmatter.title}</h2>
+          <h2 className="tracking-tighter leading-none font-medium text-2xl decoration-dashed hover:underline">{frontmatter.title}</h2>
         ) : (
           <h3 className={styles.titleHeading}>{frontmatter.title}</h3>
         )}
       </a>
-      <Datetime datetime={frontmatter.datetime} />
-      <p className="break-all">{description}</p>
+      <p className="break-all tracking-tighter leading-tight text-sm">{frontmatter.description}</p>
     </li>
   );
 }

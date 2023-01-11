@@ -3,21 +3,42 @@ import type { MarkdownInstance } from "astro";
 import type { Frontmatter } from "../types";
 
 const getUniqueYears = (posts: MarkdownInstance<Frontmatter>[]) => {
-  const filteredPosts = posts.filter(({ frontmatter }) => !frontmatter.draft);
+  const wMap = new Map();
+  const filteredPosts = posts
+    .filter(({ frontmatter }) => !frontmatter.draft)
+    .sort((a, b) => {
+      const l = new Date(a.frontmatter.date);
+      const r = new Date(b.frontmatter.date);
 
-  return filteredPosts.reduce((acu: { [key: string]: MarkdownInstance<Frontmatter>[] }, cur: MarkdownInstance<Frontmatter>) => {
-    const { datetime } = cur.frontmatter
-    let year = Date.parse(datetime) ? new Date(datetime).getFullYear() + '' : '1999'
-    console.log("🚀 ~ file: getUniqueYears.ts:11 ~ returnfilteredPosts.reduce ~ year", year)
+      if (l > r) {
+        return -1;
+      } else if (l < r) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
 
-    if (!acu[year]) {
-      acu[year] = []
+  filteredPosts.forEach((cur: MarkdownInstance<Frontmatter>) => {
+    const { date } = cur.frontmatter;
+    let year = parseInt(Date.parse(date) ? new Date(date).getFullYear() + "" : "1999");
+
+    if (!wMap.get(year)) {
+      wMap.set(year, []);
     }
 
-    acu[year].push(cur)
+    wMap.set(year, [...wMap.get(year), cur]);
+  });
 
-    return acu
-  }, {});
+  return new Map([...wMap.entries()].sort((l, r) => {
+    if (l > r) {
+      return -1;
+    } else if (l < r) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }));
 };
 
 export default getUniqueYears;

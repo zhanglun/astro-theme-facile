@@ -7,7 +7,7 @@ export const SITE = {
   description: "A clean, responsive and SEO-friendly Astro blog theme.",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
-  postPerPage: 5,
+  postPerPage: 8,
   social: {
     twitter: "zhanglun1410",
   },
