@@ -28,19 +28,6 @@ const next = pageNum < totalPages ? "" : "disabled";
   <Header activeNav="blogs" />
   <Main pageTitle="Blogs" pageDesc="All the articles I've posted.">
     <BlogList allPosts={allPosts} client:load />
-    <!-- <ul class="grid w-full lg:gap-y-14 lg:grid-cols-[repeat(12,1fr)] lg:gap-6">
-      {
-        posts.map(({ frontmatter, compiledContent }) => {
-          return (
-            <Card
-              href={`/blogs/${slugify(frontmatter)}`}
-              frontmatter={frontmatter}
-              rawContent={compiledContent()}
-            />
-          );
-        })
-      }
-    </ul> -->
   </Main>
 
   <!-- {

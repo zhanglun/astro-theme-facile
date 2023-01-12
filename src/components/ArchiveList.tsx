@@ -19,7 +19,7 @@ export const ArchiveList = ({
           {archiveMap.get(year)?.map(({ frontmatter, compiledContent }) => {
             return (
               <Card
-                href={`/blogs/${slugify(frontmatter)}`}
+                href={`${import.meta.env.BASE_URL.slice(0, -1)}/blogs/${slugify(frontmatter)}`}
                 frontmatter={frontmatter}
                 rawContent={compiledContent()}
               />

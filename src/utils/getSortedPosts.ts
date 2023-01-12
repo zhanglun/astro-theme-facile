@@ -5,12 +5,12 @@ const getSortedPosts = (posts: MarkdownInstance<Frontmatter>[]) =>
   posts
     .filter(({ frontmatter }) => !frontmatter.draft)
     .map(post => {
-      const text = post.rawContent().replace(/<[^>]+>/gi, "");
+      const text = post.compiledContent().replace(/<[^>]+>/gi, "");
       const firstPeriodIdx = text.search(/\.\s|。/gi);
       const description =
         post.frontmatter.description ||
         text.slice(0, Math.min(250, firstPeriodIdx + 1));
-
+      
       post.frontmatter.description = description;
 
       return post;

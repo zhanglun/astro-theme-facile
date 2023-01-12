@@ -22,7 +22,7 @@ cover: https://www.notion.so/images/page-cover/rijksmuseum_avercamp_1608.jpg
 
 Style Dictionary 是一个**构建系统**。使用它可以让你一次性定义风格，供任何平台或语言使用。在一个地方可以创建和编辑你的样式，通过一个命令就可以把这些规则导出到你需要的所有地方，iOS、Android、CSS、JS、HTML、Sketch 文件、样式文档，或者任何你能想得到的地方。它可以通过npm作为CLI使用，也可以像普通的Node.js模块一样使用。
 
-![](images/c2866a2e5a48303b.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221218%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221218T051952Z&X-Amz-Expires=3600&X-Amz-Signature=53e41cf8138e750390f4a109b2e9425abd555c1175203b7b87c419dd35dd95c0&X-Amz-SignedHeaders=host&x-id=GetObject)
+![](./images/c2866a2e5a48303b.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221218%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221218T051952Z&X-Amz-Expires=3600&X-Amz-Signature=53e41cf8138e750390f4a109b2e9425abd555c1175203b7b87c419dd35dd95c0&X-Amz-SignedHeaders=host&x-id=GetObject)
 
 ## 简单案例，快速上手
 

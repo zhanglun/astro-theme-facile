@@ -9,8 +9,9 @@ import getUniqueYears from "@utils/getUniqueYears";
 import type { Frontmatter } from "src/types";
 
 const posts = await Astro.glob<Frontmatter>("../../contents/blog/**/*.md");
+const posts2 = await Astro.glob<Frontmatter>("../../contents/notion/**/*.md");
 
-let yearGroup = getUniqueYears(posts);
+let yearGroup = getUniqueYears([...posts, ...posts2]);
 
 ---
 

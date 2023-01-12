@@ -1,5 +1,5 @@
-import type { Frontmatter } from '@types';
 import React from 'react';
+import type { Frontmatter } from '@types';
 
 export interface Props {
   href?: string;
@@ -48,21 +48,9 @@ export function ArticleItem({ href, frontmatter, rawContent }: Props) {
           <span itemProp="headline" className="text-[var(--color-text-base)] block text-[1.125rem] font-semibold group-hover:underline">
             {title}
           </span>
+          <p className=" text-base font-normal pt-4">{frontmatter.description}</p>
         </a>
-        {/* <small>{post.frontmatter.date}</small> */}
-        {/* <section> */}
-        {/*  <p */}
-        {/*    dangerouslySetInnerHTML={{ */}
-        {/*      __html: post.frontmatter.description || post.excerpt, */}
-        {/*    }} */}
-        {/*    itemProp="description" */}
-        {/*  /> */}
-        {/* </section> */}
-        {/* <footer> */}
-        {/*  <Link to={post.fields.slug} itemProp="url" className="read-more"> */}
-        {/*    READ MORE */}
-        {/*  </Link> */}
-        {/* </footer> */}
+         {/* <small>{frontmatter.date}</small>  */}
       </article>
     </li>
   );

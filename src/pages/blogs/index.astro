@@ -6,9 +6,15 @@ import getPageNumbers from "@utils/getPageNumbers";
 import type { Frontmatter } from "src/types";
 
 const posts = await Astro.glob<Frontmatter>("../../contents/blog/**/*.md");
-const sortedPosts = getSortedPosts(posts);
+const posts2 = await Astro.glob<Frontmatter>("../../contents/notion/**/*.md");
+const sortedPosts = getSortedPosts([...posts, ...posts2]);
 const totalPages = getPageNumbers(sortedPosts.length);
 const paginatedPosts = sortedPosts.slice(0, SITE.postPerPage);
 ---
 
-<Blogs posts={paginatedPosts} pageNum={1} totalPages={totalPages.length} allPosts={sortedPosts} />
+<Blogs
+  posts={paginatedPosts}
+  pageNum={1}
+  totalPages={totalPages.length}
+  allPosts={sortedPosts}
+/>
