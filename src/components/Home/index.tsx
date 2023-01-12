@@ -12,7 +12,7 @@ export const Home = ({ siteInfo, menu }: HomeProps) => {
     menu.map((item: any, idx: number) => (
       <a
         className="flex items-center leading-none group"
-        href={item.url}
+        href={import.meta.env.BASE_URL.slice(0, -1) + item.url}
         key={item.id}
       >
         <span className="mr-3">{item.name}</span>

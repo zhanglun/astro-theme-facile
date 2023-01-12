@@ -23,9 +23,10 @@ export function CircleArrow(props: CircleArrowProps) {
   };
 
   const boxClass = `
-    inline-block text-0 p-1 border-[var(--color-text-base)] border leading-none rounded-full transition-all duration-150 ease-in-out 
+    inline-block text-0 p-1 border-[var(--color-text-base)] border leading-[0] rounded-full transition-all duration-150 ease-in-out 
      ${theme === 'dark' ? 'bg-[var(--color-text-base)] text-[white]' : 'bg-[white] text-[var(--color-text-base)]'} 
      ${theme === 'dark' ? '' : 'hover:bg-[var(--color-text-base)] hover:text-[white]'} 
+     ${theme === 'dark' ? '' : 'group-hover:bg-[var(--color-text-base)] group-hover:text-[white]'} 
      ${className}
   `;
 
@@ -37,7 +38,6 @@ export function CircleArrow(props: CircleArrowProps) {
         width="24"
         height="24"
         fill="none"
-        className="group-hover:fill-[var(--color-text-base)]"
         style={svgStyle}
       >
         <path

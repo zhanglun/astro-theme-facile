@@ -6,7 +6,7 @@ import logoPNG from "/assets/logo.png";
 import logoSVG from "/assets/logo.svg";
 
 export interface Props {
-  activeNav?: "blogs" | 'categories' | "archives" | "tags" | "about" | "search";
+  activeNav?: "blogs" | "categories" | "archives" | "tags" | "about" | "search";
 }
 
 const { activeNav } = Astro.props;
@@ -47,7 +47,10 @@ const { activeNav } = Astro.props;
           {
             (MENU || []).map((item: any) => (
               <li>
-                <a class={activeNav === item.id ? "active" : ""}href={item.url}>
+                <a
+                  class={activeNav === item.id ? "active" : ""}
+                  href={import.meta.env.BASE_URL.slice(0, -1) + item.url}
+                >
                   <span>{item.name}</span>
                 </a>
               </li>

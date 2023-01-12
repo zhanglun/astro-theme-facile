@@ -3,6 +3,7 @@ import type { MarkdownInstance } from "astro";
 import type { Frontmatter } from "@types";
 import { SITE } from "@config";
 import Card from "@components/Card";
+import { ArticleItem } from "./ArticleItem";
 import slugify from "@utils/slugify";
 import { CircleArrow, CircleArrowThemeEnum } from "@components/CircleArrow";
 
@@ -32,7 +33,21 @@ export const BlogList = (props: Props) => {
 
   return (
     <div className="m-auto max-w-screen-2xl">
-      <ul className="grid w-full lg:gap-y-14 lg:grid-cols-[repeat(12,1fr)] lg:gap-6">
+      <ul className="w-full">
+        {renderPosts.map(({ frontmatter }) => {
+          return (
+            <ArticleItem
+              key={frontmatter.title}
+              href={
+                import.meta.env.BASE_URL.slice(0, -1) +
+                `/blogs/${slugify(frontmatter)}`
+              }
+              frontmatter={frontmatter}
+            />
+          );
+        })}
+      </ul>
+      {/* <ul className="grid w-full lg:gap-y-14 lg:grid-cols-[repeat(12,1fr)] lg:gap-6">
         {renderPosts.map(({ frontmatter }) => {
           return (
             <Card
@@ -42,15 +57,20 @@ export const BlogList = (props: Props) => {
             />
           );
         })}
-      </ul>
+      </ul> */}
 
       {renderPosts.length < allPosts.length && (
         <nav
           className="md:mt-16 ml-[auto] flex items-center justify-end"
           aria-label="Pagination"
         >
-          <div className="leading-none" onClick={() => viewMore()}>
-            <span className="mr-2">VIEW MORE BLOGS</span>
+          <div
+            className="leading-none flex items-center cursor-pointer group"
+            onClick={() => viewMore()}
+          >
+            <span className="mr-2 relative group-hover:after:scale-x-100 group-hover:underline
+            after:content-[' '] after:block after:absolute after:bottom-[-2px] after:w-full after:h-[1px] after:bg-[currentColor] after:scale-x-0 after:origin-right after:transition-transform
+            ">VIEW MORE BLOGS</span>
             <CircleArrow
               size={1}
               rotate={0}
