@@ -20,6 +20,7 @@ export function CircleArrow(props: CircleArrowProps) {
     transform: `rotate(${rotate}deg)`,
     width: `${size * 16}px`,
     height: `${size * 16}px`,
+    fill: 'none !important',
   };
 
   const boxClass = `

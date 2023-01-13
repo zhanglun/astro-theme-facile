@@ -36,6 +36,7 @@ export function ArticleItem({ href, frontmatter, rawContent }: Props) {
                 width="24"
                 height="24"
                 fill="none"
+                className="fill-transparent"
               >
                 <path
                   stroke="currentColor"

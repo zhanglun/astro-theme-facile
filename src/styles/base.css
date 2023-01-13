@@ -44,6 +44,7 @@
   }
   svg {
     @apply w-6 h-6 inline-block fill-[none];
+    fill: currentColor;
   }
   svg.icon-tabler {
     @apply w-6 h-6 scale-125 sm:scale-110 opacity-90 

@@ -9,7 +9,7 @@ const getSortedPosts = (posts: MarkdownInstance<Frontmatter>[]) =>
       const firstPeriodIdx = text.search(/\.\s|。/gi);
       const description =
         post.frontmatter.description ||
-        text.slice(0, Math.min(250, firstPeriodIdx + 1));
+        text.slice(0, Math.max(250, firstPeriodIdx + 1));
       
       post.frontmatter.description = description;
 

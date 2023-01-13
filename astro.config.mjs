@@ -7,8 +7,8 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://https://zhanglun.github.io",
-  base: "/astro-theme-facile",
+  site: "https://zhanglun.github.io",
+  base: "/",
   integrations: [
     tailwind({
       config: {

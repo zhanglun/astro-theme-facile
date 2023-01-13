@@ -26,7 +26,7 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
       class="mt-8 mb-2 hover:opacity-75 flex focus-outline"
       onclick="history.back()"
     >
-      <svg xmlns="http://www.w3.org/2000/svg"
+      <svg xmlns="http://www.w3.org/2000/svg" color="currentColor"
         ><path
           d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
         ></path>
@@ -40,9 +40,15 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin)
       <Content />
     </article>
 
-    {tags && <ul class="tags-container">
-      {tags.map(tag => <Tag name={tag} />)}
-    </ul>}
+    {
+      tags && (
+        <ul class="tags-container">
+          {tags.map(tag => (
+            <Tag name={tag} />
+          ))}
+        </ul>
+      )
+    }
   </main>
   <Footer />
 </Layout>
