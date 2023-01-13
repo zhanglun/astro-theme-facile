@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://https/astro-theme-facile/blogs/%E8%A7%84%E8%8C%83%E4%B9%8B%E8%B7%AF-normal-flow/">
+    <meta name="generator" content="Astro v1.9.1">
+
+    <!-- General Meta Tags -->
+    <title>规范之路-Normal Flow</title>
+    <meta name="title" content="规范之路-Normal Flow">
+    <meta name="description" content="##Normal Flow
+在正常流中的盒子们都是一个格式化上下文（formatting context）中的成员，可以表现成一个block或者inline，但是不能既是block又是inline。">
+    <meta name="author" content="zhanglun">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="规范之路-Normal Flow">
+    <meta property="og:description" content="##Normal Flow
+在正常流中的盒子们都是一个格式化上下文（formatting context）中的成员，可以表现成一个block或者inline，但是不能既是block又是inline。">
+    <meta property="og:url" content="https://https/astro-theme-facile/blogs/%E8%A7%84%E8%8C%83%E4%B9%8B%E8%B7%AF-normal-flow/">
+    <meta property="og:image" content="https://https/%E8%A7%84%E8%8C%83%E4%B9%8B%E8%B7%AF-Normal%20Flow.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://https/astro-theme-facile/blogs/%E8%A7%84%E8%8C%83%E4%B9%8B%E8%B7%AF-normal-flow/">
+    <meta property="twitter:title" content="规范之路-Normal Flow">
+    <meta property="twitter:description" content="##Normal Flow
+在正常流中的盒子们都是一个格式化上下文（formatting context）中的成员，可以表现成一个block或者inline，但是不能既是block又是inline。">
+    <meta property="twitter:image" content="https://https/astropaper-og.jpg">
+
+    <!-- Google Font -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    /> -->
+
+    
+
+    <script src="/toggle-theme.js"></script>
+  <link rel="stylesheet" href="/astro-theme-facile/assets/about.f0b2d10e.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.7bc150a9.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.5beba882.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/about.2a036302.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.f0163f61.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.80516c5d.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.4fac2f80.css" /><script type="module">const e=document.querySelector(".hamburger-menu"),n=document.querySelector("#menu-items")?.classList,t=document.querySelector(".icon-container")?.classList,o=document.querySelector("#first-line")?.classList,a=document.querySelector("#second-line ")?.classList,s=document.querySelector("#third-line")?.classList;e.addEventListener("click",function(r){e?.getAttribute("aria-expanded")==="false"?(e?.setAttribute("aria-expanded","true"),e?.setAttribute("aria-label","Close Menu"),n?.remove("display-none"),t?.remove("flex"),t?.add("relative"),o?.add("rotate-45","absolute","bottom-1/2"),s?.add("display-none"),a?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(e?.setAttribute("aria-expanded","false"),e?.setAttribute("aria-label","Open Menu"),n?.add("display-none"),t?.add("flex"),t?.remove("relative"),o?.remove("rotate-45","absolute","bottom-1/2"),s?.remove("display-none"),a?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});
+</script></head>
+  <body>
+    <header class="astro-ZEJXROEC">
+  <a id="skip-to-content" href="#main-content" class="astro-ZEJXROEC">Skip to content</a>
+  <div class="nav-container astro-ZEJXROEC">
+    <div class="top-nav-wrap astro-ZEJXROEC">
+      <a href="/" class="logo astro-ZEJXROEC">
+        Astro blog facile
+      </a>
+      <nav id="nav-menu" class="astro-ZEJXROEC">
+        <button class="hamburger-menu focus-outline astro-ZEJXROEC" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
+          <div class="icon-container flex astro-ZEJXROEC">
+            <div id="first-line" class="astro-ZEJXROEC"></div>
+            <div id="second-line" class="astro-ZEJXROEC"></div>
+            <div id="third-line" class="astro-ZEJXROEC"></div>
+          </div>
+        </button>
+        <ul id="menu-items" class="display-none sm:flex astro-ZEJXROEC">
+          <li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/">
+                  <span class="astro-ZEJXROEC">首页</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/blogs">
+                  <span class="astro-ZEJXROEC">博文</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/categories">
+                  <span class="astro-ZEJXROEC">分类</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/archives">
+                  <span class="astro-ZEJXROEC">归档</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/labs">
+                  <span class="astro-ZEJXROEC">实验室</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/about">
+                  <span class="astro-ZEJXROEC">关于我</span>
+                </a>
+              </li>
+          <li class="astro-ZEJXROEC">
+            <a type="button" href="/astro-theme-facile/search" tabindex="0" class="group focus-outline p-3 sm:p-1  astro-ZEJXROEC astro-2C5NGGNE" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100 astro-ZEJXROEC"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-ZEJXROEC"></path>
+              </svg>
+</a>
+
+
+          </li>
+          <li class="astro-ZEJXROEC">
+            <button id="theme-btn" class="focus-outline astro-ZEJXROEC" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-ZEJXROEC">
+                    <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-ZEJXROEC">
+                    <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-LRLIQ33U">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-LRLIQ33U" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-LRLIQ33U"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-LRLIQ33U"></path>
+      </svg><span class="astro-LRLIQ33U">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-LRLIQ33U">
+    <h1 class="post-title astro-LRLIQ33U">规范之路-Normal Flow</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-LRLIQ33U"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base" aria-hidden="true"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="sr-only">Posted on:</span><span class="italic text-base">October 3, 2014<span aria-hidden="true"> | </span><span class="sr-only"> at </span>04:39 AM</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-LRLIQ33U">
+      <p>##Normal Flow</p>
+<p>在正常流中的盒子们都是一个格式化上下文（formatting context）中的成员，可以表现成一个block或者inline，但是不能既是block又是inline。block 元素进入块级格式化上下文（block formatting context），inline 元素进入行级格式化上下文（inline formatting context）。</p>
+<p>###Block formatting contexts</p>
+<p>浮动元素，绝对定位元素，非块级盒子的块级容器（inline-block元素，table-cell元素和table-caption元素）和 overflow 的值不为 visiable的盒子，都会为它们的内容创建一个新的块级格式化上下文（BFC）。</p>
+<p>在BFC中，盒子从顶端开始垂直地一个接一个地排列，两个盒子之间的垂直的间隙是由他们的margin 值所决定的。在一个BFC中，两个相邻的块级盒子的垂直外边距会产生折叠。</p>
+<p>在BFC中，每一个盒子的左外边缘（margin-left）会触碰到容器的左边缘(padding-left 或者 border-left)（对于从右到左的格式来说，则触碰到右边缘）。</p>
+<p>###Inline formatting contexts</p>
+<p>在IFC中，盒子从顶端水平地一个接一个地排列。盒子之间的水平的外边距，边框和内边距会起作用。这些可以可以以不同的方式对齐：底部对齐，顶部对齐或者盒子内容中文本的基线对齐。每一行包含的盒子所形成的矩形区域我们称之为“line box”。</p>
+<p>通常情况下，一个line box的高度足够容纳它包含的盒子。但是，有可能会比最高的盒子还高。当一个盒子B的高度比包含着它的line box 的高度还要小的时候，盒子B在line box中的垂直对齐由属性 “vertival-align” 决定。当几个行级盒子不能在一个单一的line box中正常地水平排列时，它们会被分配到两个或者多个垂直堆叠（vertical-stacked）的line box中。因此一个段落是line box中一个垂直的堆（vertical stack）。</p>
+<p>通常来说，一个line box的左边缘会接触到它的包含块的做边缘，右边缘接触到包含块的右边缘。但是，浮动的盒子可能会出现在line box 的边缘和它的包含块的边缘之间。因此，虽然在同一个IFC中的line box有同样的宽度（取决于包含块的宽度），但是当浮动导致水平方向上可用的空间减少时，它们宽度将不一样。同样的，同一个IFC中的它们的高度也有可能不同，比如有的包含一个图片，有的只包含一行文字。</p>
+<p>当一个内联元素的超过了 line box 的宽度，它将分割成若干个盒子，并且这些盒子将会分布在多个line box 上。但是有时候超过宽度的盒子没办法被分割（e.g., 盒子中包含一个单字符；语言特定的断字规则不允许断开；内联盒子受 CSS属性 <code>white-space</code> 的值 <code>nowrap</code> 或者 <code>pre</code> 标签的作用），它将溢出。</p>
+<p>当一个内联盒子被截断时，margin，padding和border在截断处都不会有任何的视觉效果。</p>
+<hr>
+<!--![inline-box-split-margin](http://ncuey-crispelite.stor.sinaapp.com/inline-box-split-margin.png) -->
+<hr>
+<!--![inline-box-split-padding](http://ncuey-crispelite.stor.sinaapp.com/inline-box-split-padding.png) -->
+<hr>
+<!--![inline-box-split-border](http://ncuey-crispelite.stor.sinaapp.com/inline-box-split-border.png) -->
+<hr>
+<p>Line box 的诞生是为了容纳一个包含着一个行级格式化上下文的行级内容（inline-level content）。当一个 line box 中不包含文本，不存在保留的空白，没有非零外边距，内边距，或者边框的内联元素和其他未脱离文档流的内容，以及不已一个保留的新行作为结尾时，它的高度被看作是0（zero-height）</p>
+<blockquote>
+<p>这是一个inline box 建立的过程。p元素的内容中包含一段匿名的文本，并穿插着em元素和strong元素：</p>
+</blockquote>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">&#x3C;p></span></span>
+<span class="line"><span style="color: #abb2bf">    Several </span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;em>emphasized words&#x3C;/em></span></span>
+<span class="line"><span style="color: #abb2bf">     appear</span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;strong>in this&#x3C;/strong></span></span>
+<span class="line"><span style="color: #abb2bf">     sentence, dear.</span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/p></span></span></code></pre>
+<p>p元素形成了一个块级盒子，包含着五个行内盒子，其中三个是匿名盒子：</p>
+<ul>
+<li>Anonymous: “Several”</li>
+<li>EM: “emphasized words”</li>
+<li>Anonymous: “appear”</li>
+<li>STRONG: “in this”</li>
+<li>Anonymous: “sentence, dear.”</li>
+</ul>
+<p>为了格式化这个段落，用户代理将五个盒子绘入到 line box 中。在这个例子里面，p元素形成的盒子为inline box 建立了一个 containing block。如果包含块足够宽，所有行内盒子将放入一个单独的一行中：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">Several emphasized words appear in this sentence, dear.</span></span></code></pre>
+<p>如果不是，则行内盒子将被分裂并分布在几个 line box中。前一段可能会被分拆如下：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">Several emphasized words appear</span></span>
+<span class="line"><span style="color: #abb2bf">in this sentence, dear.</span></span></code></pre>
+<p>或者这样：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">Several emphasized  </span></span>
+<span class="line"><span style="color: #abb2bf">words appear in this </span></span>
+<span class="line"><span style="color: #abb2bf">sentence, dear.</span></span></code></pre>
+<p>下次就是<a href="http://www.w3.org/TR/CSS21/visuren.html#floats">Floats</a></p>
+<p>Bye~</p>
+    </article>
+
+    <ul class="tags-container astro-LRLIQ33U">
+      <li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/CSS" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">CSS</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/笔记" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">笔记</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="max-w-screen-2xl mt-auto astro-RWWC6FBJ">
+  <div class="footer-wrapper astro-RWWC6FBJ">
+    <div class="social-icons flex astro-PHLHVEKU">
+  <a type="button" href="https://github.com/zhanglun" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title=" Astro blog facile on Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.instagram.com/zhanglun1410/" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Instagram">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+    <circle cx="12" cy="12" r="3"></circle>
+    <line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
+  </svg>
+</a>
+
+<a type="button" href="mailto:zhanglun1410@gmail.com" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Send an email to Astro blog facile">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3 7 12 13 21 7"></polyline>
+    </svg>
+</a>
+
+<a type="button" href="https://twitter.com/zhanglun1410" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-RWWC6FBJ">
+      <span class="astro-RWWC6FBJ">Copyright &#169; 2023</span>
+      <span class="separator astro-RWWC6FBJ">&nbsp;|&nbsp;</span>
+      <span class="astro-RWWC6FBJ">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

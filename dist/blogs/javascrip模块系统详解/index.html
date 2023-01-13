@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://https/astro-theme-facile/blogs/javascrip%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/">
+    <meta name="generator" content="Astro v1.9.1">
+
+    <!-- General Meta Tags -->
+    <title>JavaScrip模块系统详解</title>
+    <meta name="title" content="JavaScrip模块系统详解">
+    <meta name="description" content="在这几天的工作中，我需要调用同事编写的兼容jQuery和React的通用组件。">
+    <meta name="author" content="zhanglun">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="JavaScrip模块系统详解">
+    <meta property="og:description" content="在这几天的工作中，我需要调用同事编写的兼容jQuery和React的通用组件。">
+    <meta property="og:url" content="https://https/astro-theme-facile/blogs/javascrip%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/">
+    <meta property="og:image" content="https://https/JavaScrip%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://https/astro-theme-facile/blogs/javascrip%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/">
+    <meta property="twitter:title" content="JavaScrip模块系统详解">
+    <meta property="twitter:description" content="在这几天的工作中，我需要调用同事编写的兼容jQuery和React的通用组件。">
+    <meta property="twitter:image" content="https://https/astropaper-og.jpg">
+
+    <!-- Google Font -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    /> -->
+
+    
+
+    <script src="/toggle-theme.js"></script>
+  <link rel="stylesheet" href="/astro-theme-facile/assets/about.f0b2d10e.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.7bc150a9.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.5beba882.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/about.2a036302.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.f0163f61.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.80516c5d.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.4fac2f80.css" /><script type="module">const e=document.querySelector(".hamburger-menu"),n=document.querySelector("#menu-items")?.classList,t=document.querySelector(".icon-container")?.classList,o=document.querySelector("#first-line")?.classList,a=document.querySelector("#second-line ")?.classList,s=document.querySelector("#third-line")?.classList;e.addEventListener("click",function(r){e?.getAttribute("aria-expanded")==="false"?(e?.setAttribute("aria-expanded","true"),e?.setAttribute("aria-label","Close Menu"),n?.remove("display-none"),t?.remove("flex"),t?.add("relative"),o?.add("rotate-45","absolute","bottom-1/2"),s?.add("display-none"),a?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(e?.setAttribute("aria-expanded","false"),e?.setAttribute("aria-label","Open Menu"),n?.add("display-none"),t?.add("flex"),t?.remove("relative"),o?.remove("rotate-45","absolute","bottom-1/2"),s?.remove("display-none"),a?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});
+</script></head>
+  <body>
+    <header class="astro-ZEJXROEC">
+  <a id="skip-to-content" href="#main-content" class="astro-ZEJXROEC">Skip to content</a>
+  <div class="nav-container astro-ZEJXROEC">
+    <div class="top-nav-wrap astro-ZEJXROEC">
+      <a href="/" class="logo astro-ZEJXROEC">
+        Astro blog facile
+      </a>
+      <nav id="nav-menu" class="astro-ZEJXROEC">
+        <button class="hamburger-menu focus-outline astro-ZEJXROEC" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
+          <div class="icon-container flex astro-ZEJXROEC">
+            <div id="first-line" class="astro-ZEJXROEC"></div>
+            <div id="second-line" class="astro-ZEJXROEC"></div>
+            <div id="third-line" class="astro-ZEJXROEC"></div>
+          </div>
+        </button>
+        <ul id="menu-items" class="display-none sm:flex astro-ZEJXROEC">
+          <li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/">
+                  <span class="astro-ZEJXROEC">首页</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/blogs">
+                  <span class="astro-ZEJXROEC">博文</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/categories">
+                  <span class="astro-ZEJXROEC">分类</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/archives">
+                  <span class="astro-ZEJXROEC">归档</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/labs">
+                  <span class="astro-ZEJXROEC">实验室</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/about">
+                  <span class="astro-ZEJXROEC">关于我</span>
+                </a>
+              </li>
+          <li class="astro-ZEJXROEC">
+            <a type="button" href="/astro-theme-facile/search" tabindex="0" class="group focus-outline p-3 sm:p-1  astro-ZEJXROEC astro-2C5NGGNE" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100 astro-ZEJXROEC"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-ZEJXROEC"></path>
+              </svg>
+</a>
+
+
+          </li>
+          <li class="astro-ZEJXROEC">
+            <button id="theme-btn" class="focus-outline astro-ZEJXROEC" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-ZEJXROEC">
+                    <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-ZEJXROEC">
+                    <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-LRLIQ33U">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-LRLIQ33U" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-LRLIQ33U"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-LRLIQ33U"></path>
+      </svg><span class="astro-LRLIQ33U">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-LRLIQ33U">
+    <h1 class="post-title astro-LRLIQ33U">JavaScrip模块系统详解</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-LRLIQ33U"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base" aria-hidden="true"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="sr-only">Posted on:</span><span class="italic text-base">January 12, 2017<span aria-hidden="true"> | </span><span class="sr-only"> at </span>03:45 AM</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-LRLIQ33U">
+      <p>在这几天的工作中，我需要调用同事编写的兼容jQuery和React的通用组件。他为了兼容jQuery风格的调用和React的组件化，分别export了一个default和几个方法函数。在调用的过程中，出现了一些小插曲：React代码和老的jQuery老代码调用时应该怎么正确的import？虽然是很低级的问题，但是引发了我一些思考：<strong>export 和 import 与 module.exports 和 exports 之间的关系</strong>以及<strong>JavaScript模块系统的发展历程</strong>。</p>
+<!--more-->
+<p>JavScript这门语言，在设计之初是没有自己的模块系统的。但是在 ES6 正式发布之前，社区已经中已经出现了一些库，实现了简单的模块风格，并且这种风格在 ES6 中也是适用的：</p>
+<ul>
+<li>每个模块都是一段代码，加载之后只会解析过程只会执行一次；</li>
+<li>在模块中可以声明变量，函数，类等；
+<ul>
+<li>默认情况下，这些声明都是这个模块的局部声明；</li>
+<li>可以将一些声明导出，让其他模块引用；</li>
+</ul>
+</li>
+<li>一个模块可以通过模块标识符或者文件路径引入其他模块；</li>
+<li>模块都是单例的，即使多次引用，也只有一个实例;</li>
+</ul>
+<p>有一点要注意，避免通过<code>global</code>作为来引用自己的模块，因为<code>global</code>本身也是一个模块。</p>
+<h3 id="es5中的模块系统">ES5中的模块系统</h3>
+<p>前面说到的，在 ES6 之前，JavaScript 是没有模块系统这一说的。在社区的模块风格出现之前，编写 JavaScript常常会遇到这种情况：</p>
+<ul>
+<li>所有的代码写在一个文件里面，按照依赖顺序，被依赖的方法必须写在前面。 简单粗暴，但是问题很多
+<ul>
+<li>通用的代码无法重复利用。</li>
+<li>单个文件会越来越大，后期的命名也会越来越艰难。</li>
+</ul>
+</li>
+<li>按照功能将代码拆分成不同文件，按照依赖顺序加载，被依赖的方法必须先加载。通用代码可以复用，但是问题还是很多
+<ul>
+<li>过多全局变量，容易冲突。</li>
+<li>过多 JavaScript 脚本加载导致页面阻塞（虽然 HTML5中的 defer和 async可以适当的减轻这个问题）。</li>
+<li>过多依赖不方便管理和开发。</li>
+</ul>
+</li>
+</ul>
+<p>随着 JavaScript 的地位慢慢提高，为了满足日常开发的需要，社区中慢慢出现了相对比较同意的模块标准，主要有两种：</p>
+<ul>
+<li><strong>CommonJS Modules:</strong> 这个标准主要在 Node.js 中实现（Node.js的模块比 CommonJS 好稍微多一些特性）。其特点是：</li>
+</ul>
+<ul>
+<li>简单的语法</li>
+<li>为同步加载和服务端而设计</li>
+</ul>
+<ul>
+<li><strong>Asynchronous Module Definition (AMD):</strong> 这个标准最受欢迎的实现实在 RequireJS 中。其特点是：</li>
+</ul>
+<ul>
+<li>稍微复杂一点点的语法，使得AMD的运行不需要编译</li>
+<li>为异步加载和浏览器而设计</li>
+</ul>
+<p>上述只是 ES5 模块系统的简单介绍，如果有兴趣可以去看看<a href="https://addyosmani.com/writing-modular-js/">Writing Modular JavaScript With AMD, CommonJS &#x26; ES Harmony</a>。</p>
+<h4 id="commonjs-modules-在-nodejs-中的实现">CommonJS Modules 在 Node.js 中的实现</h4>
+<p>根据CommonJS规范，一个单独的文件就是一个模块。每一个模块都是一个单独的作用域，在该模块内部定义的变量，无法被其他模块读取，除非定义为global对象的属性，或者将属性暴露出来。在 Nodejs就是如此。</p>
+<p>比如：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">circle</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'./circle.js'</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 使用 require 加载模块 circle</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">`The area of a circle of radius 4 is </span><span style="color: #C678DD">${</span><span style="color: #E5C07B">circle</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">area</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">4</span><span style="color: #ABB2BF">)</span><span style="color: #C678DD">}</span><span style="color: #98C379">`</span><span style="color: #ABB2BF">);</span></span></code></pre>
+<p>在 circle.js 中:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">PI</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Math</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">PI</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">area</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> (</span><span style="color: #E06C75">r</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">PI</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">*</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">r</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">*</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">r</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">circumference</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> (</span><span style="color: #E06C75">r</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">2</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">*</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">PI</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">*</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">r</span><span style="color: #ABB2BF">;</span></span></code></pre>
+<p>circle.js 模块导出了 area()和 circumffference()两个方法，变量 PI是这个模块的私有变量。如果想为自定义的模块添加属性或者方法，将它们添加到 exports 这个特殊的对象上就可以达到目的。
+如果希望模块提供的接口是一个构造函数，或者输出的是一个完整的对象而不是一个属性，那么可以使用 module.exports 代替 exports。但是注意，exports 是 module.exports 的一个引用，只是为了用起来方便，只要没有重写 module.exports对象，那么<code>module.exports.xxx</code>就等价于<code>exports.xxx</code>。</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">square</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'./square.js'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">mySquare</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">square</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">2</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">`The area of my square is </span><span style="color: #C678DD">${</span><span style="color: #E5C07B">mySquare</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">area</span><span style="color: #ABB2BF">()</span><span style="color: #C678DD">}</span><span style="color: #98C379">`</span><span style="color: #ABB2BF">);</span></span></code></pre>
+<p>square.js:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E5C07B">module</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> (</span><span style="color: #E06C75">width</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #61AFEF">area</span><span style="color: #ABB2BF">: () </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">width</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">*</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">width</span></span>
+<span class="line"><span style="color: #ABB2BF">  };</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h4 id="amd规范">AMD规范</h4>
+<p>AMD是“Asynchronous Module Definition”的缩写。通过异步方式加载模块，模块的加载不影响后续语句的执行，所有依赖加载中的模块的语句，都会放在一个回调函数中，等到该模块加载完成后，这个回调函数才运行。注意，在 AMD 中模块名是全局作用域，可以在全局引用。</p>
+<p>AMD规范的API非常简单：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">define(id?, dependencies?, factory);</span></span></code></pre>
+<p>规范定义了一个define函数，它用来定义一个模块。它包含三个参数，前两个参数都是可选的。</p>
+<ul>
+<li>id：是一个string字符串，它表示模块的标识。通常用来定义这个模块的名字，一般不用</li>
+<li>dependencies：是一个数组，依赖的模块的标识。也是可选的参数，每个依赖的模块的输出将作为参数一次传入 factory 中。如果没有指定 dependencies，那么它的默认值是 [“require”, “exports”, “module”]。</li>
+<li>factory：一个函数或者对象。如果是函数，在依赖的模块加载成功后，会执行这个回调函数，它的返回值就是模块的输出接口或值。它的参数是所有依赖模块的引用。</li>
+</ul>
+<p>定义一个名为 myModule 的模块，它依赖 jQuery 模块：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #61AFEF">define</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'myModule'</span><span style="color: #ABB2BF">, [</span><span style="color: #98C379">'jquery'</span><span style="color: #ABB2BF">], </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">$</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">// $ 是 jquery 模块的输出</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #61AFEF">$</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'body'</span><span style="color: #ABB2BF">).</span><span style="color: #61AFEF">text</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'hello world'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">});</span></span>
+<span class="line"><span style="color: #7F848E">// 使用</span></span>
+<span class="line"><span style="color: #61AFEF">define</span><span style="color: #ABB2BF">([</span><span style="color: #98C379">'myModule'</span><span style="color: #ABB2BF">], </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">myModule</span><span style="color: #ABB2BF">) {});</span></span></code></pre>
+<h3 id="es6中的模块系统">ES6中的模块系统</h3>
+<p>ES6 模块系统的目标就是创建一个统一的模块格式，让 CommonJS 和 AMD的使用者都满意：</p>
+<ul>
+<li>和CommonJS类似，但是更加简洁的语法，循环引用的支持更好。</li>
+<li>和AMD类似，直接支持异步加载和可配置的模块加载。</li>
+</ul>
+<p>模块标准主要有两部分：</p>
+<ol>
+<li>声明语法：import 和 export</li>
+<li>可编程的加载 API：配置模块如何以及有条件地加载模块</li>
+</ol>
+<h4 id="es6模块的基础">ES6模块的基础</h4>
+<p>在 ES6的模块系统中，有两种 export：命名的 export 和默认的 export。在一个文件中，命名的 export 可以有多个，而默认的 default export 只能有一个。可以同时使用，但最好还是分开使用。</p>
+<h5 id="命名的export">命名的export</h5>
+<p>也可以在声明表达式前面加上 export 关键字可以直接导出将声明的对象导出：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">//------ lib.js ------</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">sqrt</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Math</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">sqrt</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">square</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">x</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">x</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">*</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">x</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">diag</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">x</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">y</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">sqrt</span><span style="color: #ABB2BF">(</span><span style="color: #61AFEF">square</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">x</span><span style="color: #ABB2BF">) </span><span style="color: #56B6C2">+</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">square</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">y</span><span style="color: #ABB2BF">));</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">//------ main.js ------</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">square</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">diag</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'lib'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #61AFEF">square</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">11</span><span style="color: #ABB2BF">)); </span><span style="color: #7F848E">// 121</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #61AFEF">diag</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">4</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">3</span><span style="color: #ABB2BF">)); </span><span style="color: #7F848E">// 5</span></span></code></pre>
+<p>如果要导出一个已经存在的变量，需要加上<code>{}</code>:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">random</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Math</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">random</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">random</span><span style="color: #ABB2BF">;  </span><span style="color: #7F848E">// SyntaxError: Unexpected token, expected {</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">random</span><span style="color: #ABB2BF"> };</span></span></code></pre>
+<p>使用 CommonJS 语法实现相同目的：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">//------ lib.js ------</span></span>
+<span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">sqrt</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Math</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">sqrt</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">square</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">x</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">x</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">*</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">x</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">diag</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">x</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">y</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">sqrt</span><span style="color: #ABB2BF">(</span><span style="color: #61AFEF">square</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">x</span><span style="color: #ABB2BF">) </span><span style="color: #56B6C2">+</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">square</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">y</span><span style="color: #ABB2BF">));</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #E5C07B">module</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">sqrt</span><span style="color: #ABB2BF">: </span><span style="color: #E06C75">sqrt</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">square</span><span style="color: #ABB2BF">: </span><span style="color: #E06C75">square</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">diag</span><span style="color: #ABB2BF">: </span><span style="color: #E06C75">diag</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">//------ main.js ------</span></span>
+<span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">square</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'lib'</span><span style="color: #ABB2BF">).</span><span style="color: #E06C75">square</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">diag</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'lib'</span><span style="color: #ABB2BF">).</span><span style="color: #E06C75">diag</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #61AFEF">square</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">11</span><span style="color: #ABB2BF">)); </span><span style="color: #7F848E">// 121</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #61AFEF">diag</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">4</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">3</span><span style="color: #ABB2BF">)); </span><span style="color: #7F848E">// 5</span></span></code></pre>
+<p>下面是来自 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">MDN</a> 的更加完整的export 语法：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">name1</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">name2</span><span style="color: #ABB2BF">, …, </span><span style="color: #E06C75">nameN</span><span style="color: #ABB2BF"> };</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">variable1</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">name1</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">variable2</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">name2</span><span style="color: #ABB2BF">, …, </span><span style="color: #E06C75">nameN</span><span style="color: #ABB2BF"> };</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">name1</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">name2</span><span style="color: #ABB2BF">, …, </span><span style="color: #E06C75">nameN</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">// also var</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">name1</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> …, </span><span style="color: #E06C75">name2</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> …, …, </span><span style="color: #E06C75">nameN</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">// also var, const</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">expression</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">expression</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> (…) { … } </span><span style="color: #7F848E">// also class, function*</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">name1</span><span style="color: #ABB2BF">(…) { … } </span><span style="color: #7F848E">// also class, function*</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">name1</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF">, … };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">*</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> …;</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">name1</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">name2</span><span style="color: #ABB2BF">, …, </span><span style="color: #E06C75">nameN</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> …;</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">import1</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">name1</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">import2</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">name2</span><span style="color: #ABB2BF">, …, </span><span style="color: #E06C75">nameN</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> …;</span></span></code></pre>
+<h5 id="默认导出">默认导出</h5>
+<p>每个模块只有一个默认导出的值， default export 可以是一个函数，一个类，一个对象或者其他任意值。有两种形式的 default export:</p>
+<ol>
+<li>被标记的声明。导出一个函数或者类</li>
+<li>直接导出值。导出表达式的运行结果</li>
+</ol>
+<p>导出一个函数：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">//------ myFunc.js ------</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> () {} </span><span style="color: #7F848E">// 没有分号 函数名可有可无</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">//------ main1.js ------</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">myFunc</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'myFunc'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #61AFEF">myFunc</span><span style="color: #ABB2BF">();</span></span></code></pre>
+<p>导出一个类：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">//------ MyClass.js ------</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">class</span><span style="color: #ABB2BF"> {} </span><span style="color: #7F848E">// 没有分号 类名可有可无</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">//------ main2.js ------</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">MyClass</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'MyClass'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">inst</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">MyClass</span><span style="color: #ABB2BF">();</span></span></code></pre>
+<p>导出表达式运行结果：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'abc'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">foo</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">/^</span><span style="color: #E06C75">xyz$</span><span style="color: #56B6C2">/</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">5</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">*</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">7</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">no</span><span style="color: #ABB2BF">: </span><span style="color: #D19A66">false</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">yes</span><span style="color: #ABB2BF">: </span><span style="color: #D19A66">true</span><span style="color: #ABB2BF"> };</span></span></code></pre>
+<p>前面说的到的导出匿名函数和类，可以将其视为导出表达式的运行结果：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> (</span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> () {});</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> (</span><span style="color: #C678DD">class</span><span style="color: #ABB2BF"> {});</span></span></code></pre>
+<p>每一个 default export 都是这种结构：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">&#x3C;&#x3C;</span><span style="color: #E06C75">expression</span><span style="color: #56B6C2">>></span></span></code></pre>
+<p>相当于：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">__default__</span><span style="color: #ABB2BF">  </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">&#x3C;&#x3C;</span><span style="color: #E06C75">expression</span><span style="color: #56B6C2">>></span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">__default__</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> }; </span><span style="color: #7F848E">// (A)</span></span></code></pre>
+<p>export后面是不能接变量声明的，因为一个变量声明表达式中可以一次生命多个变量。考虑下面这种情况：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">const</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">foo</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">bar</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">2</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">baz</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">3</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">// not legal JavaScript!</span></span></code></pre>
+<p>应该导出 foo，bar，还是 baz 呢？</p>
+<h5 id="必须在模块的最顶层使用import和export">必须在模块的最顶层使用import和export</h5>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E5C07B">Math</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">random</span><span style="color: #ABB2BF">()) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'foo'</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">// SyntaxError</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// You can’t even nest `import` and `export`</span></span>
+<span class="line"><span style="color: #7F848E">// inside a simple block:</span></span>
+<span class="line"><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'foo'</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">// SyntaxError</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h5 id="import-会被提升到当前作用域的顶部">import 会被提升到当前作用域的顶部</h5>
+<p>模块的 import 会被提升到当前作用域的顶部。所以下面这种情况是可行的：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #61AFEF">foo</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">foo</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'my_module'</span><span style="color: #ABB2BF">;</span></span></code></pre>
+<h5 id="import-的一些细节">import 的一些细节</h5>
+<p>import的基本语法：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">defaultMember</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"module-name"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">*</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">name</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"module-name"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">member</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"module-name"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">member</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">alias</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"module-name"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">member1</span><span style="color: #ABB2BF"> , </span><span style="color: #E06C75">member2</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"module-name"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">member1</span><span style="color: #ABB2BF"> , </span><span style="color: #E06C75">member2</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">alias2</span><span style="color: #ABB2BF"> , [...] } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"module-name"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">defaultMember</span><span style="color: #ABB2BF">, { </span><span style="color: #E06C75">member</span><span style="color: #ABB2BF"> [ , [...] ] } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"module-name"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">defaultMember</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">*</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">name</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"module-name"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"module-name"</span><span style="color: #ABB2BF">;</span></span></code></pre>
+<h3 id="对循环引用的支持">对循环引用的支持</h3>
+<p>什么是循环引用？模块A 引用了模块 B，模块 B 又引用了模块 A。如果可能的话，应该避免这种情况出现，这会使得模块之间过度的耦合。但是这种有时候又是无法避免的。</p>
+<h4 id="commonjs-中的循环引用">CommonJS 中的循环引用</h4>
+<p>a.js 中的内容：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'模块 a 开始了！'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">done</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">false</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">b</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'./b.js'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'在 a 中, b.done = %j'</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">b</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">done</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">done</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">true</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'模块 a 结束了！'</span><span style="color: #ABB2BF">);</span></span></code></pre>
+<p>b.js 中的内容：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'模块 b 开始了！'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">done</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">false</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">a</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'./a.js'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'在 b 中, a.done = %j'</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">a</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">done</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">done</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">true</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'模块 b 结束了！'</span><span style="color: #ABB2BF">);</span></span></code></pre>
+<p>main.js 中的内容：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'main 开始了！'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">a</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'./a.js'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">b</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'./b.js'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'在 main 中, a.done=%j, b.done=%j'</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">a</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">done</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">b</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">done</span><span style="color: #ABB2BF">);</span></span></code></pre>
+<p>当 main.js 加载 a.js 时，a.js 又加载 b.js。这个时候，b.js 又会尝试去加载 a.js 。为了防止出现无限循环的加载，a.js 中的 exports 对象会返回一个 unfinished copy 给 b.js 模块。然后模块 b 完成加载，同时将提供模块 a 的接口。当 main.js 加载完 a，b 两个模块之后，输出如下：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">main 开始了！</span></span>
+<span class="line"><span style="color: #ABB2BF">模块 a 开始了！</span></span>
+<span class="line"><span style="color: #ABB2BF">模块 b 开始了！</span></span>
+<span class="line"><span style="color: #ABB2BF">在 b 中, a.done = </span><span style="color: #56B6C2">false</span></span>
+<span class="line"><span style="color: #ABB2BF">模块 b 结束了！</span></span>
+<span class="line"><span style="color: #ABB2BF">在 a 中, b.done = </span><span style="color: #56B6C2">true</span></span>
+<span class="line"><span style="color: #ABB2BF">模块 a 结束了！</span></span>
+<span class="line"><span style="color: #ABB2BF">在 main 中, a.done=true, b.done=true</span></span></code></pre>
+<p>这种方式有其局限性：</p>
+<ul>
+<li>
+<p>Nodejs风格的单个值的导出无法工作。当a使用 module.exports 导出一个值时，那么 b 模块中引用的变量 a 在声明之后就不会再更新</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">module</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF">(){};</span></span></code></pre>
+</li>
+<li>
+<p>无法直接命名你的引用</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">foo</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'a'</span><span style="color: #ABB2BF">).</span><span style="color: #E06C75">foo</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">// foo  is undefined</span></span></code></pre>
+</li>
+</ul>
+<h4 id="es6中的循环引用">ES6中的循环引用</h4>
+<p>ES6中，imports 是 exprts 的只读视图，直白一点就是，imports 都指向 exports 原本的数据，比如：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">//------ lib.js ------</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">3</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">incCounter</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">counter</span><span style="color: #56B6C2">++</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">//------ main.js ------</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">incCounter</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'./lib'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// The imported value `counter` is live</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 3</span></span>
+<span class="line"><span style="color: #61AFEF">incCounter</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 4</span></span>
+<span class="line"><span style="color: #7F848E">// The imported value can’t be changed</span></span>
+<span class="line"><span style="color: #E06C75">counter</span><span style="color: #56B6C2">++</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">// TypeError</span></span></code></pre>
+<p>因此在 ES6中处理循环引用特别简单，看下面这段代码：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">//------ a.js ------</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> {</span><span style="color: #E06C75">bar</span><span style="color: #ABB2BF">} </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'b'</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">// (i)</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">foo</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #61AFEF">bar</span><span style="color: #ABB2BF">(); </span><span style="color: #7F848E">// (ii)</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">//------ b.js ------</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> {</span><span style="color: #E06C75">foo</span><span style="color: #ABB2BF">} </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'a'</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">// (iii)</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">bar</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E5C07B">Math</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">random</span><span style="color: #ABB2BF">()) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #61AFEF">foo</span><span style="color: #ABB2BF">(); </span><span style="color: #7F848E">// (iv)</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>假设先加载模块 a，在模块 a 加载完成之后，bar 间接性地指向的是模块 b 中的 bar。无论是加载命令的 imports 还是未完成的 imports，imports 和 exports 之间都有一个间接的联系，所以总是可以正常工作。</p>
+<h3 id="es6-模块加载器-api">ES6 模块加载器 API</h3>
+<p>除了声明式加载模块，ES6还提供了一个可编程的 API：</p>
+<ul>
+<li>以编程的方式使用模块</li>
+<li>配置模块的加载</li>
+</ul>
+<p>要注意，这个 API 并不是ES6标准中的一部分，在“JavaScript Loader Standrad”中，并且具体的标准还在制定中，所以下面讲到的内容都是试验性的。</p>
+<h4 id="loaders-的简单使用">Loaders 的简单使用</h4>
+<p>Loader 用于处理模块标识符和加载模块等。它的 construct 是<code>Reflect.Loader</code>。每个平台在全局作用域中都有一个全局变量<code>System</code>的实例来实现 loader 的一些特性。</p>
+<p>你可以通过 API 提供的 Promise，以编码的方式 import 一个模块：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E5C07B">System</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">import</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'some_module'</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">then</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">some_module</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">// Use some_module</span></span>
+<span class="line"><span style="color: #ABB2BF">})</span></span>
+<span class="line"><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">catch</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">error</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    ···</span></span>
+<span class="line"><span style="color: #ABB2BF">});</span></span></code></pre>
+<p>System.import() 可以：</p>
+<ul>
+<li>可以在 script 标签中使用模块</li>
+<li>有条件地加载模块</li>
+</ul>
+<p>System.import() 返回一个模块, 可以用 Promise.all() 来导入多个模块:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E5C07B">Promise</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">all</span><span style="color: #ABB2BF">(</span></span>
+<span class="line"><span style="color: #ABB2BF">    [</span><span style="color: #98C379">'module1'</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'module2'</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'module3'</span><span style="color: #ABB2BF">]</span></span>
+<span class="line"><span style="color: #ABB2BF">    .</span><span style="color: #61AFEF">map</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">x</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">System</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">import</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">x</span><span style="color: #ABB2BF">)))</span></span>
+<span class="line"><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">then</span><span style="color: #ABB2BF">(([</span><span style="color: #E06C75">module1</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">module2</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">module3</span><span style="color: #ABB2BF">]) </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">// Use module1, module2, module3</span></span>
+<span class="line"><span style="color: #ABB2BF">});</span></span></code></pre>
+<h5 id="loader的其他方法">Loader的其他方法</h5>
+<p>Loader 还有一些其他方法，最重要的三个是：</p>
+<ul>
+<li>System.module(source, [options])
+将 source 中的 JavaScript 代码当做一个模块执行，返回一个 Promise</li>
+<li>System.set(name, modules)
+注册一个模块，比如用 System.module 创建的模块</li>
+<li>System.define(name, source, [options])
+执行 source 中的代码，将返回的结果注册为一个模块</li>
+</ul>
+<p>目前 Loader API 还处于试验阶段，更多的细节不想在深入。有兴趣的话可以去看看</p>
+<h3 id="模块导入的细节">模块导入的细节</h3>
+<p>在 CommonJS 和 ES6中，两种模块导入方式有一些不同：</p>
+<ul>
+<li>在 CommonJS 中，导入的内容是模块导出的内容的拷贝。</li>
+<li>在 ES6 中，导出值得实时只读视图，类似于引用。</li>
+</ul>
+<p>在 CommonJS 中，如果你将一个导入的值保存到一个变量中，这个值会被复制两次：第一次是这个值所属模块导出时（行 A），第二次是这个值被引用时（行 B）。</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">//------ lib.js ------</span></span>
+<span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">3</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">incCounter</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">counter</span><span style="color: #56B6C2">++</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #E5C07B">module</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">: </span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">, </span><span style="color: #7F848E">// (A)</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">incCounter</span><span style="color: #ABB2BF">: </span><span style="color: #E06C75">incCounter</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">//------ main1.js ------</span></span>
+<span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'./lib'</span><span style="color: #ABB2BF">).</span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">// (B)</span></span>
+<span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">incCounter</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'./lib'</span><span style="color: #ABB2BF">).</span><span style="color: #E06C75">incCounter</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// The imported value is a (disconnected) copy of a copy</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 3</span></span>
+<span class="line"><span style="color: #61AFEF">incCounter</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 3</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// The imported value can be changed</span></span>
+<span class="line"><span style="color: #E06C75">counter</span><span style="color: #56B6C2">++</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 4</span></span></code></pre>
+<p>如果通过 exports对象来访问这个值，这个值还是会再复制一次：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">//------ main2.js ------</span></span>
+<span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">lib</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'./lib'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// The imported value is a (disconnected) copy</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">lib</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 3</span></span>
+<span class="line"><span style="color: #E5C07B">lib</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">incCounter</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">lib</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 3</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// The imported value can be changed</span></span>
+<span class="line"><span style="color: #E5C07B">lib</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">counter</span><span style="color: #56B6C2">++</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">lib</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 4</span></span></code></pre>
+<p>和 CommonJS 不同的是，在 ES6中，所有的导入的数据都是导出值的视图，每一个导入的数据都和原始的数据有一个实时连接（并不是 JS 中Object引用的那种概念，因为导出的值可以是一个原始类型，primitive type，而且导入的数据是只读的）。</p>
+<ul>
+<li>无条件的引入 (import x from ‘foo’) 就是用 const 声明的变量</li>
+<li>模块的属性foo (import * as foo from ‘foo’) 则是创建一个 frozen object.</li>
+</ul>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">//------ lib.js ------</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">3</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">incCounter</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">counter</span><span style="color: #56B6C2">++</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">//------ main1.js ------</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">incCounter</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'./lib'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// The imported value `counter` is live</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 3</span></span>
+<span class="line"><span style="color: #61AFEF">incCounter</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 4</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// The imported value can’t be changed</span></span>
+<span class="line"><span style="color: #E06C75">counter</span><span style="color: #56B6C2">++</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">// TypeError</span></span></code></pre>
+<p>如果使用*引入模块，会得到相同的结果：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">//------ main2.js ------</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">*</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">lib</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'./lib'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// 导入的值 counter 是活动的</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">lib</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 3</span></span>
+<span class="line"><span style="color: #E5C07B">lib</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">incCounter</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">lib</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 4</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// 导入的值是只读的不能被修改</span></span>
+<span class="line"><span style="color: #E5C07B">lib</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">counter</span><span style="color: #56B6C2">++</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">// TypeError</span></span></code></pre>
+<p>虽然不能修改导入的值，但是可以修改对象指向的内容，这个 const 常量的处理是一致的。例如：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">//------ lib.js ------</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">obj</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">//------ main.js ------</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">obj</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'./lib'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E5C07B">obj</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">prop</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">123</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">// OK</span></span>
+<span class="line"><span style="color: #E06C75">obj</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {}; </span><span style="color: #7F848E">// TypeError</span></span></code></pre>
+<h3 id="结束">结束</h3>
+<p>关于更多 ES6 模块相关的内容，有兴趣的朋友可以去下面这些地方看看：</p>
+<ul>
+<li><a href="http://exploringjs.com/es6/ch_modules.html">http://exploringjs.com/es6/ch_modules.html</a></li>
+<li><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-modules">http://www.ecma-international.org/ecma-262/6.0/#sec-modules</a></li>
+</ul>
+<p>参考资料：</p>
+<ol>
+<li><a href="http://stackoverflow.com/a/40295288">http://stackoverflow.com/a/40295288</a></li>
+<li><a href="http://exploringjs.com/es6/ch_modules.html">http://exploringjs.com/es6/ch_modules.html</a></li>
+<li><a href="http://zhaoda.net/webpack-handbook/amd.html">http://zhaoda.net/webpack-handbook/amd.html</a></li>
+<li>[<a href="https://nodejs.org/api/modules.html%5D)(">https://nodejs.org/api/modules.html])(</a><a href="https://nodejs.org/api/modules.html">https://nodejs.org/api/modules.html</a>)</li>
+<li><a href="http://speakingjs.com/es5/ch17.html#freezing_objects">http://speakingjs.com/es5/ch17.html#freezing_objects</a></li>
+</ol>
+    </article>
+
+    <ul class="tags-container astro-LRLIQ33U">
+      <li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/JavaScript" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">JavaScript</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="max-w-screen-2xl mt-auto astro-RWWC6FBJ">
+  <div class="footer-wrapper astro-RWWC6FBJ">
+    <div class="social-icons flex astro-PHLHVEKU">
+  <a type="button" href="https://github.com/zhanglun" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title=" Astro blog facile on Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.instagram.com/zhanglun1410/" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Instagram">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+    <circle cx="12" cy="12" r="3"></circle>
+    <line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
+  </svg>
+</a>
+
+<a type="button" href="mailto:zhanglun1410@gmail.com" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Send an email to Astro blog facile">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3 7 12 13 21 7"></polyline>
+    </svg>
+</a>
+
+<a type="button" href="https://twitter.com/zhanglun1410" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-RWWC6FBJ">
+      <span class="astro-RWWC6FBJ">Copyright &#169; 2023</span>
+      <span class="separator astro-RWWC6FBJ">&nbsp;|&nbsp;</span>
+      <span class="astro-RWWC6FBJ">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://https/astro-theme-facile/blogs/%E8%A7%84%E8%8C%83%E4%B9%8B%E8%B7%AF-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%E4%BA%86float/">
+    <meta name="generator" content="Astro v1.9.1">
+
+    <!-- General Meta Tags -->
+    <title>规范之路-重新认识了Float</title>
+    <meta name="title" content="规范之路-重新认识了Float">
+    <meta name="description" content="
+总是喜欢在阴雨绵绵的时候收拾自己的小窝，无论是在家还是在学校。">
+    <meta name="author" content="zhanglun">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="规范之路-重新认识了Float">
+    <meta property="og:description" content="
+总是喜欢在阴雨绵绵的时候收拾自己的小窝，无论是在家还是在学校。">
+    <meta property="og:url" content="https://https/astro-theme-facile/blogs/%E8%A7%84%E8%8C%83%E4%B9%8B%E8%B7%AF-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%E4%BA%86float/">
+    <meta property="og:image" content="https://https/%E8%A7%84%E8%8C%83%E4%B9%8B%E8%B7%AF-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%E4%BA%86Float.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://https/astro-theme-facile/blogs/%E8%A7%84%E8%8C%83%E4%B9%8B%E8%B7%AF-%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%E4%BA%86float/">
+    <meta property="twitter:title" content="规范之路-重新认识了Float">
+    <meta property="twitter:description" content="
+总是喜欢在阴雨绵绵的时候收拾自己的小窝，无论是在家还是在学校。">
+    <meta property="twitter:image" content="https://https/astropaper-og.jpg">
+
+    <!-- Google Font -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    /> -->
+
+    
+
+    <script src="/toggle-theme.js"></script>
+  <link rel="stylesheet" href="/astro-theme-facile/assets/about.f0b2d10e.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.7bc150a9.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.5beba882.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/about.2a036302.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.f0163f61.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.80516c5d.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.4fac2f80.css" /><script type="module">const e=document.querySelector(".hamburger-menu"),n=document.querySelector("#menu-items")?.classList,t=document.querySelector(".icon-container")?.classList,o=document.querySelector("#first-line")?.classList,a=document.querySelector("#second-line ")?.classList,s=document.querySelector("#third-line")?.classList;e.addEventListener("click",function(r){e?.getAttribute("aria-expanded")==="false"?(e?.setAttribute("aria-expanded","true"),e?.setAttribute("aria-label","Close Menu"),n?.remove("display-none"),t?.remove("flex"),t?.add("relative"),o?.add("rotate-45","absolute","bottom-1/2"),s?.add("display-none"),a?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(e?.setAttribute("aria-expanded","false"),e?.setAttribute("aria-label","Open Menu"),n?.add("display-none"),t?.add("flex"),t?.remove("relative"),o?.remove("rotate-45","absolute","bottom-1/2"),s?.remove("display-none"),a?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});
+</script></head>
+  <body>
+    <header class="astro-ZEJXROEC">
+  <a id="skip-to-content" href="#main-content" class="astro-ZEJXROEC">Skip to content</a>
+  <div class="nav-container astro-ZEJXROEC">
+    <div class="top-nav-wrap astro-ZEJXROEC">
+      <a href="/" class="logo astro-ZEJXROEC">
+        Astro blog facile
+      </a>
+      <nav id="nav-menu" class="astro-ZEJXROEC">
+        <button class="hamburger-menu focus-outline astro-ZEJXROEC" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
+          <div class="icon-container flex astro-ZEJXROEC">
+            <div id="first-line" class="astro-ZEJXROEC"></div>
+            <div id="second-line" class="astro-ZEJXROEC"></div>
+            <div id="third-line" class="astro-ZEJXROEC"></div>
+          </div>
+        </button>
+        <ul id="menu-items" class="display-none sm:flex astro-ZEJXROEC">
+          <li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/">
+                  <span class="astro-ZEJXROEC">首页</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/blogs">
+                  <span class="astro-ZEJXROEC">博文</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/categories">
+                  <span class="astro-ZEJXROEC">分类</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/archives">
+                  <span class="astro-ZEJXROEC">归档</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/labs">
+                  <span class="astro-ZEJXROEC">实验室</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/about">
+                  <span class="astro-ZEJXROEC">关于我</span>
+                </a>
+              </li>
+          <li class="astro-ZEJXROEC">
+            <a type="button" href="/astro-theme-facile/search" tabindex="0" class="group focus-outline p-3 sm:p-1  astro-ZEJXROEC astro-2C5NGGNE" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100 astro-ZEJXROEC"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-ZEJXROEC"></path>
+              </svg>
+</a>
+
+
+          </li>
+          <li class="astro-ZEJXROEC">
+            <button id="theme-btn" class="focus-outline astro-ZEJXROEC" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-ZEJXROEC">
+                    <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-ZEJXROEC">
+                    <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-LRLIQ33U">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-LRLIQ33U" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-LRLIQ33U"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-LRLIQ33U"></path>
+      </svg><span class="astro-LRLIQ33U">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-LRLIQ33U">
+    <h1 class="post-title astro-LRLIQ33U">规范之路-重新认识了Float</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-LRLIQ33U"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base" aria-hidden="true"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="sr-only">Posted on:</span><span class="italic text-base">October 15, 2014<span aria-hidden="true"> | </span><span class="sr-only"> at </span>10:50 PM</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-LRLIQ33U">
+      <blockquote>
+<p>总是喜欢在阴雨绵绵的时候收拾自己的小窝，无论是在家还是在学校。也不知道这个癖好是怎么形成的，还是不错的。这几天一直在搞一个新的hexo的主题，暂时没什么进展了，想到之前坚持撸标准的事情已经搁置了好久，今天收拾完就重新开始吧。</p>
+</blockquote>
+<p>今天看的是 <a href="http://www.w3.org/TR/CSS21/visuren.html#floats">Floats</a></p>
+<!--more-->
+<h2 id="什么是浮动">什么是浮动</h2>
+<p>当一个元素的CSS属性中添加了<code>float:left;</code>或者<code>float:right;</code>的时候，我们就可以把这个元素称之为“浮动元素”。当一个元素浮动之后，它会脱离文档流，也就是“out of flow”，然后尽可能地移动到当前行的左边或者右边。浮动最有意思的特性就是：内容沿着浮动元素的的边界流动。说直白一点就是，内容沿着向左浮动的元素的右边往下排（flows down），沿着向右浮动的元素的左边往下排。就像下面这样</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E06C75">img</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">	float:</span><span style="color: #D19A66">left</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"container"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">	&#x3C;</span><span style="color: #E06C75">img</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">src</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"http://placekitten.com/g/50/50"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">alt</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">""</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">style</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"float:left"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF">>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum maxime tempore perferendis ullam, voluptatem repellat vero nihil sint. Quisquam repellat, minus distinctio quae sit, ea provident sed aliquid voluptate vitae.</span></span>
+<span class="line"><span style="color: #ABB2BF">  	&#x3C;/</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span></code></pre>
+<!--![](http://ncuey-crispelite.stor.sinaapp.com/W3CR-Floats/2014-10-31_155325.png) -->
+<p>利用这个特性可以制作文字环绕图片的效果，据说float最初的作用就是这，直到有人发现可以用来“布局”。当然可以使用<code>clear</code>属性来禁止这个效果。</p>
+<h2 id="元素浮动之后如何表现">元素浮动之后如何表现</h2>
+<p>一个浮动的盒子会移动到左边或者右边，直到它的外边缘碰到包含块的边缘或者另一个浮动元素的外边缘。如果存在一个行盒子（以前记录过的关于line box的介绍 <a href="/2014/10/02/%E8%A7%84%E8%8C%83%E4%B9%8B%E8%B7%AF-normal%20flow/#Inline_formatting_contexts">link</a>），通常情况下，浮动元素的顶部会和当前行盒子的顶部对齐。</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #D19A66">.container</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">    border:</span><span style="color: #D19A66">1</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">solid</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">#343434</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #D19A66">.left</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">    float:</span><span style="color: #D19A66">left</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    width:</span><span style="color: #D19A66">300</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    background:</span><span style="color: #D19A66">#4de6e8</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #D19A66">.color3</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">    background:</span><span style="color: #D19A66">#985ede</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"container"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"content"</span><span style="color: #ABB2BF">>我是一个乖乖的div，我形成了一个BFC&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">span</span><span style="color: #ABB2BF">>我是一个span标签，我形成了IFC，同时还有一个 line box&#x3C;/</span><span style="color: #E06C75">span</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"left"</span><span style="color: #ABB2BF">>我是一个向左浮动的盒子，我的左边碰到了父元素形成的containing block的左边缘&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"left color3"</span><span style="color: #ABB2BF">>我也是一个向左浮动的盒子，我的左边碰到了前面的浮动元素的右边缘&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span></code></pre>
+<!--![](http://ncuey-crispelite.stor.sinaapp.com/W3CR-Floats/2014-10-31_175651.png) -->
+<p>如果没有足够的横向空间，浮动元素会向下移动，可以理解成另起一行，直到能够容纳它的宽度或者不存在更多的浮动元素。</p>
+<p>因为浮动后的元素不在正常的流中，所以在浮动元素前后创建的非定位块级盒子（non-position block boxes）在垂直方向上表现得就好像浮动元素不存在一样。这意味着浮动元素在正常的流中将不会占据高度，如果一个容器没有固定高度，且里面只包含浮动元素，那么这个容器的高度将为0。但是在浮动元素之后（html结构上的先后）创建的行盒子在适当的时候会自动缩短以腾出空间放置浮动元素。如果缩短的盒子太小不能容纳任何内容，这个line box会向下移动（它的宽度重新计算）直到某些内容能够适应宽度或者没有更多的浮动元素。</p>
+<!--![](http://ncuey-crispelite.stor.sinaapp.com/W3CR-Floats/2014-10-31_193922.png) -->
+<p>在当前行中，任何在浮动元素之前的的内容都会在同一行中reflow到浮动元素的另一边。</p>
+<p>如果表格的边框盒子，块级可替换元素或者在正常流中的元素创建出一个BFC，那么，它们绝对不会和处在相同BFC中的浮动元素的外填充盒子（包含margin 的盒子）重叠。乍看之下好像元素浮动之后在页面上新叠了一层，但其实不是，只有定位元素才是真正意义上是的新层（new stack）。</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #D19A66">.ovh</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">    overflow:</span><span style="color: #D19A66">hidden</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #D19A66">.red</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">    background:</span><span style="color: #D19A66">red</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">	height:</span><span style="color: #D19A66">40</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"container"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"left"</span><span style="color: #ABB2BF">>我是一个浮动的元素&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">""</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">		&#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"red"</span><span style="color: #ABB2BF">>我没有创建了一个BFC，所以有一部分与浮动元素重叠了&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">		&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;</span><span style="color: #E06C75">br</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"container"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"left"</span><span style="color: #ABB2BF">>我是一个浮动的元素&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"ovh"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">		&#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"red"</span><span style="color: #ABB2BF">>我创建了一个BFC，不在重叠了！&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">	&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span></code></pre>
+<!--![](http://ncuey-crispelite.stor.sinaapp.com/W3CR-Floats/2014-10-31_193115.png) -->
+<p>来看看下面的代码：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E06C75">img</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">	float:</span><span style="color: #D19A66">left</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #E06C75">p</span><span style="color: #ABB2BF">,</span><span style="color: #E06C75">img</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">	margin:</span><span style="color: #D19A66">10</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">	&#x3C;</span><span style="color: #E06C75">img</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">src</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"http://placekitten.com/g/50/50"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">alt</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">""</span><span style="color: #ABB2BF">>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, corporis nulla quis aliquid distinctio labore commodi fugiat eum architecto sunt sed vel animi illo aspernatur quae nam ducimus enim explicabo!</span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF">></span></span></code></pre>
+<!--![](http://ncuey-crispelite.stor.sinaapp.com/W3CR-Floats/2014-10-31_202013.png) -->
+<p>可以看到，图片向左浮动，在同一行上，紧跟着图片的内容的问题移到了右边。由于图片的原因，右侧的line box 被缩短了。但是在在图片之后的line box 恢复了它的宽度。</p>
+<p>再来看下面这个例子：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E06C75">p</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">    border:</span><span style="color: #D19A66">1</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">solid</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">red</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    margin:</span><span style="color: #D19A66">10</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    padding:</span><span style="color: #D19A66">10</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #E06C75">img</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">    margin:</span><span style="color: #D19A66">10</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    float:</span><span style="color: #D19A66">left</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF">>&#x3C;</span><span style="color: #E06C75">img</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">src</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"http://placekitten.com/g/200/400"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">alt</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">""</span><span style="color: #ABB2BF">>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, iusto, eos, recusandae qui impedit blanditiis libero in accusamus necessitatibus repellendus porro quae inventore unde non voluptate iste nesciunt aut quis.&#x3C;/</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF">>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, iusto, eos, recusandae qui impedit blanditiis libero in accusamus necessitatibus repellendus porro quae inventore unde non voluptate iste nesciunt aut quis.&#x3C;/</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF">></span></span></code></pre>
+<p>效果图如下：</p>
+<!--![](http://ncuey-crispelite.stor.sinaapp.com/W3CR-Floats/2014-10-31_204351.png) -->
+<p>图片浮动之后，在页面上不再占据高度，此时，没有设置高度的P元素的高度只能靠内容撑开。另一P元素就像图片不存在一样，紧接其后。可以使用<code>clear</code>属性阻止第二个P元素的内容流向（围绕）到浮动的图片。添加新的属性</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E06C75">p</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">	clear:</span><span style="color: #D19A66">left</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<!--![](http://ncuey-crispelite.stor.sinaapp.com/W3CR-Floats/2014-11-01_095746.png) -->
+<p>当p元素添加了 “clear:left” 之后，导致第二个段落被“推”到浮动图片的下方。有一个叫做“clearence”的东西添加到第二个段落的上外边距，就是这个“clearence”完成了调整的工作。后面会说到“clearence”</p>
+<h2 id="floatleftrightnoneinherit">float:left|right|none|inherit;</h2>
+<blockquote>
+<p>额好吧上面说了这么多感觉乱乱的。</p>
+</blockquote>
+<p>可以为任何元素添加float属性，如果元素形成的盒子具有绝对定位属性（absolutely position：position的属性值是absolute或者fixed），浮动将不起作用。</p>
+<p>元素浮动之后，会形成 一个块级盒子。也就是说，通常情况下形成行级盒子的span元素，浮动之后也便会形成一个块级盒子。</p>
+<p>在<a href="http://www.w3.org/TR/CSS21/visuren.html#floats">这里</a>官方给出了关于浮动更精确的规则，挑了几条比较个人感觉重要的</p>
+<ul>
+<li>向左浮动的元素的左外填充边缘（outer edge）不一定是 containing block 的左边缘。向右的元素同理。</li>
+<li>假设当前的盒子是向左浮动的，在它的DOM树之前也存在向左浮动的盒子。那么对于这个盒子来说，要么它的左外填充边缘与前面的盒子的右外填充边缘接触，要么它的顶外填充边缘与前面的盒子的底外填充边缘接触。向右浮动的元素同理。</li>
+<li>一个浮动元素的上外填充可能不会比它的包含块高。当浮动在两个重叠的margin之间发生，这个浮动就好像它有一个处于正常流中的空的匿名块的父元素一样</li>
+<li>一个浮动元素的上外填充通常不会比DOM结构比其优先的元素形成的块盒子或者浮动和的上外填充高</li>
+<li>一个浮动元素的上外填充通常不会比DOM结构比其优先的元素形成的line box（这个盒子要包含另一盒子）上外填充高</li>
+</ul>
+<h2 id="我要控制浮动">我要控制浮动！</h2>
+<p>CSS中提供了一个叫做<code>clear</code>的属性方便我们控制浮动之后的流。应用在块级元素上，可以使用的值有：none|left|right|both|inherit。这个属性决定元素形成的盒子的哪一边（左边或者右边）不与前面的浮动元素相邻。同时，不会作用于应用该属性的元素内部的浮动和其他的BFC中的浮动。</p>
+<h3 id="clear的属性值">‘clear’的属性值</h3>
+<p>可以是将下面四个值应用在没有浮动的块级盒子上</p>
+<dl>
+    <dt>
+    	**left**
+    </dt>
+    <dd>
+        命令使用`clear:left`的盒子的上外边界要低于任何DOM结构中比自己优先的左浮动元素框的下外边界。（只关心html结构上在自己之前的浮动元素）
+    </dd>
+    <dt>
+    	**right**
+    </dt>
+    <dd>
+        命令使用`clear:right`的盒子的上外边界要低于任何DOM结构中比自己优先的左浮动元素框的下外边界。（只关心html结构上在自己之前的浮动元素）
+    </dd>
+    <dt>
+    **both**
+    </dt>
+    <dd>
+        命令使用`clear:both`的盒子的上外边界要低于任何DOM结构中比自己优先的左浮动或者右浮动元素框的下外边界。（只关心html结构上在自己之前的浮动元素）
+    </dd>
+</dl>
+<blockquote>
+<p>根据官方的定义，可以推断出，所谓“使用clear来清除浮动”这种说法是错误的。clear所起的作用不是针对浮动，它决定的是作用的元素与其前面的浮动元素的位置关系。假如A元素使用左浮动，B元素使用左清除浮动，其作用的结果是B元素的上外边界是紧跟随在A元素的下外边界，浮动依旧浮动，B元素只不过是让其本身左侧出现在A的下方（不是底下）。</p>
+</blockquote>
+<p>看下面的例子：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"container"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    	&#x3C;</span><span style="color: #E06C75">img</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">src</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"http://placekitten.com/200/200?image=5"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">alt</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">""</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, iusto, eos, recusandae qui impedit blanditiis libero in accusamus necessitatibus repellendus porro quae inventore unde non voluptate iste nesciunt aut quis.&#x3C;/</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">	&#x3C;</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF">>&#x3C;/</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span></code></pre>
+<!--![](http://ncuey-crispelite.stor.sinaapp.com/W3CR-Floats/2014-11-02_152036.png) -->
+<p>当clear的值不是none时，潜在地引入了一个叫做“clearence”的东西，clearence禁止margin的重叠，表现得好像元素margin-top上的空白间隔。用来将元素从浮动元素身边挤下去（push past）。</p>
+<p>在第一次确定元素上边框边缘的位置的时候，元素的“clearence”的计算已经完成。如果clear设置为none，那么这个位置就是元素真正的上边框边缘的位置，也就是没有“clearence”。</p>
+<h3 id="例子说明如何计算这个clearence">例子说明如何计算这个clearence</h3>
+<p>假设，有三个盒子，顺序是：B1，margin-botom:M1，没有padding，border和子元素；浮动的F，高度为H；B2，margin-top:M2，同样没有padding，border和子元素,B2设置<code>clear:both</code>;</p>
+<p>如果暂时忽略B2的clear属性，我们会有下面的图片中的结果，B1和B2的margin重叠了，两者之间的间隔取大值也就是Max(M1, M2)。取B1的最底部在Y轴坐标为0，那么F的顶部的位置为y=M1，B2的顶部为y=Max(M1, M2)，F的底部为y=M1 + H。</p>
+<!--![](http://ncuey-crispelite.stor.sinaapp.com/W3CR-Floats/2014-11-02_162630.png) -->
+<p>考虑到B2的clear属性的作用，我们需要计算clearence，C1和C2，取Max(C1, C2)。</p>
+<ol>
+<li>B2的顶部会被挤到F的底部，坐标为y=M1 + H;这意味着它们自己空隙计算方式是：</li>
+</ol>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">	bottom of F = top border edge of B2</span></span>
+<span class="line"><span style="color: #abb2bf">    ⇔</span></span>
+<span class="line"><span style="color: #abb2bf">    M1 + H = M1 + C1 + M2</span></span>
+<span class="line"><span style="color: #abb2bf">    ⇔</span></span>
+<span class="line"><span style="color: #abb2bf">    C1 = M1 + H - M1 - M2 = H - M2</span></span></code></pre>
+<ol start="2">
+<li>保持B2的顶部在原来的位置，坐标为y=Max(M1, M2);计算方式：</li>
+</ol>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">    Max(M1, M2) = M1 + C2 + M2</span></span>
+<span class="line"><span style="color: #abb2bf">    ⇔</span></span>
+<span class="line"><span style="color: #abb2bf">	C2 = Max(M1, M2) - M1 - M2</span></span>
+<span class="line"><span style="color: #abb2bf">    </span></span>
+<span class="line"><span style="color: #abb2bf">	假设 Max(M1, M2) &#x3C; M1 + H，那么：</span></span>
+<span class="line"><span style="color: #abb2bf">    </span></span>
+<span class="line"><span style="color: #abb2bf">    C2 = Max(M1,M2) - M1 - M2&#x3C; M1 + H - M1 - M2 = H - M2</span></span>
+<span class="line"><span style="color: #abb2bf">    ⇒</span></span>
+<span class="line"><span style="color: #abb2bf">	C2 &#x3C; H - M2</span></span></code></pre>
+<ol start="3">
+<li>所以</li>
+</ol>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">C1 = H - M2  >C2  ⇒ Max(C1, C2);</span></span></code></pre>
+<h4 id="再来说明一下负clearence的情况">再来说明一下“负clearence的情况”</h4>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">style</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"margin-bottom: 4em"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  First paragraph.</span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">style</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"float: left; height: 2em; margin: 0"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  Floating paragraph.</span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">style</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"clear: left; margin-top: 3em"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  Last paragraph.</span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">p</span><span style="color: #ABB2BF">></span></span></code></pre>
+<p>如果没有为最后一个段落添加clear属性，第一个和最后一个段落的margin会重叠，最后一个元素的顶部会与浮动元素的的顶部齐平。加上clear之后第三个段落会排列在第二个段落的下方比原来的位置低2em（浮动元素的高度），同时，margin也不在重叠。所以</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">clearence + margin-top = 2em ;</span></span>
+<span class="line"><span style="color: #abb2bf">⇒</span></span>
+<span class="line"><span style="color: #abb2bf">clearence = 2em -3em = -1em;</span></span></code></pre>
+<p>完了，Bye~</p>
+    </article>
+
+    <ul class="tags-container astro-LRLIQ33U">
+      <li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/CSS" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">CSS</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/笔记" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">笔记</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="max-w-screen-2xl mt-auto astro-RWWC6FBJ">
+  <div class="footer-wrapper astro-RWWC6FBJ">
+    <div class="social-icons flex astro-PHLHVEKU">
+  <a type="button" href="https://github.com/zhanglun" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title=" Astro blog facile on Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.instagram.com/zhanglun1410/" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Instagram">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+    <circle cx="12" cy="12" r="3"></circle>
+    <line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
+  </svg>
+</a>
+
+<a type="button" href="mailto:zhanglun1410@gmail.com" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Send an email to Astro blog facile">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3 7 12 13 21 7"></polyline>
+    </svg>
+</a>
+
+<a type="button" href="https://twitter.com/zhanglun1410" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-RWWC6FBJ">
+      <span class="astro-RWWC6FBJ">Copyright &#169; 2023</span>
+      <span class="separator astro-RWWC6FBJ">&nbsp;|&nbsp;</span>
+      <span class="astro-RWWC6FBJ">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

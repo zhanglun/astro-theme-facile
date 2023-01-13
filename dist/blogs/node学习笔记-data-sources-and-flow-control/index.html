@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://https/astro-theme-facile/blogs/node%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-data-sources-and-flow-control/">
+    <meta name="generator" content="Astro v1.9.1">
+
+    <!-- General Meta Tags -->
+    <title>Node学习笔记-Data Sources and Flow Control</title>
+    <meta name="title" content="Node学习笔记-Data Sources and Flow Control">
+    <meta name="description" content="
+额在之前的笔记中，提到了使用middleware，设置路由，发送数据，处理请求，渲染模板等。">
+    <meta name="author" content="zhanglun">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Node学习笔记-Data Sources and Flow Control">
+    <meta property="og:description" content="
+额在之前的笔记中，提到了使用middleware，设置路由，发送数据，处理请求，渲染模板等。">
+    <meta property="og:url" content="https://https/astro-theme-facile/blogs/node%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-data-sources-and-flow-control/">
+    <meta property="og:image" content="https://https/Node%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Data%20Sources%20and%20Flow%20Control.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://https/astro-theme-facile/blogs/node%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-data-sources-and-flow-control/">
+    <meta property="twitter:title" content="Node学习笔记-Data Sources and Flow Control">
+    <meta property="twitter:description" content="
+额在之前的笔记中，提到了使用middleware，设置路由，发送数据，处理请求，渲染模板等。">
+    <meta property="twitter:image" content="https://https/astropaper-og.jpg">
+
+    <!-- Google Font -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    /> -->
+
+    
+
+    <script src="/toggle-theme.js"></script>
+  <link rel="stylesheet" href="/astro-theme-facile/assets/about.f0b2d10e.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.7bc150a9.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.5beba882.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/about.2a036302.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.f0163f61.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.80516c5d.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.4fac2f80.css" /><script type="module">const e=document.querySelector(".hamburger-menu"),n=document.querySelector("#menu-items")?.classList,t=document.querySelector(".icon-container")?.classList,o=document.querySelector("#first-line")?.classList,a=document.querySelector("#second-line ")?.classList,s=document.querySelector("#third-line")?.classList;e.addEventListener("click",function(r){e?.getAttribute("aria-expanded")==="false"?(e?.setAttribute("aria-expanded","true"),e?.setAttribute("aria-label","Close Menu"),n?.remove("display-none"),t?.remove("flex"),t?.add("relative"),o?.add("rotate-45","absolute","bottom-1/2"),s?.add("display-none"),a?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(e?.setAttribute("aria-expanded","false"),e?.setAttribute("aria-label","Open Menu"),n?.add("display-none"),t?.add("flex"),t?.remove("relative"),o?.remove("rotate-45","absolute","bottom-1/2"),s?.remove("display-none"),a?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});
+</script></head>
+  <body>
+    <header class="astro-ZEJXROEC">
+  <a id="skip-to-content" href="#main-content" class="astro-ZEJXROEC">Skip to content</a>
+  <div class="nav-container astro-ZEJXROEC">
+    <div class="top-nav-wrap astro-ZEJXROEC">
+      <a href="/" class="logo astro-ZEJXROEC">
+        Astro blog facile
+      </a>
+      <nav id="nav-menu" class="astro-ZEJXROEC">
+        <button class="hamburger-menu focus-outline astro-ZEJXROEC" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
+          <div class="icon-container flex astro-ZEJXROEC">
+            <div id="first-line" class="astro-ZEJXROEC"></div>
+            <div id="second-line" class="astro-ZEJXROEC"></div>
+            <div id="third-line" class="astro-ZEJXROEC"></div>
+          </div>
+        </button>
+        <ul id="menu-items" class="display-none sm:flex astro-ZEJXROEC">
+          <li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/">
+                  <span class="astro-ZEJXROEC">首页</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/blogs">
+                  <span class="astro-ZEJXROEC">博文</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/categories">
+                  <span class="astro-ZEJXROEC">分类</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/archives">
+                  <span class="astro-ZEJXROEC">归档</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/labs">
+                  <span class="astro-ZEJXROEC">实验室</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/about">
+                  <span class="astro-ZEJXROEC">关于我</span>
+                </a>
+              </li>
+          <li class="astro-ZEJXROEC">
+            <a type="button" href="/astro-theme-facile/search" tabindex="0" class="group focus-outline p-3 sm:p-1  astro-ZEJXROEC astro-2C5NGGNE" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100 astro-ZEJXROEC"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-ZEJXROEC"></path>
+              </svg>
+</a>
+
+
+          </li>
+          <li class="astro-ZEJXROEC">
+            <button id="theme-btn" class="focus-outline astro-ZEJXROEC" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-ZEJXROEC">
+                    <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-ZEJXROEC">
+                    <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-LRLIQ33U">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-LRLIQ33U" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-LRLIQ33U"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-LRLIQ33U"></path>
+      </svg><span class="astro-LRLIQ33U">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-LRLIQ33U">
+    <h1 class="post-title astro-LRLIQ33U">Node学习笔记-Data Sources and Flow Control</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-LRLIQ33U"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base" aria-hidden="true"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="sr-only">Posted on:</span><span class="italic text-base">November 7, 2014<span aria-hidden="true"> | </span><span class="sr-only"> at </span>05:17 AM</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-LRLIQ33U">
+      <blockquote>
+<p>额在之前的笔记中，提到了使用middleware，设置路由，发送数据，处理请求，渲染模板等。但是这些都不足以完成一个Web应用程序，动态数据交互需要和数据库联系在一起。当用户向服务器发送一个请求，响应的服务器可能就需要向数据库发送请求，此时，之后当数据库将数据返回给服务器，服务端才能够将响应给用户。好的，在这里就涉及到了服务端的流控制（server-side flow control）</p>
+</blockquote>
+<h2 id="connecting-to-database">Connecting to Database</h2>
+<p>在Node中没有的提供默认的链接数据的方法，同时又有很多类型的数据库都支持在Node中使用。至于如何选择还是要看具体情况具体分析。书上用的例子是Redis，这是一个很轻量级的数据，具体的我也不太懂。这里是它的<a href="http://redis.io/">官网</a>，由于没有官方的window版本，我决定先试试用SQLite。</p>
+<p>之前有过一个sqlite的数据文件，里面是在豆瓣电影上抓取的一点点东西，正好可以用上。</p>
+<p>Node的包实在是太多了，往往有时候陷入选择困难症……。我选用的是叫做<code>sqlite3</code>的modules，NPM上提供的详细资料在<a href="https://www.npmjs.org/package/sqlite3">这里</a>，<a href="https://github.com/mapbox/node-sqlite3/wiki/">这里</a>还有其API文档。</p>
+<p>在server.js的目录下新建<code>db</code>文件夹，里面放着待会儿要用的db文件。在Node中使用sqlite时，也要先引用它对应的module。</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">sqlite3</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'sqlite3'</span><span style="color: #ABB2BF">).</span><span style="color: #61AFEF">verbose</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">db</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">sqlite3</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">Database</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'./db/douban.rdb'</span><span style="color: #ABB2BF">);</span></span></code></pre>
+<p>路由的设置和之前的一样，采用<code>connect-route</code>，从数据库读取到数据完成之后，调用回调函数，回调函数中的参数<code>row</code>包含每一行的数据，</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">&#x3C;!--movie.html template--></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">h1</span><span style="color: #ABB2BF">>豆瓣电影&#x3C;/</span><span style="color: #E06C75">h1</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">dl</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">dt</span><span style="color: #ABB2BF">>{{name}}&#x3C;/</span><span style="color: #E06C75">dt</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">dd</span><span style="color: #ABB2BF">>&#x3C;</span><span style="color: #E06C75">img</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">src</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"{{img}}"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">alt</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"{{name}}"</span><span style="color: #ABB2BF">>&#x3C;/</span><span style="color: #E06C75">dd</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">dd</span><span style="color: #ABB2BF">>&#x3C;</span><span style="color: #E06C75">a</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">href</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"{{href}}"</span><span style="color: #ABB2BF">>{{name}}&#x3C;/</span><span style="color: #E06C75">a</span><span style="color: #ABB2BF">>&#x3C;/</span><span style="color: #E06C75">dd</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">dd</span><span style="color: #ABB2BF">>&#x3C;</span><span style="color: #E06C75">span</span><span style="color: #ABB2BF">>{{type}}&#x3C;/</span><span style="color: #E06C75">span</span><span style="color: #ABB2BF">> </span><span style="color: #E06C75">&#x26;nbsp;&#x26;nbsp;</span><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">span</span><span style="color: #ABB2BF">>&#x3C;/</span><span style="color: #E06C75">span</span><span style="color: #ABB2BF">>&#x3C;/</span><span style="color: #E06C75">dd</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">dl</span><span style="color: #ABB2BF">></span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">// server.js</span></span>
+<span class="line"><span style="color: #7F848E">// 忽略外部函数，只显示核心代码</span></span>
+<span class="line"><span style="color: #E5C07B">router</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">get</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'/movie'</span><span style="color: #ABB2BF">, </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">req</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">res</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">next</span><span style="color: #ABB2BF">){</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">search</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">db</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">each</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"select * from MOVIE"</span><span style="color: #ABB2BF">, </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">err</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">row</span><span style="color: #ABB2BF">){</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">row</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">movie</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">name</span><span style="color: #ABB2BF">:</span><span style="color: #E5C07B">row</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">name</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">href</span><span style="color: #ABB2BF">:</span><span style="color: #E5C07B">row</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">href</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">img</span><span style="color: #ABB2BF">:</span><span style="color: #E5C07B">row</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">post_url</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">type</span><span style="color: #ABB2BF">:</span><span style="color: #E5C07B">row</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">type</span></span>
+<span class="line"><span style="color: #ABB2BF">        };</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">readable</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">mu</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">compileAndRender</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'movie.html'</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">movie</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E5C07B">readable</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">pipe</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">res</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">    });</span></span>
+<span class="line"><span style="color: #ABB2BF">});</span></span></code></pre>
+<p>这应该算的上是Node中操作数据库最简单的例子，执行select语句读取数据，然后将数据渲染到模板中，呈现给用户。觉得还是有必要把sqlite3的API稍微翻译下做个笔记，不然每次都去查有点子麻烦。</p>
+<h2 id="storing-data-in-files">Storing Data in Files</h2>
+<p>上面讲的是从数据库中取数据，现在来说说如何存储数据。其实我觉得这些问题，只要搞明白了一个，其他的也就不怎么困难了。取数据的时候我们是先访问数据库，然后查找，找到自己需要的数据之后返回就行，大体上就是这么个过程，那么反过来存储数据就是 先准备好打算存储的数据，然后访问数据库，将要存储的数据存入数据库就行了。整个过程都依赖相应数据库modules的API，看懂了API结合着操作几次，差不多就熟练了。我觉得这也没什么好说的。</p>
+<h2 id="node-sqlite3-简单的操作">node-sqlite3 简单的操作</h2>
+<blockquote>
+<p>来自<a href="https://github.com/mapbox/node-sqlite3/wiki/API">node sqlite3 wiki api</a></p>
+</blockquote>
+<h3 id="new-sqlite3databasefilename-mode-callback">new sqlite3.Database(filename, [mode], [callback])</h3>
+<p>返回一个新的Database对象，并且自动打开这个数据库。没有其他间接的方法来打开数据库。</p>
+<ul>
+<li><code>filename</code>： 正确的值是文件名，如果是“:memory:”，则在内存中创建一个匿名的数据库，匿名数据库不持久，关闭数据库程序之后内容就会消失。</li>
+<li><code>mode</code>：可选参数，可以是<code>sqlite3.OPEN_READONLY</code>, <code>sqlite3.OPEN_READWRITE</code> 和 <code>sqlite3.OPEN_CREATE</code>中的一个或者多个。默认值是 <code>OPEN_READWRITE | OPEN_CREATE</code>。</li>
+<li><code>callback</code>：可选参数，数据库成功打开或者打开时遇到错误调用，回调函数的第一个参数是一个err对象。当err对象为<code>null</code>时，数据库打开成功，此时触发一个没有参数的<code>open</code>事件，无论回调函数是否存在。</li>
+</ul>
+<h3 id="sqlite3verbose">sqlite3.verbose()</h3>
+<p>设置执行模式。See the wiki page on <a href="https://github.com/developmentseed/node-sqlite3/wiki/Debugging">debugging</a> for more information.</p>
+<h3 id="databaseclosecallback">Database#close([callback])</h3>
+<p>关闭数据库</p>
+<ul>
+<li><code>callback</code>：可选参数。当数据库成功关闭或者关闭时遇到错误调用。回调函数的第一个参数是一个err对象。当err对象为<code>null</code>时，数据库关闭成功，此时触发一个没有参数的<code>open</code>事件，无论回调函数是否存在。</li>
+</ul>
+<h2 id="databaserunsql-param--callback">Database#run(sql, [param, …], [callback])</h2>
+<p>执行SQL语句，然后调用回调函数。返回的是一个Database对象，可以链式调用。</p>
+<ul>
+<li>
+<p><code>sql</code>：执行的SQL语句。如果SQL语句无效，同时run方法有一个回调函数。回调函数将被调用，参数是一个包含错误信息的err对象。如果没有回调函数来处理错误，一个<code>error</code>事件会在影响到后面的数据库相关语句，导致其无法正常工作。</p>
+</li>
+<li>
+<p><code>param, ...</code>：可选参数。当SQL语句包含占位符的时候，可以将参数在这里写出。在执行前，参数会被添加到语句中。有三种方式传递参数：直接作为函数的参数列举出来；以数组的形式；或者一个json对象。</p>
+</li>
+</ul>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">      </span><span style="color: #7F848E">// Directly in the function arguments.</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">db</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">run</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"UPDATE tbl SET name = ? WHERE id = ?"</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">"bar"</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">2</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #7F848E">// As an array.</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">db</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">run</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"UPDATE tbl SET name = ? WHERE id = ?"</span><span style="color: #ABB2BF">, [ </span><span style="color: #98C379">"bar"</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">2</span><span style="color: #ABB2BF"> ]);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #7F848E">// As an object with named parameters.</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">db</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">run</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"UPDATE tbl SET name = $name WHERE id = $id"</span><span style="color: #ABB2BF">, {</span></span>
+<span class="line"><span style="color: #ABB2BF">          </span><span style="color: #E06C75">$id</span><span style="color: #ABB2BF">: </span><span style="color: #D19A66">2</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">          </span><span style="color: #E06C75">$name</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"bar"</span></span>
+<span class="line"><span style="color: #ABB2BF">      });</span></span></code></pre>
+<p>参数的键可以这么书写 <code>:name</code>, <code>@name</code> and <code>$name</code>. 建议使用 <code>$name</code>因为JS中允许使用$来声明变量。</p>
+<ul>
+<li><code>callback</code> ：可选参数。在语句执行的任何一个步骤出错和查询执行后都会调用这个函数。遇到错误时，第一个（只有一个）参数是一个包含错误信息的err对象。如果执行成功，第一个参数是<code>null</code>。函数的上下文（this）指向的是statement对象。在第一次运行之后无妨再次运行这个statement，因为在第一次运行之后它被自动销毁了。
+如果执行成功，this对象将包含两个属性：<code>lastID</code>和<code>changes</code>，这两个属性包含这最后插入的行的ID和这条语句影响的行数（如果它们都不是undefined的话）。执行INSERT才会有lastID，执行UPDATE和DELETE才会有changes。其他情况下，这两个属性的都是不准确的，不应该被使用。
+在查询方法总，只有<code>.run()</code>的回调函数才有这两个值，其他的比如<code>.all()</code>，<code>.get()</code>等都没有这些值。</li>
+</ul>
+<p>更多详情请戳<a href="https://github.com/mapbox/node-sqlite3/wiki/API">这里</a></p>
+<p>Bye~下次再来……</p>
+    </article>
+
+    <ul class="tags-container astro-LRLIQ33U">
+      <li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/笔记" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">笔记</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/Node.js" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">Node.js</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="max-w-screen-2xl mt-auto astro-RWWC6FBJ">
+  <div class="footer-wrapper astro-RWWC6FBJ">
+    <div class="social-icons flex astro-PHLHVEKU">
+  <a type="button" href="https://github.com/zhanglun" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title=" Astro blog facile on Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.instagram.com/zhanglun1410/" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Instagram">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+    <circle cx="12" cy="12" r="3"></circle>
+    <line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
+  </svg>
+</a>
+
+<a type="button" href="mailto:zhanglun1410@gmail.com" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Send an email to Astro blog facile">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3 7 12 13 21 7"></polyline>
+    </svg>
+</a>
+
+<a type="button" href="https://twitter.com/zhanglun1410" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-RWWC6FBJ">
+      <span class="astro-RWWC6FBJ">Copyright &#169; 2023</span>
+      <span class="separator astro-RWWC6FBJ">&nbsp;|&nbsp;</span>
+      <span class="astro-RWWC6FBJ">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

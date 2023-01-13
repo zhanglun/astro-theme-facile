@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://https/astro-theme-facile/blogs/intersectionobservermutationobserver%E5%92%8Cresizeobserver/">
+    <meta name="generator" content="Astro v1.9.1">
+
+    <!-- General Meta Tags -->
+    <title>IntersectionObserver、MutationObserver和ResizeObserver</title>
+    <meta name="title" content="IntersectionObserver、MutationObserver和ResizeObserver">
+    <meta name="description" content="在之前的从getboundingclientrect到intersection-observer中提到了Intersection Observer API，今天趁热打铁，将现有的其他几个Observer API 一并整理，方便查阅
+IntersectionObserver
+字面翻译：交叉的观察者。">
+    <meta name="author" content="zhanglun">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="IntersectionObserver、MutationObserver和ResizeObserver">
+    <meta property="og:description" content="在之前的从getboundingclientrect到intersection-observer中提到了Intersection Observer API，今天趁热打铁，将现有的其他几个Observer API 一并整理，方便查阅
+IntersectionObserver
+字面翻译：交叉的观察者。">
+    <meta property="og:url" content="https://https/astro-theme-facile/blogs/intersectionobservermutationobserver%E5%92%8Cresizeobserver/">
+    <meta property="og:image" content="https://https/IntersectionObserver%E3%80%81MutationObserver%E5%92%8CResizeObserver.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://https/astro-theme-facile/blogs/intersectionobservermutationobserver%E5%92%8Cresizeobserver/">
+    <meta property="twitter:title" content="IntersectionObserver、MutationObserver和ResizeObserver">
+    <meta property="twitter:description" content="在之前的从getboundingclientrect到intersection-observer中提到了Intersection Observer API，今天趁热打铁，将现有的其他几个Observer API 一并整理，方便查阅
+IntersectionObserver
+字面翻译：交叉的观察者。">
+    <meta property="twitter:image" content="https://https/astropaper-og.jpg">
+
+    <!-- Google Font -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    /> -->
+
+    
+
+    <script src="/toggle-theme.js"></script>
+  <link rel="stylesheet" href="/astro-theme-facile/assets/about.f0b2d10e.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.7bc150a9.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.5beba882.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/about.2a036302.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.f0163f61.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.80516c5d.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.4fac2f80.css" /><script type="module">const e=document.querySelector(".hamburger-menu"),n=document.querySelector("#menu-items")?.classList,t=document.querySelector(".icon-container")?.classList,o=document.querySelector("#first-line")?.classList,a=document.querySelector("#second-line ")?.classList,s=document.querySelector("#third-line")?.classList;e.addEventListener("click",function(r){e?.getAttribute("aria-expanded")==="false"?(e?.setAttribute("aria-expanded","true"),e?.setAttribute("aria-label","Close Menu"),n?.remove("display-none"),t?.remove("flex"),t?.add("relative"),o?.add("rotate-45","absolute","bottom-1/2"),s?.add("display-none"),a?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(e?.setAttribute("aria-expanded","false"),e?.setAttribute("aria-label","Open Menu"),n?.add("display-none"),t?.add("flex"),t?.remove("relative"),o?.remove("rotate-45","absolute","bottom-1/2"),s?.remove("display-none"),a?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});
+</script></head>
+  <body>
+    <header class="astro-ZEJXROEC">
+  <a id="skip-to-content" href="#main-content" class="astro-ZEJXROEC">Skip to content</a>
+  <div class="nav-container astro-ZEJXROEC">
+    <div class="top-nav-wrap astro-ZEJXROEC">
+      <a href="/" class="logo astro-ZEJXROEC">
+        Astro blog facile
+      </a>
+      <nav id="nav-menu" class="astro-ZEJXROEC">
+        <button class="hamburger-menu focus-outline astro-ZEJXROEC" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
+          <div class="icon-container flex astro-ZEJXROEC">
+            <div id="first-line" class="astro-ZEJXROEC"></div>
+            <div id="second-line" class="astro-ZEJXROEC"></div>
+            <div id="third-line" class="astro-ZEJXROEC"></div>
+          </div>
+        </button>
+        <ul id="menu-items" class="display-none sm:flex astro-ZEJXROEC">
+          <li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/">
+                  <span class="astro-ZEJXROEC">首页</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/blogs">
+                  <span class="astro-ZEJXROEC">博文</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/categories">
+                  <span class="astro-ZEJXROEC">分类</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/archives">
+                  <span class="astro-ZEJXROEC">归档</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/labs">
+                  <span class="astro-ZEJXROEC">实验室</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/about">
+                  <span class="astro-ZEJXROEC">关于我</span>
+                </a>
+              </li>
+          <li class="astro-ZEJXROEC">
+            <a type="button" href="/astro-theme-facile/search" tabindex="0" class="group focus-outline p-3 sm:p-1  astro-ZEJXROEC astro-2C5NGGNE" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100 astro-ZEJXROEC"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-ZEJXROEC"></path>
+              </svg>
+</a>
+
+
+          </li>
+          <li class="astro-ZEJXROEC">
+            <button id="theme-btn" class="focus-outline astro-ZEJXROEC" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-ZEJXROEC">
+                    <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-ZEJXROEC">
+                    <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-LRLIQ33U">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-LRLIQ33U" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-LRLIQ33U"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-LRLIQ33U"></path>
+      </svg><span class="astro-LRLIQ33U">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-LRLIQ33U">
+    <h1 class="post-title astro-LRLIQ33U">IntersectionObserver、MutationObserver和ResizeObserver</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-LRLIQ33U"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base" aria-hidden="true"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="sr-only">Posted on:</span><span class="italic text-base">July 13, 2019<span aria-hidden="true"> | </span><span class="sr-only"> at </span>10:31 PM</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-LRLIQ33U">
+      <p>在之前的<a href="../%E4%BB%8Egetboundingclientrect%E5%88%B0intersection-observer/index.md">从getboundingclientrect到intersection-observer</a>中提到了<code>Intersection Observer API</code>，今天趁热打铁，将现有的其他几个Observer API 一并整理，方便查阅</p>
+<h2 id="intersectionobserver">IntersectionObserver</h2>
+<p>字面翻译：交叉的观察者。即观察两个元素之间的交叉情况</p>
+<p>Web的传统位置计算机制依赖于显式查询DOM的状态。 其中一些会导致样式重新计算和布局(比如前文提到的<code>offsetHeight</code>, <code>offsetWidth</code> 和 <code>getBoundingClientRect()</code>)，并且经常需要JavaScript脚本需要轮询此信息，因此经常会让浏览器触发多余的重新计算和布局。在实际工作中，追踪或者判断DOM是否出现在客户端视图窗口中是一个很常见的操作。比如图片懒加载，滚动时元素进入的动画等等。一般来说可以通过监听滚动事件，使用<code>getBoundingClientRect()</code>来计算元素的位置。但正如前文所言，这存在性能问题。
+<code>Intersection Observer API</code> 就是为这而<a href="https://github.com/w3c/IntersectionObserver/blob/master/explainer.md">设计</a>的，显着降低其CPU，GPU和能源消耗。</p>
+<h3 id="创建一个-intersectionobserver">创建一个 IntersectionObserver</h3>
+<p>IntersectionObserver 的 API 非常简洁</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">observer</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">IntersectionObserver</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">changes</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">for</span><span style="color: #ABB2BF"> (</span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">change</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">of</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">changes</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">change</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">}, {});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// 观察目标元素的可见性变化</span></span>
+<span class="line"><span style="color: #E5C07B">observer</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">observe</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">target</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// 停止对一个元素的观察</span></span>
+<span class="line"><span style="color: #E5C07B">observer</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">unobserve</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">target</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// 停止对所有目标元素可见性变化的观察</span></span>
+<span class="line"><span style="color: #E5C07B">observer</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">disconnect</span><span style="color: #ABB2BF">();</span></span></code></pre>
+<h3 id="callback">callback</h3>
+<p>回调接收 IntersectionObserverEntry 对象和观察者的列表：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">callback</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">entries</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">IntersectionObserverEntry</span><span style="color: #ABB2BF">[], </span><span style="color: #E06C75">observer</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">IntersectionObserver</span><span style="color: #ABB2BF">) { </span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">entries</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">forEach</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">entry</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">// Each entry describes an intersection change for one observed</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">// target element:</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">//   entry.boundingClientRect</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">//   entry.intersectionRatio</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">//   entry.intersectionRect</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">//   entry.isIntersecting</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">//   entry.rootBounds</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">//   entry.target</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">//   entry.time</span></span>
+<span class="line"><span style="color: #ABB2BF">  });</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span></code></pre>
+<p><code>entries</code>是一个数组，和<code>threshold</code>对应。即使<code>threshold</code>输入的是一个数字，<code>entries</code>也会返回数组。下图是<code>IntersectionObserverEntry</code>的结构</p>
+<p><img src="./images/intersection-observer-api.png" alt="intersection-observer-api.png"></p>
+<p>下图可以清晰的看出<code>intersectionRadio</code>的意义</p>
+<p><img src="./images/intersectratio.png" alt="intersectratio.png"></p>
+<p><code>IntersectionObservers</code> 是异步传递数据，回调函数中的代码将在主线程中运行。 规范中提到<code>IntersectionObserver</code>实现应使用<code>requestIdleCallback（）</code>。 这意味着对回调函数的执行是低优先级的，将在客户端空闲时间进行。 这是有意为之。</p>
+<h3 id="options">options</h3>
+<p>传递到IntersectionObserver()构造函数的 options 对象包含以下字段：</p>
+<ul>
+<li><strong>root</strong>
+<ul>
+<li>指定根(root)元素，用于检查目标的可见性。必须是目标元素的父级元素。</li>
+<li>如果未指定或者为null，则默认为浏览器视窗。</li>
+</ul>
+</li>
+<li><strong>rootMargin</strong>
+<ul>
+<li>根元素的外边距。类似于css中的 margin 属性，比如 “10px 20px 30px 40px” (top, right, bottom, left)。</li>
+<li>如果有指定root参数，则rootMargin也可以使用百分比来取值。该属性值是用作root元素和target发生交集时候的计算交集的区域范围，使用该属性可以控制root元素每一边的收缩或者扩张。</li>
+<li>默认值为0。</li>
+</ul>
+</li>
+<li><strong>threshold</strong>
+<ul>
+<li>可以是一个数字也可以是一个数字数组。目标元素和根元素相交程度达到该值的时候IntersectionObserver注册的回调函数将会被执行。</li>
+<li>如果你只是想要探测当target元素的在root元素中的可见性超过50%的时候，你可以指定该属性值为0.5。</li>
+<li>如果你想要target元素在root元素的可见程度每多25%就执行一次回调，那么你可以指定一个数组[0, 0.25, 0.5, 0.75, 1]。</li>
+<li>默认值是0(意味着只要有一个target像素出现在root元素中，回调函数将会被执行)。</li>
+<li>该值为1.0含义是当target完全出现在root元素中时候 回调才会被执行。</li>
+</ul>
+</li>
+</ul>
+<p><strong>注意：</strong></p>
+<ol>
+<li>如果使用默认的<code>options</code>，目标元素部分进入视图窗口和完全离开视图窗口时，都会触发一次回调函数</li>
+<li>如果你想同时观察多个元素，尽可能地在一个<code>IntersectionObserver</code>的实例上调用多次<code>observer</code>方法</li>
+</ol>
+<h3 id="常用场景">常用场景</h3>
+<h4 id="元素的可见性监听">元素的可见性监听</h4>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">&#x3C;!-- 网页中嵌入的广告 --></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">iframe</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">id</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"theAd"</span><span style="color: #ABB2BF">>&#x3C;/</span><span style="color: #E06C75">iframe</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #7F848E">&#x3C;!-- 嵌入的脚本 --></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">script</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">src</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"//cdn.example.com/ads.js"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">async</span><span style="color: #ABB2BF">>&#x3C;/</span><span style="color: #E06C75">script</span><span style="color: #ABB2BF">></span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">// ads.js</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// 上报信息</span></span>
+<span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">logImpressionToServer</span><span style="color: #ABB2BF">() { </span><span style="color: #7F848E">/* ... */</span><span style="color: #ABB2BF"> }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// 判断是否可见</span></span>
+<span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">isVisible</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">boundingClientRect</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">intersectionRect</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> ((</span><span style="color: #E5C07B">intersectionRect</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">width</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">*</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">intersectionRect</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">height</span><span style="color: #ABB2BF">) </span><span style="color: #56B6C2">/</span></span>
+<span class="line"><span style="color: #ABB2BF">          (</span><span style="color: #E5C07B">boundingClientRect</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">width</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">*</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">boundingClientRect</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">height</span><span style="color: #ABB2BF">) </span><span style="color: #56B6C2">>=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">0.5</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">visibleTimerCallback</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">element</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">observer</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">delete</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">element</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">visibleTimeout</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #61AFEF">processChanges</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">observer</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">takeRecords</span><span style="color: #ABB2BF">());</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #98C379">'isVisible'</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">in</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">element</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">delete</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">element</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">isVisible</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #61AFEF">logImpressionToServer</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">observer</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">unobserve</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">element</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// 交叉时的回调函数</span></span>
+<span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">processChanges</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">changes</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">changes</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">forEach</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">function</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">changeRecord</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">element</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">changeRecord</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">target</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">element</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">isVisible</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">isVisible</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">changeRecord</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">boundingClientRect</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">changeRecord</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">intersectionRect</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #98C379">'isVisible'</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">in</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">element</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #7F848E">// 显示</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">element</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">visibleTimeout</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">setTimeout</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">visibleTimerCallback</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">1000</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">element</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">observer</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">    } </span><span style="color: #C678DD">else</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #7F848E">// 隐藏</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #98C379">'visibleTimeout'</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">in</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">element</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #61AFEF">clearTimeout</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">element</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">visibleTimeout</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">delete</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">element</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">visibleTimeout</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">      }</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">  });</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">observer</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">IntersectionObserver</span><span style="color: #ABB2BF">(</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">processChanges</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  { </span><span style="color: #E06C75">threshold</span><span style="color: #ABB2BF">: [</span><span style="color: #D19A66">0.5</span><span style="color: #ABB2BF">] } </span></span>
+<span class="line"><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">theAd</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">document</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">querySelector</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'#theAd'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #E5C07B">observer</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">observe</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">theAd</span><span style="color: #ABB2BF">);</span></span></code></pre>
+<p>乍看之下好像需要编写更多复杂代码，但是对比传统的方式，这种方式有其优点</p>
+<ol>
+<li>无需监听scroll事件</li>
+<li>没有频繁的同步计算布局，没有插件依赖，只使用了一个定时器来记录状态</li>
+</ol>
+<h4 id="数据滚动">数据滚动</h4>
+<p>许多系统使用数据绑定列表来管理其视图内内容，可以通过回收DOM的方式保持内存和布局效。率。通常我们在渲染分页加载的列表数据的时候，为了避免滚动的时候出现卡顿感，会一次加载好几页的数据，但是实际上需要渲染的数据是总数据的子集。并且随着页码的加大，这个列表中的DOM会越来越多。我们可以在列表元素上使用 <code>IntersectionObserver</code>，来通知系统何时加载数据，何时回收DOM</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">style</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #D19A66">.container</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    overflow: </span><span style="color: #D19A66">auto</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    width: </span><span style="color: #D19A66">10</span><span style="color: #E06C75">em</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    height: </span><span style="color: #D19A66">30</span><span style="color: #E06C75">em</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    position: </span><span style="color: #D19A66">relative</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #D19A66">.inner-scroll-surface</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    position: </span><span style="color: #D19A66">absolute</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    left: </span><span style="color: #D19A66">0</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    top: </span><span style="color: #D19A66">0</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    width: </span><span style="color: #D19A66">100</span><span style="color: #E06C75">%</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">/* proportional to the # of expected items in the list */</span></span>
+<span class="line"><span style="color: #ABB2BF">    height: </span><span style="color: #D19A66">1000</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #D19A66">.scroll-item</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    position: </span><span style="color: #D19A66">absolute</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    height: </span><span style="color: #D19A66">2</span><span style="color: #E06C75">em</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    left: </span><span style="color: #D19A66">0</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    right: </span><span style="color: #D19A66">0</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">style</span><span style="color: #ABB2BF">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"container"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"inner-scroll-surface"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"scroll-item"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">style</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"top: 0em;"</span><span style="color: #ABB2BF">>item 1&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"scroll-item"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">style</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"top: 2em;"</span><span style="color: #ABB2BF">>item 2&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"scroll-item"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">style</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"top: 4em;"</span><span style="color: #ABB2BF">>item 3&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">&#x3C;!-- ... --></span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span></code></pre>
+<p>As the user moves the container, the children can be observed and as they cross the threshold of the scrollable area, a manager can recycle them and fill them with new data instead of needing to re-create the items from scratch.</p>
+<p>当用户滚动列表时，列表元素经过预先设定的阈值时，可以执行对应的处理逻辑</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">query</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">selector</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Array</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">from</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">document</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">querySelectorAll</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">selector</span><span style="color: #ABB2BF">));</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">init</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">opts</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> { </span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">root</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">document</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">querySelector</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">".container"</span><span style="color: #ABB2BF">),</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">rootMargin</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"500px 0px"</span><span style="color: #ABB2BF"> </span></span>
+<span class="line"><span style="color: #ABB2BF">  };</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">observer</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">IntersectionObserver</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">manageItemPositionChanges</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">opts</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #61AFEF">query</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">".inner-scroll-surface > .scroll-item"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">    .</span><span style="color: #61AFEF">forEach</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">function</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">scrollItem</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">observer</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">observe</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">scrollItem</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">    });</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">manageItemPositionChanges</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">changes</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #7F848E">// ...</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h4 id="延迟加载">延迟加载</h4>
+<p>使用<code>IntersectionObserver</code>轻松实现懒加载</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"lazy-loaded"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;</span><span style="color: #E06C75">template</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    ...</span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;/</span><span style="color: #E06C75">template</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">query</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">selector</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Array</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">from</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">document</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">querySelectorAll</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">selector</span><span style="color: #ABB2BF">));</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">observer</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">IntersectionObserver</span><span style="color: #ABB2BF">(</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #7F848E">// 预先加载在视窗可见区域高度两倍以内的元素</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">changes</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">changes</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">forEach</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">function</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">change</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">container</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">change</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">target</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">content</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">container</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">querySelector</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"template"</span><span style="color: #ABB2BF">).</span><span style="color: #E06C75">content</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">container</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">appendChild</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">content</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">observer</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">unobserve</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">container</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">    });</span></span>
+<span class="line"><span style="color: #ABB2BF">  },</span></span>
+<span class="line"><span style="color: #ABB2BF">  { </span><span style="color: #E06C75">rootMargin</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"200% 0%"</span><span style="color: #ABB2BF"> }</span></span>
+<span class="line"><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #61AFEF">query</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">".lazy-loaded"</span><span style="color: #ABB2BF">).</span><span style="color: #61AFEF">forEach</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">function</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">item</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">observer</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">observe</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">item</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">});</span></span></code></pre>
+<h2 id="mutationobserver">MutationObserver</h2>
+<p>在web应用中，DOM操作是相当频繁的。在过去有一段时间，公认有效的一种方式是使用<code>Mutation Events</code>，不过这个特性在API的设计中有缺陷，为DOM添加 mutation 监听器反而会进一步降低修改DOM文档的性能（慢1.5 - 7倍）。而且 移除监听器不会减少性能的消耗。目前已经被废弃了。具体原因可以查看<a href="https://lists.w3.org/Archives/Public/public-webapps/2011JulSep/0779.html">DOM Mutation Events Replacement: The Story So Far / Existing Points of Consensus</a>。简单来说以下三点原因：</p>
+<ol>
+<li>冗余。因为经常触发</li>
+<li>慢。因为事件传播所以慢，同时还阻止了一些UA的自我优化</li>
+<li>容易crash。</li>
+</ol>
+<p>W3C提出了<code>MutationObserver</code>来代替<code>Mutation Events</code>。</p>
+<h3 id="创建一个-mutationobserver">创建一个 MutationObserver</h3>
+<p><code>MutationObserver</code> 可以监听DOM节点的变化，属性的变化，它最基本的语法如下：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">targetNode</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">document</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">querySelector</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"#someElement"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">observerOptions</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">childList</span><span style="color: #ABB2BF">: </span><span style="color: #D19A66">true</span><span style="color: #ABB2BF">,  </span><span style="color: #7F848E">// 观察目标子节点的变化，是否有添加或者删除</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">attributes</span><span style="color: #ABB2BF">: </span><span style="color: #D19A66">true</span><span style="color: #ABB2BF">, </span><span style="color: #7F848E">// 观察属性变动</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">subtree</span><span style="color: #ABB2BF">: </span><span style="color: #D19A66">true</span><span style="color: #ABB2BF">     </span><span style="color: #7F848E">// 观察后代节点，默认为 false</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">observer</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">MutationObserver</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">callback</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">callback</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">records</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">mutationRecord</span><span style="color: #ABB2BF">[], </span><span style="color: #E06C75">observer</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">MutationObserver</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #7F848E">// ...</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #E5C07B">observer</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">observe</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">targetNode</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">observerOptions</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// ...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E5C07B">observer</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">disconnect</span><span style="color: #ABB2BF">() </span><span style="color: #7F848E">// 停止观察变动。 可以重用观察者。所有已经检测到但是尚未向观察者报告的变动都会被丢弃</span></span></code></pre>
+<p>使用选择器来获取目标节点树。 <code>observerOptions</code> 中设定了观察者的选项，通过设定 childList 和 attributes 为 true 来获取所需信息，表示同时观察目标节点树的childList和attributes的变化。</p>
+<h3 id="callback-1">callback</h3>
+<p>每当被指定的节点或子树以及配置项有 DOM 变动时，callback会被异步调用。这个函数有两个参数：一个是描述所有被触发改动的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MutationRecord"><code>MutationRecord</code></a> 对象数组，另一个是调用该函数的MutationObserver 对象。比如：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">callback</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">mutationRecords</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">observer</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">mutationRecords</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">forEach</span><span style="color: #ABB2BF">((</span><span style="color: #E06C75">mutation</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">switch</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">mutation</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">type</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">case</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'childList'</span><span style="color: #ABB2BF">:</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #7F848E">/* 从树上添加或移除一个或更多的子节点；参见 mutation.addedNodes 与</span></span>
+<span class="line"><span style="color: #7F848E">           mutation.removedNodes */</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">break</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">case</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'attributes'</span><span style="color: #ABB2BF">:</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #7F848E">/* mutation.target 中某节点的一个属性值被更改；该属性名称在 mutation.attributeName 中，</span></span>
+<span class="line"><span style="color: #7F848E">           该属性之前的值为 mutation.oldValue */</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">break</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">  });</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>:::info
+callback 的函数签名和 <code>IntersectionObserver</code> 很相似。其实这些 Observer 的callback 的函数签名都是相似的
+:::</p>
+<p>之后指定目标节点与记录选项，我们开始观察使用 <code>observe()</code> 指定的 DOM 节点。</p>
+<p>从现在开始直到调用 <code>disconnect()</code> ，每次以 targetNode 为根节点的 DOM 树添加或移除元素时，以及这些元素的任意属性改变时，<code>callback()</code> 都会被调用。</p>
+<h3 id="options-1">options</h3>
+<p><code>observer(target, options)</code> 中的 <code>options</code> 是一个<code>MutationObserverInit</code>对象，描述了 MutationObserver 的配置。当调用 <code>observe()</code> 方法时，<code>childList</code>，<code>attributes</code> 或者 <code>characterData</code> 三个属性之中，至少有一个必须为 <code>true</code>，否则会抛出 <code>TypeError</code> 异常。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>参数名</th><th>描述</th><th>是否可选</th><th>默认值</th></tr></thead><tbody><tr><td>childList</td><td>设为 <code>true</code> 时，监视目标节点（如果 subtree 为 true，则包含子孙节点）添加或删除新的子节点。</td><td>可选</td><td>false</td></tr><tr><td>attributes</td><td>设为 <code>true</code> 时，观察受监视元素的属性值变更</td><td>可选</td><td>false</td></tr><tr><td>characterData</td><td>设为 <code>true</code> 时，监视指定目标节点或子节点树中节点所包含的字符数据的变化</td><td>可选</td><td>-</td></tr><tr><td>attributeFilter</td><td>要监视的特定属性名称的数组。如果未包含此属性，则对所有属性的更改都会触发变动通知</td><td>可选</td><td>-</td></tr><tr><td>attributeOldValue</td><td>当监视节点的属性改动时，将此属性设为 true 将记录任何有改动的属性的上一个值</td><td>可选</td><td>-</td></tr><tr><td>characterDataOldValue</td><td>设为 <code>true</code>时， 受监视节点的文本(text)发生更改时记录节点文本的先前值</td><td>可选</td><td>-</td></tr><tr><td>subtree</td><td>设为 <code>true</code> 时将监视范围扩展至目标节点整个节点树中的所有节点。MutationObserverInit 的其他值也会作用于此子树下的所有节点，而不仅仅只作用于目标节点。</td><td>可选</td><td>false</td></tr></tbody></table>
+<h3 id="takerecords">takeRecords()</h3>
+<p>返回<strong>已检测到但尚未由观察者的回调函数处理的所有匹配DOM更改的列表，使变更队列保持为空</strong>。 最常见的使用场景是：在断开观察者之前立即获取所有未处理的更改记录，以便在停止观察者时可以处理任何未处理的更改。比如：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">var targetNode = document.querySelector("#someElement");</span></span>
+<span class="line"><span style="color: #ABB2BF">var observerOptions = {</span></span>
+<span class="line"><span style="color: #ABB2BF">  childList: true,</span></span>
+<span class="line"><span style="color: #ABB2BF">  attributes: true</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">var observer = new MutationObserver(callback);</span></span>
+<span class="line"><span style="color: #ABB2BF">observer.observe(targetNode, observerOptions);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">// 这里做了一些事情</span></span>
+<span class="line"><span style="color: #ABB2BF">// ...</span></span>
+<span class="line"><span style="color: #98C379"><span style="user-select: none;">+</span>// 开始处理尚未结束的变更</span></span>
+<span class="line"><span style="color: #98C379"><span style="user-select: none;">+</span>var mutations = observer.takeRecords();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #98C379"><span style="user-select: none;">+</span>if (mutations) {</span></span>
+<span class="line"><span style="color: #98C379"><span style="user-select: none;">+</span>  callback(mutations);</span></span>
+<span class="line"><span style="color: #98C379"><span style="user-select: none;">+</span>}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">observer.disconnect();</span></span></code></pre>
+<h2 id="resize-observer">Resize Observer</h2>
+<p>这个API和其他的Observer类似，他可以用来观察元素大小的变化。onresize事件则只能有window来触发。大部分使用场景可能是在视窗大小发生变化，或者在移动设备上屏幕旋转时，监听页面元素尺寸的变化。在resizeObserver出现之前，只能使用 <code>window.resize</code> 事件来见视窗的大小变化。这种方式稍不留神就容易因为频繁触发resize事件而出现性能问题，从另一个层面来说，<code>resize</code>有点“浪费资源”，因为我们只能通过视窗的变化来计算目标元素的变化。</p>
+<p>现如今重Web端的SPA页面中，经常需要动态地添加或者删除DOM，频繁修改父元素的尺寸，这种case只有Resize Observer API能够帮我们。</p>
+<p>除了监听元素大小变化之外，还有几个有意思的特性：</p>
+<ol>
+<li>目标元素被插入或者从DOM中移除时会触发观察</li>
+<li>目标元素display修改为<code>none</code>时会触发观察</li>
+<li>非替换元素(<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Replaced_element">link</a>)不会触发观察</li>
+<li>tranforms不会触发观察</li>
+<li>如果元素被渲染了时尺寸不是0，0，也会触发观察</li>
+</ol>
+<h3 id="创建一个-resizeobserver">创建一个 ResizeObserver</h3>
+<p>与<code>intersectionObserver</code>和<code>MutationObserver</code>不同，ResizeObserver的构造函数只需要一个<code>callback</code>参数。但是监听和取消监听的方法类似</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">callbacl</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">entries</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #7F848E">// ...</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">myObserver</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">ResizeObserver</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">callback</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">someEl</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">document</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">querySelector</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'.some-element'</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">someOtherEl</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">document</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">querySelector</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'.some-other-element'</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E5C07B">myObserver</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">observe</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">someEl</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #E5C07B">myObserver</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">observe</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">someOtherEl</span><span style="color: #ABB2BF">)</span></span></code></pre>
+<h3 id="callback-2">callback</h3>
+<p>当观察的目标元素尺寸发生变化时触发回调函数，参数是一个<code>ResizeObserverEntry</code>对象数组。ResizeObserverEntry的接口如下</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">interface</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">ResizeObserverEntry</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">readonly</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">attribute</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">Element</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">target</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">readonly</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">attribute</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">DOMRectReadOnly</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">contentRect</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">readonly</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">attribute</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">sequence</span><span style="color: #56B6C2">&#x3C;</span><span style="color: #E06C75">ResizeObserverSize</span><span style="color: #56B6C2">></span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">borderBoxSize</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">readonly</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">attribute</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">sequence</span><span style="color: #56B6C2">&#x3C;</span><span style="color: #E06C75">ResizeObserverSize</span><span style="color: #56B6C2">></span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">contentBoxSize</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">readonly</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">attribute</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">sequence</span><span style="color: #56B6C2">&#x3C;</span><span style="color: #E06C75">ResizeObserverSize</span><span style="color: #56B6C2">></span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">devicePixelContentBoxSize</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span></code></pre>
+<p><code>contentRect</code> 是 ResizeObserver API 孵化阶段时的产物，考虑到兼容性问题暂时保留，在未来可能会被废弃。</p>
+<p>当观察的目标元素尺寸发生变化时触发回调函数，参数是一个<code>ResizeObserverEntry</code>对象数组。<code>ResizeObserverEntry</code>对象包含两个属性：<code>contentRect</code>，<code>target</code>。<strong>target</strong>是被观察的目标对象。<strong>contentRect</strong>是<code>DOMRectReadOnly</code>的引用，包含 <code>width</code>, <code>height</code>, <code>x</code>, <code>y</code>, <code>top</code>, <code>right</code>, <code>bottom</code> 和 <code>left</code>。和<code>Element.getBoundingClientRect()</code>返回的数据不同，<code>contentRect</code>的<code>width</code>和<code>height</code>不包含<code>padding</code>，<code>contentRect.top</code>是元素的<code>padding-top</code>，<code>contentRect.left</code>是元素的<code>padding-left</code>。</p>
+<p>比如在元素调整大小时，其内部文本显示为尺寸大小，代码如下：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">resizeObserver</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">ResizeObserver</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">entries</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">for</span><span style="color: #ABB2BF"> (</span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">entry</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">of</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">entries</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">boxEl</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">entry</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">target</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">dimensions</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">entry</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">contentRect</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">boxEl</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">textContent</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">`</span><span style="color: #C678DD">${</span><span style="color: #E5C07B">dimensions</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">width</span><span style="color: #C678DD">}</span><span style="color: #98C379"> x </span><span style="color: #C678DD">${</span><span style="color: #E5C07B">dimensions</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">height</span><span style="color: #C678DD">}</span><span style="color: #98C379">`</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">})</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E5C07B">resizeObserver</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">observe</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">document</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">querySelector</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'.box:nth-child(2)'</span><span style="color: #ABB2BF">))</span></span></code></pre>
+<h3 id="observetarget-options">observe(target, options)</h3>
+<p>ResizeObserver实例的observe方法还有第二个参数<code>options</code>。不过暂时处于草案阶段，浏览器还不支持第二个参数。</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">enum</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">ResizeObserverBoxOptions</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #98C379">"border-box"</span><span style="color: #ABB2BF">, </span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #98C379">"content-box"</span><span style="color: #ABB2BF">, </span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #98C379">"device-pixel-content-box"</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span></code></pre>
+<p>可以控制Observer观察不同的CSS尺寸：</p>
+<ul>
+<li><strong>border-box</strong> : box-border。返回的尺寸包含padding和border</li>
+<li><strong>content-box</strong> : content-boder。返回的尺寸不包含padding和border。默认值</li>
+<li><strong>device-pixel-content-box</strong> : 返回的尺寸是未经缩放的，和设备像素相关的大小，一定是一个整数。</li>
+</ul>
+<h3 id="常用场景-1">常用场景</h3>
+<h4 id="iframe的大小变化">iframe的大小变化</h4>
+<p>iframe 可以检测到大小的变化然后通知给父窗口</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">ro</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">ResizeObserver</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">entries</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">idealSize</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">computeIdealSize</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">window</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">parent</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">postMessage</span><span style="color: #ABB2BF">({</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">name</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"iframeResize"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">width</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">idealSize</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">width</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">height</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">idealSize</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">height</span></span>
+<span class="line"><span style="color: #ABB2BF">  }, </span><span style="color: #98C379">'*'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E5C07B">ro</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">observe</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">document</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">body</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// window上监听message事件</span></span>
+<span class="line"><span style="color: #E5C07B">window</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">addEventListener</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"message"</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">ev</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E5C07B">ev</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">data</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">&#x26;&#x26;</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">ev</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">data</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">name</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">==</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"iframeResize"</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">iframe</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">findEventSourceIframe</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">ev</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">source</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E06C75">iframe</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">iframe</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">style</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">width</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">ev</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">data</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">width</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">+</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"px"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">iframe</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">style</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">height</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">ev</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">data</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">height</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">+</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"px"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">}, </span><span style="color: #D19A66">false</span><span style="color: #ABB2BF">);</span></span></code></pre>
+<h4 id="聊天窗口自动滚动到底部">聊天窗口自动滚动到底部</h4>
+<p>在聊天窗口中，最新的消息在底部。为了防止浏览器自动滚动到顶部，当收到新消息时需要将滚动的位置保持在最底部。当窗口自动变化的时候也要保证能够</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #D19A66">.chat</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  overflow: </span><span style="color: #D19A66">scroll</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"chat"</span><span style="color: #ABB2BF">>  </span><span style="color: #7F848E">&#x3C;!-- chat has the scrollbar --></span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">class</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"chat-text"</span><span style="color: #ABB2BF">> </span><span style="color: #7F848E">&#x3C;!-- chat-text contains chat text --></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">>jack: hi &#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">>jill: hi &#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">div</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">ro</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">ResizeObserver</span><span style="color: #ABB2BF">( </span><span style="color: #E06C75">entries</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">for</span><span style="color: #ABB2BF"> (</span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">e</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">of</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">entries</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">chat</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">e</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">target</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">parentNode</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">scrollTop</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">scrollHeight</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">-</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">clientHeight</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">});</span></span>
+<span class="line"><span style="color: #E5C07B">ro</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">observe</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">document</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">querySelector</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'.chat-text'</span><span style="color: #ABB2BF">))</span></span></code></pre>
+<p>ResizeObserver 观察 <code>chat-text</code> 的大小，每次检测到变化时，将 <code>chat</code> 滚动到底部。新消息插入时也会触发到resize的检测。</p>
+<p>当用户向上滚动滚动条阅读历史消息时，新消息插入时自动滚动到底部，这会让用户丢掉之前阅读的信息。所以在这里引出一个新问题，如何保留用户的滚动位置？</p>
+<p>我们可以监听scroll事件来判断是否滚动，但是没有API可以区分是scroll事件是用户行为触发还是程序触发，这里hack的方式是使用flag来区分。代码如下：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">ro</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">ResizeObserver</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">initScrollPositionChat</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">chat</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">chatText</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">firstElementChild</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">chatText</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">resizeHandler</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">entry</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">chat</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">entry</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">target</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">parentNode</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">// 判断flag</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #56B6C2">!</span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">saveUserScroll</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">isResizeScrollEvent</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">true</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">scrollTop</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">scrollHeight</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">-</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">clientHeight</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">ro</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">observe</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">chatText</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">addEventListener</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'scroll'</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">ev</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">// Ignore scrolls generated by ResizeObserver</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">isResizeScrollEvent</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">delete</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">isResizeScrollEvent</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">// 保存用户的位置，除非已经滚动到底部了</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">scrollTop</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">scrollHeight</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">-</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">clientHeight</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">saveUserScroll</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">true</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    } </span><span style="color: #C678DD">else</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">chat</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">saveUserScroll</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">false</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">  });</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>Resize Observer API目前还有很多特性处于草稿阶段，有兴趣的朋友可以前往<a href="https://www.w3.org/TR/resize-observer/#intro">w3.org</a>查阅</p>
+<h2 id="三个observer的对比">三个Observer的对比</h2>
+<p><img src="./images/observers.png" alt="Observer.png"></p>
+<h2 id="参考">参考</h2>
+<ol>
+<li><a href="https://developers.google.com/web/updates/2016/04/intersectionobserver">IntersectionObserver’s Coming into View</a></li>
+<li><a href="https://github.com/w3c/IntersectionObserver/blob/master/explainer.md">IntersectionObserver explainer</a></li>
+<li><a href="https://web.dev/resize-observer/">ResizeObserver: it’s like document.onresize for elements</a></li>
+</ol>
+    </article>
+
+    
+  </main><footer class="max-w-screen-2xl mt-auto astro-RWWC6FBJ">
+  <div class="footer-wrapper astro-RWWC6FBJ">
+    <div class="social-icons flex astro-PHLHVEKU">
+  <a type="button" href="https://github.com/zhanglun" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title=" Astro blog facile on Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.instagram.com/zhanglun1410/" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Instagram">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+    <circle cx="12" cy="12" r="3"></circle>
+    <line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
+  </svg>
+</a>
+
+<a type="button" href="mailto:zhanglun1410@gmail.com" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Send an email to Astro blog facile">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3 7 12 13 21 7"></polyline>
+    </svg>
+</a>
+
+<a type="button" href="https://twitter.com/zhanglun1410" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-RWWC6FBJ">
+      <span class="astro-RWWC6FBJ">Copyright &#169; 2023</span>
+      <span class="separator astro-RWWC6FBJ">&nbsp;|&nbsp;</span>
+      <span class="astro-RWWC6FBJ">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

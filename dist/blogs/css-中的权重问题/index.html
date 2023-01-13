@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://https/astro-theme-facile/blogs/css-%E4%B8%AD%E7%9A%84%E6%9D%83%E9%87%8D%E9%97%AE%E9%A2%98/">
+    <meta name="generator" content="Astro v1.9.1">
+
+    <!-- General Meta Tags -->
+    <title>CSS 中的权重问题</title>
+    <meta name="title" content="CSS 中的权重问题">
+    <meta name="description" content="
+自己对以后的方向很明确，但是却一直做不到。">
+    <meta name="author" content="zhanglun">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="CSS 中的权重问题">
+    <meta property="og:description" content="
+自己对以后的方向很明确，但是却一直做不到。">
+    <meta property="og:url" content="https://https/astro-theme-facile/blogs/css-%E4%B8%AD%E7%9A%84%E6%9D%83%E9%87%8D%E9%97%AE%E9%A2%98/">
+    <meta property="og:image" content="https://https/CSS%20%E4%B8%AD%E7%9A%84%E6%9D%83%E9%87%8D%E9%97%AE%E9%A2%98.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://https/astro-theme-facile/blogs/css-%E4%B8%AD%E7%9A%84%E6%9D%83%E9%87%8D%E9%97%AE%E9%A2%98/">
+    <meta property="twitter:title" content="CSS 中的权重问题">
+    <meta property="twitter:description" content="
+自己对以后的方向很明确，但是却一直做不到。">
+    <meta property="twitter:image" content="https://https/astropaper-og.jpg">
+
+    <!-- Google Font -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    /> -->
+
+    
+
+    <script src="/toggle-theme.js"></script>
+  <link rel="stylesheet" href="/astro-theme-facile/assets/about.f0b2d10e.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.7bc150a9.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.5beba882.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/about.2a036302.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.f0163f61.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.80516c5d.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.4fac2f80.css" /><script type="module">const e=document.querySelector(".hamburger-menu"),n=document.querySelector("#menu-items")?.classList,t=document.querySelector(".icon-container")?.classList,o=document.querySelector("#first-line")?.classList,a=document.querySelector("#second-line ")?.classList,s=document.querySelector("#third-line")?.classList;e.addEventListener("click",function(r){e?.getAttribute("aria-expanded")==="false"?(e?.setAttribute("aria-expanded","true"),e?.setAttribute("aria-label","Close Menu"),n?.remove("display-none"),t?.remove("flex"),t?.add("relative"),o?.add("rotate-45","absolute","bottom-1/2"),s?.add("display-none"),a?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(e?.setAttribute("aria-expanded","false"),e?.setAttribute("aria-label","Open Menu"),n?.add("display-none"),t?.add("flex"),t?.remove("relative"),o?.remove("rotate-45","absolute","bottom-1/2"),s?.remove("display-none"),a?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});
+</script></head>
+  <body>
+    <header class="astro-ZEJXROEC">
+  <a id="skip-to-content" href="#main-content" class="astro-ZEJXROEC">Skip to content</a>
+  <div class="nav-container astro-ZEJXROEC">
+    <div class="top-nav-wrap astro-ZEJXROEC">
+      <a href="/" class="logo astro-ZEJXROEC">
+        Astro blog facile
+      </a>
+      <nav id="nav-menu" class="astro-ZEJXROEC">
+        <button class="hamburger-menu focus-outline astro-ZEJXROEC" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
+          <div class="icon-container flex astro-ZEJXROEC">
+            <div id="first-line" class="astro-ZEJXROEC"></div>
+            <div id="second-line" class="astro-ZEJXROEC"></div>
+            <div id="third-line" class="astro-ZEJXROEC"></div>
+          </div>
+        </button>
+        <ul id="menu-items" class="display-none sm:flex astro-ZEJXROEC">
+          <li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/">
+                  <span class="astro-ZEJXROEC">首页</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/blogs">
+                  <span class="astro-ZEJXROEC">博文</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/categories">
+                  <span class="astro-ZEJXROEC">分类</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/archives">
+                  <span class="astro-ZEJXROEC">归档</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/labs">
+                  <span class="astro-ZEJXROEC">实验室</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/about">
+                  <span class="astro-ZEJXROEC">关于我</span>
+                </a>
+              </li>
+          <li class="astro-ZEJXROEC">
+            <a type="button" href="/astro-theme-facile/search" tabindex="0" class="group focus-outline p-3 sm:p-1  astro-ZEJXROEC astro-2C5NGGNE" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100 astro-ZEJXROEC"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-ZEJXROEC"></path>
+              </svg>
+</a>
+
+
+          </li>
+          <li class="astro-ZEJXROEC">
+            <button id="theme-btn" class="focus-outline astro-ZEJXROEC" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-ZEJXROEC">
+                    <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-ZEJXROEC">
+                    <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-LRLIQ33U">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-LRLIQ33U" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-LRLIQ33U"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-LRLIQ33U"></path>
+      </svg><span class="astro-LRLIQ33U">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-LRLIQ33U">
+    <h1 class="post-title astro-LRLIQ33U">CSS 中的权重问题</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-LRLIQ33U"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base" aria-hidden="true"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="sr-only">Posted on:</span><span class="italic text-base">September 26, 2014<span aria-hidden="true"> | </span><span class="sr-only"> at </span>08:23 PM</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-LRLIQ33U">
+      <blockquote>
+<p>自己对以后的方向很明确，但是却一直做不到。接连的 rejected 多少对自己有影响。不是自己不去争取，而是真的已经疲了，或者说自己也怂了。面试的时候已经不知道该怎么办，即使自己的知道的问题也只会模棱两可地回答。滚回学校慢慢学吧</p>
+</blockquote>
+<p>如果你现在问我CSS的权重，我也只能说个大概。于是开始整理有关的资料。</p>
+<h2 id="css-specificity">CSS Specificity</h2>
+<p>有时候你会发现自己辛辛苦苦写的CSS样式不起作用，文件引入了，浏览器也加载了，但就是不按照你想要的方式显示，这个时候你就需要考虑 CSS权重的问题。如果你对权重的工作方式有所了解，将会大大减少调试bug的时间。</p>
+<p>如果想解释权重的工作方式，最好的办法就是针对问题来分析。下面就是一个 CSS 样式没有按照期待的方式显示的例子。</p>
+<p>一个简单的无序列表</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">&#x3C;ul id="summer-drinks"></span></span>
+<span class="line"><span style="color: #abb2bf">   &#x3C;li class="favorite">Whiskey and Ginger Ale&#x3C;/li></span></span>
+<span class="line"><span style="color: #abb2bf">   &#x3C;li>Wheat Beer&#x3C;/li></span></span>
+<span class="line"><span style="color: #abb2bf">   &#x3C;li>Mint Julip&#x3C;/li></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/ul></span></span></code></pre>
+<p>而在CSS中，是酱紫的：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">ul#summer-drinks li {</span></span>
+<span class="line"><span style="color: #abb2bf">   font-weight: normal;</span></span>
+<span class="line"><span style="color: #abb2bf">   font-size: 12px;</span></span>
+<span class="line"><span style="color: #abb2bf">   color: black;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">.favorite {</span></span>
+<span class="line"><span style="color: #abb2bf">  color: red;</span></span>
+<span class="line"><span style="color: #abb2bf">  font-weight: bold;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span></code></pre>
+<p>但是你会发现，拥有class为favorite的li元素中的内容并没有像你期待的那样加粗变红。这就是权重引发的“血案“！别急别急，我们可以好好的捋一捋。</p>
+<h4 id="什么是css的权重">什么是CSS的权重</h4>
+<p>我的理解就是：CSS规则的优先顺序，权重高的优先。权利大的才有发言权。</p>
+<p>每个选择器都有自己的权重。你的每条css规则，都包含一个权重级别。权重决定了哪一条规则会被浏览器应用在元素上，如果两个选择器作用在同一元素上，则权重高者生效。</p>
+<p>那上面的例子来说，两个CSS选择器 <code>ul#summer-drinks</code> 和 <code>.favorite</code> 有自己的权重，而前者的权重高于后者。所以采用的样式由前者决定而非后者。</p>
+<h4 id="如何计算权重">如何计算权重</h4>
+<p>规范中给出的定义在<a href="http://www.w3.org/TR/CSS2/cascade.html#specificity">这里</a>，分成四种不同等级的基础权重值，选择器最终的权重（优先级）由四个值共同决定。这四个等级分别是：</p>
+<ol>
+<li>行内样式，html文档中定义的style，不包含选择器，直接对元素起作用。</li>
+<li>ID选择器</li>
+<li>类（class），属性选择器（attribute selector）和伪类选择器（pseudo-class-selector）</li>
+<li>元素和伪元素（pseudo-elements）</li>
+</ol>
+<p>搞明白了这几个等级，权重的计算也是很简单了，为了方便计算和描述，分别将这四个等级标记为a, b, c, d。</p>
+<ul>
+<li>如果样式声明来自行内样式（style），将不包含选择器，直接作用在元素上，权重的基础值记为<code>1</code>, a = 1;</li>
+<li>计算选择器中ID选择器的个数x，b = x;</li>
+<li>计算选择器中class选择器，属性选择器和伪类选择器的个数y，c = y;</li>
+<li>计算元素选择器和伪元素的个数z，d = z;</li>
+</ul>
+<p>就象这样：</p>
+<!--![http://ncuey-crispelite.stor.sinaapp.com/specificity-calculationbase.png](http://ncuey-crispelite.stor.sinaapp.com/specificity-calculationbase.png)   -->
+<p>最后的到的权重就是 <code>0(1), x, y, z</code>，把它看作一个4位数的数字，数字越大权重越高。可以这么记：从0开始，一个行内样式+1000，一个id+100，一个属性选择器/class或者伪类+10，一个元素名，或者伪元素+1.比如：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf"> *             {}  /* a=0 b=0 c=0 d=0 -> specificity = 0,0,0,0 */</span></span>
+<span class="line"><span style="color: #abb2bf"> li            {}  /* a=0 b=0 c=0 d=1 -> specificity = 0,0,0,1 */</span></span>
+<span class="line"><span style="color: #abb2bf"> li:first-line {}  /* a=0 b=0 c=0 d=2 -> specificity = 0,0,0,2 */</span></span>
+<span class="line"><span style="color: #abb2bf"> ul li         {}  /* a=0 b=0 c=0 d=2 -> specificity = 0,0,0,2 */</span></span>
+<span class="line"><span style="color: #abb2bf"> ul ol+li      {}  /* a=0 b=0 c=0 d=3 -> specificity = 0,0,0,3 */</span></span>
+<span class="line"><span style="color: #abb2bf"> h1 + *[rel=up]{}  /* a=0 b=0 c=1 d=1 -> specificity = 0,0,1,1 */</span></span>
+<span class="line"><span style="color: #abb2bf"> ul ol li.red  {}  /* a=0 b=0 c=1 d=3 -> specificity = 0,0,1,3 */</span></span>
+<span class="line"><span style="color: #abb2bf"> li.red.level  {}  /* a=0 b=0 c=2 d=1 -> specificity = 0,0,2,1 */</span></span>
+<span class="line"><span style="color: #abb2bf"> #x34y         {}  /* a=0 b=1 c=0 d=0 -> specificity = 0,1,0,0 */</span></span>
+<span class="line"><span style="color: #abb2bf"> style=""          /* a=1 b=0 c=0 d=0 -> specificity = 1,0,0,0 */</span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;head></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;style type="text/css"></span></span>
+<span class="line"><span style="color: #abb2bf">  #x97z { color: red }</span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/style></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/head></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;body></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;P id="x97z" style="color: green"></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/body></span></span></code></pre>
+<p>P标签的颜色将会是绿色，因为权重的关系，行内样式会覆盖其他定义的样式。</p>
+<p>借鉴一下老外的图：</p>
+<!--![1](http://ncuey-crispelite.stor.sinaapp.com/cssspecificity-calc-1.png)   -->
+<p>或者</p>
+<!--![2](http://ncuey-crispelite.stor.sinaapp.com/cssspecificity-calc-2.png)   -->
+<p>然后</p>
+<!--![4](http://ncuey-crispelite.stor.sinaapp.com/cssspecificity-calc-4.png)  -->
+<p>还有</p>
+<!--![5](http://ncuey-crispelite.stor.sinaapp.com/cssspecificity-calc-5.png)   -->
+<p><strong>要注意的是</strong>：</p>
+<ul>
+<li>通配符选择器 <code>*</code> 不具有特殊性，其权重为(0, 0, 0, 0)</li>
+<li>伪元素(0, 0, 0, 1)和伪类选择器(0, 0, 1, 0)不是同一个东西，他们的权重值也不一样</li>
+<li>伪类选择器 :not()不具有特殊性，它的权重由括号内的内容决定</li>
+</ul>
+<p>###特殊的 !important
+!important 用于单独指定某条样式中的单个属性。对于被指定的属性，有 !important 指定的权重值大于所有未用 !important 指定的规则。</p>
+<p>例如：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">#header nav ul li.current {</span></span>
+<span class="line"><span style="color: #abb2bf">	color: red; font-weight: bold;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">// 权重值为 0, 1, 1, 3</span></span>
+<span class="line"><span style="color: #abb2bf"></span></span>
+<span class="line"><span style="color: #abb2bf">li:hover {</span></span>
+<span class="line"><span style="color: #abb2bf">	color: blue !important;</span></span>
+<span class="line"><span style="color: #abb2bf">    font-weight: normal;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf"></span></span>
+<span class="line"><span style="color: #abb2bf">// 权重值仅为0, 0, 0, 2</span></span></code></pre>
+<p>所以应用于相同元素时，前者生效。但是对于color这个属性，由于在后者中用 !important 做了指定，因此color将应用后者的规则。而font-weight则按照规定用前者的规则。</p>
+<p>如果多条规则中都对同一个属性指定了 !important ，这时 !important 的作用相互抵销，依然按abcd四组计算比较。</p>
+<p>参考自：</p>
+<p><a href="http://www.w3.org/TR/CSS2/cascade.html#specified-value">WCR specified-value</a><br>
+<a href="http://css-tricks.com/specifics-on-css-specificity/">specifics on css specificity</a><br>
+<a href="http://www.w3.org/TR/CSS2/cascade.html#specificity">WCR specificity</a></p>
+    </article>
+
+    <ul class="tags-container astro-LRLIQ33U">
+      <li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/CSS" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">CSS</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/笔记" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">笔记</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="max-w-screen-2xl mt-auto astro-RWWC6FBJ">
+  <div class="footer-wrapper astro-RWWC6FBJ">
+    <div class="social-icons flex astro-PHLHVEKU">
+  <a type="button" href="https://github.com/zhanglun" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title=" Astro blog facile on Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.instagram.com/zhanglun1410/" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Instagram">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+    <circle cx="12" cy="12" r="3"></circle>
+    <line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
+  </svg>
+</a>
+
+<a type="button" href="mailto:zhanglun1410@gmail.com" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Send an email to Astro blog facile">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3 7 12 13 21 7"></polyline>
+    </svg>
+</a>
+
+<a type="button" href="https://twitter.com/zhanglun1410" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-RWWC6FBJ">
+      <span class="astro-RWWC6FBJ">Copyright &#169; 2023</span>
+      <span class="separator astro-RWWC6FBJ">&nbsp;|&nbsp;</span>
+      <span class="astro-RWWC6FBJ">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

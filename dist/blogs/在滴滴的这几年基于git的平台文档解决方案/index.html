@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://https/astro-theme-facile/blogs/%E5%9C%A8%E6%BB%B4%E6%BB%B4%E7%9A%84%E8%BF%99%E5%87%A0%E5%B9%B4%E5%9F%BA%E4%BA%8Egit%E7%9A%84%E5%B9%B3%E5%8F%B0%E6%96%87%E6%A1%A3%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+    <meta name="generator" content="Astro v1.9.1">
+
+    <!-- General Meta Tags -->
+    <title>在滴滴的这几年：基于Git的平台文档解决方案</title>
+    <meta name="title" content="在滴滴的这几年：基于Git的平台文档解决方案">
+    <meta name="description" content="背景
+所在团队承接了架构部所有的底层服务的用户系统的建设，包括面向业务方的自助服务系统和面向运维同学的后台系统。">
+    <meta name="author" content="zhanglun">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="在滴滴的这几年：基于Git的平台文档解决方案">
+    <meta property="og:description" content="背景
+所在团队承接了架构部所有的底层服务的用户系统的建设，包括面向业务方的自助服务系统和面向运维同学的后台系统。">
+    <meta property="og:url" content="https://https/astro-theme-facile/blogs/%E5%9C%A8%E6%BB%B4%E6%BB%B4%E7%9A%84%E8%BF%99%E5%87%A0%E5%B9%B4%E5%9F%BA%E4%BA%8Egit%E7%9A%84%E5%B9%B3%E5%8F%B0%E6%96%87%E6%A1%A3%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+    <meta property="og:image" content="https://https/%E5%9C%A8%E6%BB%B4%E6%BB%B4%E7%9A%84%E8%BF%99%E5%87%A0%E5%B9%B4%EF%BC%9A%E5%9F%BA%E4%BA%8EGit%E7%9A%84%E5%B9%B3%E5%8F%B0%E6%96%87%E6%A1%A3%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://https/astro-theme-facile/blogs/%E5%9C%A8%E6%BB%B4%E6%BB%B4%E7%9A%84%E8%BF%99%E5%87%A0%E5%B9%B4%E5%9F%BA%E4%BA%8Egit%E7%9A%84%E5%B9%B3%E5%8F%B0%E6%96%87%E6%A1%A3%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+    <meta property="twitter:title" content="在滴滴的这几年：基于Git的平台文档解决方案">
+    <meta property="twitter:description" content="背景
+所在团队承接了架构部所有的底层服务的用户系统的建设，包括面向业务方的自助服务系统和面向运维同学的后台系统。">
+    <meta property="twitter:image" content="https://https/astropaper-og.jpg">
+
+    <!-- Google Font -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    /> -->
+
+    
+
+    <script src="/toggle-theme.js"></script>
+  <link rel="stylesheet" href="/astro-theme-facile/assets/about.f0b2d10e.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.7bc150a9.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.5beba882.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/about.2a036302.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.f0163f61.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.80516c5d.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.4fac2f80.css" /><script type="module">const e=document.querySelector(".hamburger-menu"),n=document.querySelector("#menu-items")?.classList,t=document.querySelector(".icon-container")?.classList,o=document.querySelector("#first-line")?.classList,a=document.querySelector("#second-line ")?.classList,s=document.querySelector("#third-line")?.classList;e.addEventListener("click",function(r){e?.getAttribute("aria-expanded")==="false"?(e?.setAttribute("aria-expanded","true"),e?.setAttribute("aria-label","Close Menu"),n?.remove("display-none"),t?.remove("flex"),t?.add("relative"),o?.add("rotate-45","absolute","bottom-1/2"),s?.add("display-none"),a?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(e?.setAttribute("aria-expanded","false"),e?.setAttribute("aria-label","Open Menu"),n?.add("display-none"),t?.add("flex"),t?.remove("relative"),o?.remove("rotate-45","absolute","bottom-1/2"),s?.remove("display-none"),a?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});
+</script></head>
+  <body>
+    <header class="astro-ZEJXROEC">
+  <a id="skip-to-content" href="#main-content" class="astro-ZEJXROEC">Skip to content</a>
+  <div class="nav-container astro-ZEJXROEC">
+    <div class="top-nav-wrap astro-ZEJXROEC">
+      <a href="/" class="logo astro-ZEJXROEC">
+        Astro blog facile
+      </a>
+      <nav id="nav-menu" class="astro-ZEJXROEC">
+        <button class="hamburger-menu focus-outline astro-ZEJXROEC" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
+          <div class="icon-container flex astro-ZEJXROEC">
+            <div id="first-line" class="astro-ZEJXROEC"></div>
+            <div id="second-line" class="astro-ZEJXROEC"></div>
+            <div id="third-line" class="astro-ZEJXROEC"></div>
+          </div>
+        </button>
+        <ul id="menu-items" class="display-none sm:flex astro-ZEJXROEC">
+          <li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/">
+                  <span class="astro-ZEJXROEC">首页</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/blogs">
+                  <span class="astro-ZEJXROEC">博文</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/categories">
+                  <span class="astro-ZEJXROEC">分类</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/archives">
+                  <span class="astro-ZEJXROEC">归档</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/labs">
+                  <span class="astro-ZEJXROEC">实验室</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/about">
+                  <span class="astro-ZEJXROEC">关于我</span>
+                </a>
+              </li>
+          <li class="astro-ZEJXROEC">
+            <a type="button" href="/astro-theme-facile/search" tabindex="0" class="group focus-outline p-3 sm:p-1  astro-ZEJXROEC astro-2C5NGGNE" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100 astro-ZEJXROEC"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-ZEJXROEC"></path>
+              </svg>
+</a>
+
+
+          </li>
+          <li class="astro-ZEJXROEC">
+            <button id="theme-btn" class="focus-outline astro-ZEJXROEC" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-ZEJXROEC">
+                    <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-ZEJXROEC">
+                    <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-LRLIQ33U">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-LRLIQ33U" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-LRLIQ33U"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-LRLIQ33U"></path>
+      </svg><span class="astro-LRLIQ33U">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-LRLIQ33U">
+    <h1 class="post-title astro-LRLIQ33U">在滴滴的这几年：基于Git的平台文档解决方案</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-LRLIQ33U"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base" aria-hidden="true"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="sr-only">Posted on:</span><span class="italic text-base">October 14, 2020<span aria-hidden="true"> | </span><span class="sr-only"> at </span>10:28 AM</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-LRLIQ33U">
+      <h2 id="背景">背景</h2>
+<p>所在团队承接了架构部所有的底层服务的用户系统的建设，包括面向业务方的自助服务系统和面向运维同学的后台系统。随着各系统的不断迭代，系统提供的自助化能力越来越强大。在滴滴，业务方在业务中通常是同时使用多个基础服务来支撑业务需求。比方说，使用MySQL服务存储数据，使用Redis服务缓存数据，使用ES服务做数据检索。但是这些服务的用户系统最初都是独立的域名，彼此之间没有联系，除了输入域名访问，没有其他入口。导致当时系统访问方式都是口口相传。</p>
+<p>为了提升用户使用的体验，同时打造部门影响力，在统一了系统的UI风格之后，逐渐往平台化的方向走，成立了基础服务平台，将这些服务相关的信息收拢在一个平台，以统一的用户界面提供给业务方。</p>
+<p>入口收敛了，服务和部门对外宣传和推广的口子也有了。运行了一段时间之后，其他部门提供基础通用能力的团队也将自家服务或者应用接入到了平台。</p>
+<p>但是服务的一些文档还处于“信息孤岛”的状态。不同服务团队各自维护和管理自家文档的方式大不相同。即使是在架构部内部，由于历史原因，文档管理方式也是五花八门，更别提其他部门了。通过对一些团队的走访和调研，发现主要有一下几种管理文档的方式：</p>
+<ol>
+<li>使用内部的wiki系统维护</li>
+<li>通过开源工具自己部署维护</li>
+</ol>
+<p>内部wiki系统有大量的文档数据，通过搜索往往不能找到自己想要的东西。虽然有空间搜索，但是前提是你要知道对应的入口链接。</p>
+<p>使用开源工具自己维护文档单独部署，需要有同学专门维护。除了要解决入口的问题之外，还存在功能不完善的问题，比如：不支持搜索。</p>
+<p>而我们想做的事情，说白了就是：在平台的基础上，为服务提供统一的文档管理和展示的窗口。降低维护成本，提升文档的可用性。（同时提升平台的用户粘性。狗头</p>
+<h2 id="文档格式化">文档格式化</h2>
+<p>说到程序员写文档，不由自主地想到markdown。Markdown 是一种轻量级的标记语言，常用与文章排版，通过markdown parser能markdown转换成我们想要的内容，甚至还能自定义解析器来实现自定义语法的转换。markdown的有很多好处：</p>
+<ol>
+<li>语法简单，专注写作内容</li>
+<li>支持自定义语法拓充</li>
+<li>轻松导出html，pdf 或者json等数据</li>
+<li>纯文本内容，可读，直观，学习成本低</li>
+<li>Vistual Stdio Code 和 Gitlab等支持高亮和预览</li>
+</ol>
+<h2 id="静态站点生成">静态站点生成</h2>
+<p>类似 Hexo, Hugo之类的静态站点生成工具种类非常多，除了 Hexo，Hugo这种主要用在静态博客场景的，还有类似 Gastby，Docusaurus 等定位是面向开源文档的书写。尤其是 Gastby，基于React，Node.js 和 GrapQL的功能强大的工具。静态站点生成有很多优点：</p>
+<ol>
+<li>可靠安全稳定</li>
+<li>版本可控制</li>
+<li>易于部署，提交即上线</li>
+<li>灵活，易于定制</li>
+</ol>
+<p>回顾一下原始诉求</p>
+<ol>
+<li>降低维护成本。开发人员只要写文档就行，不用关心部署和展示之类的</li>
+<li>提升可用性。文档最多的就是搜索，使用全文搜索，提高搜索效率。建立反馈机制，帮助提升文档质量。</li>
+</ol>
+<p>往简单了来看，我们的诉求似乎就是编写 Markdown 原文件然后转换成页面，这些工具可以帮助我们轻松实现。但是，轻量级的类似 Hexo，Hugo 定制性太差，重量级的 Gastby 虽功能强大，但是对我们的场景来说有点大材小用，引入了 GraphQL，整合到我们现有技术体系有点困难。</p>
+<p>那怎么办呢？仔细想想，如果将 Markdown 原文件转换成页面这个过程拆分成 Markdown 原文件转换成数据，使用数据渲染出页面呢？这是不是就变成了一个简单的日常web开发？</p>
+<p><img src="./images/1.png" alt="1.png"></p>
+<p>对于文档维护者来说，一次文档部署的过程应该是如下图所示：</p>
+<p><img src="./images/2.png" alt="2.png"></p>
+<p>在目前的场景中，三个简单的步骤还不足以支撑完备的业务需求。</p>
+<ol>
+<li>平台包含的服务数量过百。如果所有内容放在一个仓库中，仓库体积会越来越大，每次构建的时间也会越来越长。</li>
+<li>需要支持搜索。如果直接编译成HTML，全文搜索只能使用前端方案，不利于后续拓展，同时文档数据的使用场景也将受限与前端场景。</li>
+</ol>
+<p>于是乎，在上述的流程中补充一点细节。</p>
+<h2 id="流程设计">流程设计</h2>
+<p>创建一个Git repo 组，每个服务都是单独的一个仓库。通过约定的持续集成流水线配置，可以实现每个仓库的单独构建和部署。 负责编辑的同学只需要关注自己的仓库即可。</p>
+<p>构建过程中，将仓库中每一个文档都转换成JSON数据，存入MySQL中。再使用定时任务，采集bingLog 日志，导入到ElasticSearch中。使用MySQL中的数据用于页面的渲染，使用ElasticSearch的数据实现全局搜索。</p>
+<p><img src="./images/3.png" alt="3.png"></p>
+<h2 id="docbuilder">DocBuilder</h2>
+<p>借鉴GitBook的思路，开发了一个DocBuilder，下面是架构图：</p>
+<p><img src="./images/image2020-7-16_17-37-33.png" alt="image2020-7-16_17-37-33.png"></p>
+<p>除了最核心的扫描目录，解析 Markdown，生成JSON之外，针对 Markdown 做了一些语法上的拓展。比如输入
+<code>@dchat张伦(zhanglun)</code>会解析成一个<strong>内容为“张伦”，点击打开公司 IM 的 a 标签</strong>；输入<code>:::info  :::</code>可以创建一个info类型的提示区域等等。未来还会支持PDF, PPT文件的预览。</p>
+<h2 id="提升开发体验">提升开发体验</h2>
+<p>为了让编辑人员在写文档的时候能有写代码的感受。通过工程化的角度，对整个流程做了一下小小的优化。docbuilder除了核心的构建能力之外，还提供了快速初始化，语法检查和本地预览启动的功能。使用也很简单，安装之后通过几个命令就使用。</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E"># 安装</span></span>
+<span class="line"><span style="color: #ABB2BF">npm i -g docbuilder</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E"># 初始化文档项目。包含约定的目录结构和ci配置</span></span>
+<span class="line"><span style="color: #ABB2BF">docbuilder init</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E"># 本地启动预览</span></span>
+<span class="line"><span style="color: #ABB2BF">docbuilder serve</span></span></code></pre>
+<p>当编辑完成之后，只需要将代码推送到远端master分支，触发持续集成之后，开始构建和打包。最后将数据导入数据库，实现自动更新。</p>
+<h2 id="增加内容反馈帮助提升文档质量">增加内容反馈，帮助提升文档质量</h2>
+<p>为了让用户和文档中心形成一个较好的沟通体系，在每一篇文档中的最底部都增加了针对这篇文档的反馈入口，效果如图下所示：</p>
+<p><img src="./images/Xnip2021-06-13_15-11-20.png" alt="Xnip2021-06-13_15-11-20.png"></p>
+<p>在数据库的设计中，增加了一张feedback表，用于统计信息。用户每反馈一次便增加一条数据。同时在后台按照每个服务的维度做了数据统计，包括总数，每日新增，已回复，未处理等。服务团队可以按需派人针对收集到的问题对文档内容进行改进。</p>
+<h2 id="结束语">结束语</h2>
+<p>其实整个系统在设计和落地过程中远比上文描述的要复杂。更多的细节就不在文中细说。从技术难度的角度上来说，当我完成并落地之后，并不认为难度有多高。相反我认为实现需要一定的创造力和想象力，熟悉工具及其背后原理，才能将不同的环节串联在一起。在第一版上线之后，还化身“客服”的角色，推动服务方接入，这是从未有过的经历，虽然前期很痛苦，但是好在坚持下来，接入文档的服务方慢慢的增加。我自己也一直是以接入方的视角来思考如何推动更多服务的接入，比如提供了预览环境支持上线前的预览，提供接入指南，创建客服群增进沟通等等，后续还有跟多的想法希望在接下来的工作中能够逐步完善。</p>
+    </article>
+
+    
+  </main><footer class="max-w-screen-2xl mt-auto astro-RWWC6FBJ">
+  <div class="footer-wrapper astro-RWWC6FBJ">
+    <div class="social-icons flex astro-PHLHVEKU">
+  <a type="button" href="https://github.com/zhanglun" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title=" Astro blog facile on Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.instagram.com/zhanglun1410/" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Instagram">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+    <circle cx="12" cy="12" r="3"></circle>
+    <line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
+  </svg>
+</a>
+
+<a type="button" href="mailto:zhanglun1410@gmail.com" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Send an email to Astro blog facile">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3 7 12 13 21 7"></polyline>
+    </svg>
+</a>
+
+<a type="button" href="https://twitter.com/zhanglun1410" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-RWWC6FBJ">
+      <span class="astro-RWWC6FBJ">Copyright &#169; 2023</span>
+      <span class="separator astro-RWWC6FBJ">&nbsp;|&nbsp;</span>
+      <span class="astro-RWWC6FBJ">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

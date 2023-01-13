@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://https/astro-theme-facile/blogs/%E4%BD%BF%E7%94%A8-react-router-%E5%88%9B%E5%BB%BA%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8/">
+    <meta name="generator" content="Astro v1.9.1">
+
+    <!-- General Meta Tags -->
+    <title>使用 React-Router 创建单页应用</title>
+    <meta name="title" content="使用 React-Router 创建单页应用">
+    <meta name="description" content="最近业余时间在学习 React，配合 Redux 和 React-Router 正在不紧不慢地开发一个小工具moviemaster，用于管理硬盘中的电影剧集。">
+    <meta name="author" content="zhanglun">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="使用 React-Router 创建单页应用">
+    <meta property="og:description" content="最近业余时间在学习 React，配合 Redux 和 React-Router 正在不紧不慢地开发一个小工具moviemaster，用于管理硬盘中的电影剧集。">
+    <meta property="og:url" content="https://https/astro-theme-facile/blogs/%E4%BD%BF%E7%94%A8-react-router-%E5%88%9B%E5%BB%BA%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8/">
+    <meta property="og:image" content="https://https/%E4%BD%BF%E7%94%A8%20React-Router%20%E5%88%9B%E5%BB%BA%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://https/astro-theme-facile/blogs/%E4%BD%BF%E7%94%A8-react-router-%E5%88%9B%E5%BB%BA%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8/">
+    <meta property="twitter:title" content="使用 React-Router 创建单页应用">
+    <meta property="twitter:description" content="最近业余时间在学习 React，配合 Redux 和 React-Router 正在不紧不慢地开发一个小工具moviemaster，用于管理硬盘中的电影剧集。">
+    <meta property="twitter:image" content="https://https/astropaper-og.jpg">
+
+    <!-- Google Font -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    /> -->
+
+    
+
+    <script src="/toggle-theme.js"></script>
+  <link rel="stylesheet" href="/astro-theme-facile/assets/about.f0b2d10e.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.7bc150a9.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.5beba882.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/about.2a036302.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.f0163f61.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.80516c5d.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.4fac2f80.css" /><script type="module">const e=document.querySelector(".hamburger-menu"),n=document.querySelector("#menu-items")?.classList,t=document.querySelector(".icon-container")?.classList,o=document.querySelector("#first-line")?.classList,a=document.querySelector("#second-line ")?.classList,s=document.querySelector("#third-line")?.classList;e.addEventListener("click",function(r){e?.getAttribute("aria-expanded")==="false"?(e?.setAttribute("aria-expanded","true"),e?.setAttribute("aria-label","Close Menu"),n?.remove("display-none"),t?.remove("flex"),t?.add("relative"),o?.add("rotate-45","absolute","bottom-1/2"),s?.add("display-none"),a?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(e?.setAttribute("aria-expanded","false"),e?.setAttribute("aria-label","Open Menu"),n?.add("display-none"),t?.add("flex"),t?.remove("relative"),o?.remove("rotate-45","absolute","bottom-1/2"),s?.remove("display-none"),a?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});
+</script></head>
+  <body>
+    <header class="astro-ZEJXROEC">
+  <a id="skip-to-content" href="#main-content" class="astro-ZEJXROEC">Skip to content</a>
+  <div class="nav-container astro-ZEJXROEC">
+    <div class="top-nav-wrap astro-ZEJXROEC">
+      <a href="/" class="logo astro-ZEJXROEC">
+        Astro blog facile
+      </a>
+      <nav id="nav-menu" class="astro-ZEJXROEC">
+        <button class="hamburger-menu focus-outline astro-ZEJXROEC" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
+          <div class="icon-container flex astro-ZEJXROEC">
+            <div id="first-line" class="astro-ZEJXROEC"></div>
+            <div id="second-line" class="astro-ZEJXROEC"></div>
+            <div id="third-line" class="astro-ZEJXROEC"></div>
+          </div>
+        </button>
+        <ul id="menu-items" class="display-none sm:flex astro-ZEJXROEC">
+          <li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/">
+                  <span class="astro-ZEJXROEC">首页</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/blogs">
+                  <span class="astro-ZEJXROEC">博文</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/categories">
+                  <span class="astro-ZEJXROEC">分类</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/archives">
+                  <span class="astro-ZEJXROEC">归档</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/labs">
+                  <span class="astro-ZEJXROEC">实验室</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/about">
+                  <span class="astro-ZEJXROEC">关于我</span>
+                </a>
+              </li>
+          <li class="astro-ZEJXROEC">
+            <a type="button" href="/astro-theme-facile/search" tabindex="0" class="group focus-outline p-3 sm:p-1  astro-ZEJXROEC astro-2C5NGGNE" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100 astro-ZEJXROEC"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-ZEJXROEC"></path>
+              </svg>
+</a>
+
+
+          </li>
+          <li class="astro-ZEJXROEC">
+            <button id="theme-btn" class="focus-outline astro-ZEJXROEC" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-ZEJXROEC">
+                    <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-ZEJXROEC">
+                    <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-LRLIQ33U">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-LRLIQ33U" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-LRLIQ33U"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-LRLIQ33U"></path>
+      </svg><span class="astro-LRLIQ33U">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-LRLIQ33U">
+    <h1 class="post-title astro-LRLIQ33U">使用 React-Router 创建单页应用</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-LRLIQ33U"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base" aria-hidden="true"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="sr-only">Posted on:</span><span class="italic text-base">October 30, 2016<span aria-hidden="true"> | </span><span class="sr-only"> at </span>06:55 PM</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-LRLIQ33U">
+      <p>最近业余时间在学习 React，配合 Redux 和 React-Router 正在不紧不慢地开发一个小工具<a href="https://github.com/zhanglun/moviemaster">moviemaster</a>，用于管理硬盘中的电影剧集。在单页应用开发中，redux 并不是必须的，所以今天只讲讲 前端的路由系统以及 React-Router的简单使用。</p>
+<!--more-->
+<h3 id="什么是路由">什么是路由</h3>
+<p>以下来自维基百科：：</p>
+<blockquote>
+<p>路由（routing）就是通过互联的网络把信息从源地址传输到目的地址的活动。路由发生在OSI网络参考模型中的第三层即网路层。
+路由引导分组转送，经过一些中间的节点后，到它们最后的目的地。</p>
+</blockquote>
+<p>这是网络工程中的术语，对大家而言，最熟悉的应该就是家里的路由器。路由是指路由器从一个接口上收到数据包，根据数据包的目的地址进行定向并转发到另一个接口的过程。放在 Web 上来说，url 就像是路由器中的路由表，每个 url 对应不同的页面或者内容，就像路由表中的的 IP 对应不同的网络一样。</p>
+<p>先来看一下熟悉的套路：</p>
+<!-- ![image_1b0a1gh7ge4u1g9l14mm7v41me9a.png](http://7xnrrd.com1.z0.glb.clouddn.com/e4199599d78057a8efacb848ab9b5927.png) -->
+<p>在传统的网页应用架构中，客户端只是一个展示层，通过 url 访问服务端，服务端则根据自己的“路由表”将对应的页面分发给客户端。但是在这种模式下，ajax 异步加载的内容是无法通过url 记录的。无论你在页面上操作了多少，异步请求了多少数据，在每次重新访问同一个 url 时，服务端返回给客户端的内容都是一模一样。</p>
+<!--![image_1b0a24tg94le1p03qa76br1apfg.png](http://7xnrrd.com1.z0.glb.clouddn.com/6ed2cf502e487c30c3640a2026071f87.png) -->
+<p>如果前端有自己专属的“路由表”来分发页面上不同的状态，那不就行了？</p>
+<h3 id="hash-和-pushstate">Hash 和 pushState</h3>
+<p>据我所知，目前有两种方式可以构建出前端的路由系统：url 中的#和 HTML5中的 history API。其原理如下：</p>
+<ol>
+<li>阻止标签的默认跳转动作。</li>
+<li>ajax或者 Fetch 请求内容。</li>
+<li>将返回的内容添加到页面中。</li>
+<li>使用 hash 或者 pushState 修改 url。</li>
+</ol>
+<h4 id="经典的-hash">经典的 Hash</h4>
+<p>#代表网页中的一个位置。后面接着的字符，就是该位置的标识符。比如，</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">https://zhanglun.github.io/index.html#body</span></span></code></pre>
+<p>就代表网页 index.html 的 body 位置。浏览器读取这个 URL 后，会自动将body位置滚动至可视区域。标识符的指定有两个方法。</p>
+<ol>
+<li>使用锚点</li>
+</ol>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">&#x3C;a name="body">&#x3C;/a></span></span></code></pre>
+<ol start="2">
+<li>使用id属性</li>
+</ol>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">&#x3C;div id="body" ></span></span></code></pre>
+<p>#是用来指向文档的内容，属于浏览器的行为，与服务端无关，在 HTTP请求中也不会携带 #及其后面的内容，对于服务端而言 <a href="http://www.baidu.com">http://www.baidu.com</a> 和 <a href="http://www.baidu.com#action=fuckbaidu">http://www.baidu.com#action=fuckbaidu</a> 返回给客户端的都是前者所分发的内容，但是在浏览器中可以通过 Window 对象上的 <code>location.hash</code> 进行操作。因此，在浏览器中可以通过 hash 来记录页面的状态，构建“路由表”。当页面状态发生变化时，hash 相应变化，重新加载时又可以通过 url 中携带的 hash 直接将页面设置到对应的状态。</p>
+<p>比如：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">http://www.example.com/</span></span>
+<span class="line"><span style="color: #abb2bf">http://www.examplt.com/#edit</span></span>
+<span class="line"><span style="color: #abb2bf">http://www.examplt.com/#settings</span></span></code></pre>
+<ol>
+<li>访问<code>/</code>时，呈现主页。</li>
+<li>点击页面上的<code>Edit</code>按钮，页面呈现编辑对应的内容。通过 url 直接访问时，检查 hash 是否和 <code>edit</code> 匹配，如果匹配执行加载编辑内容的代码</li>
+<li>点击页面上的<code>Settings</code>按钮，页面呈现设置对应的内容。通过 url 直接访问时，检查 hash 是否和 <code>settings</code> 匹配，如果匹配执行加载编辑内容的代码。</li>
+</ol>
+<p>以下是伪代码：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">hashHandler</span><span style="color: #ABB2BF"> () {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">key</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">location</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">hash</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">slice</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">switch</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">key</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">case</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'edit'</span><span style="color: #ABB2BF">:</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #61AFEF">renderEditPanel</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">break</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">case</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'settings'</span><span style="color: #ABB2BF">:</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #61AFEF">renderSettings</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">break</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">       </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF">:</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">break</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">window</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">onload</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> () </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #61AFEF">hashHandler</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">window</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">onhashchange</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> () </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #61AFEF">hashHandler</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span></code></pre>
+<h4 id="html5-中的-pushstate">HTML5 中的 pushState</h4>
+<p>pushState是 History API中的一个方法，其文档可以看这里 <a href="https://developer.mozilla.org/zh-CN/docs/DOM/Manipulating_the_browser_history">MDN History</a>。它的功能简单的说就是：修改 url，添加历史记录。比如<code>/blogs</code>和<code>settings</code>对应的是两个页面，如果只是在页面上点击标签切换，需要做的操作只有：发送请求修改页面内容和调用 pushState 方法修改 url。问题来了，对于前端而言需要将其视为同一个页面，但实际上这两个 url 对于服务端来说是两个不同的请求，所以这里需要服务端的配合。</p>
+<p>我的做法是：对应的url 返回的都是同一个页面，然后浏览器接受之后检查前端定义路由系统，执行响应的代码。这个方法可能会造成页面平白添加一个短暂的延迟，不过影响不是很大。</p>
+<h3 id="react-router的使用">React-Router的使用</h3>
+<p>目前来说，任何一个路由系统库或者框架，虽说是写法不一，但是都是在上述两种方式的基础上实现的。让我觉得耳目一新的是：使用路由嵌套的概念来定义 view 的嵌套集合，当一个给定的 URL 被调用时，整个集合中（命中的部分）都会被渲染。</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">React</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'react'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">render</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'react-dom'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">Router</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">Route</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">IndexRoute</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">hashHistory</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'react-router'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">App</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'./containers/App'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">MovieContainer</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'./containers/Movies'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">Detail</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'./containers/Detail'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">rootElement</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">document</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">getElementById</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'app'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #61AFEF">render</span><span style="color: #ABB2BF">(</span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;</span><span style="color: #E5C07B">Router</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">path</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"/"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">component</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">App</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">      &#x3C;</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">path</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"about"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">component</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">About</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF"> /></span></span>
+<span class="line"><span style="color: #ABB2BF">      &#x3C;</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">path</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"inbox"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">component</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">Inbox</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">        &#x3C;</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">path</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"messages/:id"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">component</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">Message</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF"> /></span></span>
+<span class="line"><span style="color: #ABB2BF">      &#x3C;/</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;/</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;/</span><span style="color: #E5C07B">Router</span><span style="color: #ABB2BF">>,</span></span>
+<span class="line"><span style="color: #E06C75">rootElement</span><span style="color: #ABB2BF">);</span></span></code></pre>
+<p>在入口文件中，引入 React-Router，以组件的形式在 render 中使用，上述代码配置结果如下：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>URL</th><th>组件</th></tr></thead><tbody><tr><td>/</td><td>App</td></tr><tr><td>/about</td><td>App -> About</td></tr><tr><td>/inbox</td><td>App -> Inbox</td></tr><tr><td>/inbox/messages/:id</td><td>App -> Inbox -> Message</td></tr></tbody></table>
+<p>在路由中，组件对应设置的子组件可以通过 <code>this.props.children</code> 渲染在父组件中</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">class</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">App</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">extend</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Component</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">constructor</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">props</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">super</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">props</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #61AFEF">render</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">id</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"app"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">      &#x3C;</span><span style="color: #E06C75">h1</span><span style="color: #ABB2BF">>Hello, world!&#x3C;/</span><span style="color: #E06C75">h1</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">{</span><span style="color: #E5C07B">this</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">props</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">children</span><span style="color: #C678DD">}</span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>当 URL 为 / 时， App 中并没有渲染任何的组件，render 中的 this.props.children 还是 undefined。此时可以使用 <code>IndexRoute</code> 来设置一个默认页面。</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #61AFEF">render</span><span style="color: #ABB2BF">(</span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;</span><span style="color: #E5C07B">Router</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">path</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"/"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">component</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">App</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">{</span><span style="color: #7F848E">/* 当 url 为/时渲染 Welcome */</span><span style="color: #C678DD">}</span></span>
+<span class="line"><span style="color: #ABB2BF">      &#x3C;</span><span style="color: #E5C07B">IndexRoute</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">component</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">Welcome</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF"> /></span></span>
+<span class="line"><span style="color: #ABB2BF">      &#x3C;</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">path</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"about"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">component</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">About</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF"> /></span></span>
+<span class="line"><span style="color: #ABB2BF">      &#x3C;</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">path</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"inbox"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">component</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">Inbox</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">        &#x3C;</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">path</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"messages/:id"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">component</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">Message</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF"> /></span></span>
+<span class="line"><span style="color: #ABB2BF">      &#x3C;/</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;/</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;/</span><span style="color: #E5C07B">Router</span><span style="color: #ABB2BF">>,</span></span>
+<span class="line"><span style="color: #E06C75">rootElement</span><span style="color: #ABB2BF">);</span></span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>URL</th><th>组件</th></tr></thead><tbody><tr><td>/</td><td>App -> Welcome</td></tr><tr><td>/about</td><td>App -> About</td></tr><tr><td>/inbox</td><td>App -> Inbox</td></tr><tr><td>/inbox/messages/:id</td><td>App -> Inbox -> Message</td></tr></tbody></table>
+<p>看一下这一段代码</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">path</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"posts"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">component</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">Post</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">path</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"users/:userid"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">component</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">User</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">path</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"messages/:messageid"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">component</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">Message</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF"> /></span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;/</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF">></span></span></code></pre>
+<p>此时匹配的路由分别是：<code>/posts</code>，<code>/posts/usres/:userid</code> 和<code>/posts/users/:userid/messages/:messageid</code>，可以看出，嵌套的<code>&#x3C;Route></code>所匹配的 url是包裹着它的 <code>&#x3C;Route></code>的 path “之和”。但是问题又来了，嵌套的好处在于路由之间结构清晰直观，但是也会导致 url 的不美观，试想<code>/posts/users/:userid/messages/:messageid</code>这么长的路由也是着实让人心累。React-Router 的配置提供了一个选择：将 Route 的 path 设置成绝对路径。同时可以使用<code>&#x3C;Redirect/></code> 将修改为绝对路径的路由重定向到之前的设置</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">path</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"posts"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">component</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">Inbox</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">path</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"/users/:userid"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">component</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">Message</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">path</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"/messages/:messageid"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">component</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">Message</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF"> /></span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;/</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E5C07B">Route</span><span style="color: #ABB2BF">></span></span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>URL</th><th>组件</th></tr></thead><tbody><tr><td>/posts</td><td>App -> Post</td></tr><tr><td>/user/:userid</td><td>App -> Post -> User</td></tr><tr><td>/messages/:messageid</td><td>App -> Post -> User ->Message</td></tr></tbody></table>
+<p>基础的配置完成之后，通过 <code>&#x3C;Link></code>自动或者通过<code>browserHistory</code>和<code>hashHistory</code>手动执行路由的跳转。</p>
+    </article>
+
+    <ul class="tags-container astro-LRLIQ33U">
+      <li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/React" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">React</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/JavaScript" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">JavaScript</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="max-w-screen-2xl mt-auto astro-RWWC6FBJ">
+  <div class="footer-wrapper astro-RWWC6FBJ">
+    <div class="social-icons flex astro-PHLHVEKU">
+  <a type="button" href="https://github.com/zhanglun" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title=" Astro blog facile on Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.instagram.com/zhanglun1410/" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Instagram">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+    <circle cx="12" cy="12" r="3"></circle>
+    <line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
+  </svg>
+</a>
+
+<a type="button" href="mailto:zhanglun1410@gmail.com" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Send an email to Astro blog facile">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3 7 12 13 21 7"></polyline>
+    </svg>
+</a>
+
+<a type="button" href="https://twitter.com/zhanglun1410" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-RWWC6FBJ">
+      <span class="astro-RWWC6FBJ">Copyright &#169; 2023</span>
+      <span class="separator astro-RWWC6FBJ">&nbsp;|&nbsp;</span>
+      <span class="astro-RWWC6FBJ">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

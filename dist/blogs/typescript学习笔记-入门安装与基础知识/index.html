@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://https/astro-theme-facile/blogs/typescript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%85%A5%E9%97%A8%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+    <meta name="generator" content="Astro v1.9.1">
+
+    <!-- General Meta Tags -->
+    <title>TypeScript学习笔记-入门:安装与基础知识</title>
+    <meta name="title" content="TypeScript学习笔记-入门:安装与基础知识">
+    <meta name="description" content="TypeScript 是由微软推出的开源编程语言，官网的定义如下：
+
+TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.">
+    <meta name="author" content="zhanglun">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="TypeScript学习笔记-入门:安装与基础知识">
+    <meta property="og:description" content="TypeScript 是由微软推出的开源编程语言，官网的定义如下：
+
+TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.">
+    <meta property="og:url" content="https://https/astro-theme-facile/blogs/typescript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%85%A5%E9%97%A8%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+    <meta property="og:image" content="https://https/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%85%A5%E9%97%A8:%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://https/astro-theme-facile/blogs/typescript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%85%A5%E9%97%A8%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+    <meta property="twitter:title" content="TypeScript学习笔记-入门:安装与基础知识">
+    <meta property="twitter:description" content="TypeScript 是由微软推出的开源编程语言，官网的定义如下：
+
+TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.">
+    <meta property="twitter:image" content="https://https/astropaper-og.jpg">
+
+    <!-- Google Font -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    /> -->
+
+    
+
+    <script src="/toggle-theme.js"></script>
+  <link rel="stylesheet" href="/astro-theme-facile/assets/about.f0b2d10e.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.7bc150a9.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.5beba882.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/about.2a036302.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.f0163f61.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.80516c5d.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.4fac2f80.css" /><script type="module">const e=document.querySelector(".hamburger-menu"),n=document.querySelector("#menu-items")?.classList,t=document.querySelector(".icon-container")?.classList,o=document.querySelector("#first-line")?.classList,a=document.querySelector("#second-line ")?.classList,s=document.querySelector("#third-line")?.classList;e.addEventListener("click",function(r){e?.getAttribute("aria-expanded")==="false"?(e?.setAttribute("aria-expanded","true"),e?.setAttribute("aria-label","Close Menu"),n?.remove("display-none"),t?.remove("flex"),t?.add("relative"),o?.add("rotate-45","absolute","bottom-1/2"),s?.add("display-none"),a?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(e?.setAttribute("aria-expanded","false"),e?.setAttribute("aria-label","Open Menu"),n?.add("display-none"),t?.add("flex"),t?.remove("relative"),o?.remove("rotate-45","absolute","bottom-1/2"),s?.remove("display-none"),a?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});
+</script></head>
+  <body>
+    <header class="astro-ZEJXROEC">
+  <a id="skip-to-content" href="#main-content" class="astro-ZEJXROEC">Skip to content</a>
+  <div class="nav-container astro-ZEJXROEC">
+    <div class="top-nav-wrap astro-ZEJXROEC">
+      <a href="/" class="logo astro-ZEJXROEC">
+        Astro blog facile
+      </a>
+      <nav id="nav-menu" class="astro-ZEJXROEC">
+        <button class="hamburger-menu focus-outline astro-ZEJXROEC" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
+          <div class="icon-container flex astro-ZEJXROEC">
+            <div id="first-line" class="astro-ZEJXROEC"></div>
+            <div id="second-line" class="astro-ZEJXROEC"></div>
+            <div id="third-line" class="astro-ZEJXROEC"></div>
+          </div>
+        </button>
+        <ul id="menu-items" class="display-none sm:flex astro-ZEJXROEC">
+          <li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/">
+                  <span class="astro-ZEJXROEC">首页</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/blogs">
+                  <span class="astro-ZEJXROEC">博文</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/categories">
+                  <span class="astro-ZEJXROEC">分类</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/archives">
+                  <span class="astro-ZEJXROEC">归档</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/labs">
+                  <span class="astro-ZEJXROEC">实验室</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/about">
+                  <span class="astro-ZEJXROEC">关于我</span>
+                </a>
+              </li>
+          <li class="astro-ZEJXROEC">
+            <a type="button" href="/astro-theme-facile/search" tabindex="0" class="group focus-outline p-3 sm:p-1  astro-ZEJXROEC astro-2C5NGGNE" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100 astro-ZEJXROEC"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-ZEJXROEC"></path>
+              </svg>
+</a>
+
+
+          </li>
+          <li class="astro-ZEJXROEC">
+            <button id="theme-btn" class="focus-outline astro-ZEJXROEC" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-ZEJXROEC">
+                    <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-ZEJXROEC">
+                    <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-LRLIQ33U">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-LRLIQ33U" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-LRLIQ33U"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-LRLIQ33U"></path>
+      </svg><span class="astro-LRLIQ33U">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-LRLIQ33U">
+    <h1 class="post-title astro-LRLIQ33U">TypeScript学习笔记-入门:安装与基础知识</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-LRLIQ33U"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base" aria-hidden="true"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="sr-only">Posted on:</span><span class="italic text-base">July 9, 2018<span aria-hidden="true"> | </span><span class="sr-only"> at </span>05:08 AM</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-LRLIQ33U">
+      <p>TypeScript 是由微软推出的开源编程语言，官网的定义如下：</p>
+<blockquote>
+<p>TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. Any browser. Any host. Any OS. Open source.</p>
+</blockquote>
+<blockquote>
+<p>TypeScript 是 JavaScript 的类型的超集，它可以编译成纯 JavaScript。编译出来的 JavaScript 可以运行在任何浏览器上。TypeScript 编译工具可以运行在任何服务器和任何系统上。TypeScript 是开源的。</p>
+</blockquote>
+<!--more-->
+<h3 id="安装-typescript">安装 TypeScript</h3>
+<p>使用 npm 安装 typescript。一步到位，可通过 <code>tsc --help</code> 查看帮助。</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">npm install -g typescript</span></span></code></pre>
+<h3 id="简单的例子">简单的例子</h3>
+<p>前面说到，TypeScript 是 JavaScript 的超集。何谓超集？来回顾一下初中数学：</p>
+<blockquote>
+<p>如果一个集合S2中的每一个元素都在集合S1中，且集合S1中可能包含S2中没有的元素，则集合S1就是S2的一个超集，反过来，S2是S1的子集。</p>
+</blockquote>
+<p>而这也体现在TypeScript的语言上，TypeScript 包含 JavaSscript 的所有。也就是说，即使是按照 JavaScript 编写的代码，也能够被视作 TypeScript 来编译执行。举一个简单的例子：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">// hello.ts</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">sayHello</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">name</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">`Hello, </span><span style="color: #C678DD">${</span><span style="color: #E06C75">name</span><span style="color: #C678DD">}</span><span style="color: #98C379">`</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #61AFEF">sayHeloo</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'zhanglun`'</span><span style="color: #ABB2BF">);</span></span></code></pre>
+<p>上述代码在TypeScript编译器会中会被编译输出如下：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">// hello.js</span></span>
+<span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">sayHello</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">name</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"Hello, "</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">+</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">name</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #61AFEF">sayHello</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'zhanglun'</span><span style="color: #ABB2BF">);</span></span></code></pre>
+<h3 id="加入类型检查">加入类型检查</h3>
+<p>上面的例子只是提到了 TypeScript代码 转换为 JavaScript 代码。接下来说一说 TypeScript 区别于 JavaScript 的精髓所在：类型检查。</p>
+<p>众所周知，JavaScript 是一门弱类型语言的，在代码执行的过程中，时常会执行一些隐身类型转换，而这往往会产生一些难以预料的问题，同时难以排查出存在问题的代码。而 TypeScript 加入了编译的过程，在编译过程中进行静态类型检查。如果发现有错误，编译的时候就会报错。</p>
+<blockquote>
+<p>TypeScript 中，使用 : 指定变量的类型，: 的前后有没有空格都可以。</p>
+</blockquote>
+<p>举一个简单的例子：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">sayHello</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">person</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'Hello, '</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">+</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">person</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">user</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> [</span><span style="color: #D19A66">0</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">2</span><span style="color: #ABB2BF">];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #61AFEF">sayHello</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">user</span><span style="color: #ABB2BF">));</span></span></code></pre>
+<p>这段代码的编译会出错。</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">hello.ts:7:22 - error TS2345: Argument of </span><span style="color: #56B6C2">type</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'number[]'</span><span style="color: #ABB2BF"> is not assignable to parameter of </span><span style="color: #56B6C2">type</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'string'</span><span style="color: #ABB2BF">.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">7 console.log(sayHello(user));</span></span></code></pre>
+<p>TypeScript 编译过程即使报错了，还是会生成编译结果，我们仍然可以使用这个编译之后的文件。</p>
+<p>如果要在报错的时候终止 JavaScript 文件的生成，可以在 tsconfig.json 中配置 noEmitOnError 即可。更新 config 相关配置请移步<a href="http://www.typescriptlang.org/docs/handbook/tsconfig-json.html">官方手册</a>。</p>
+<h3 id="类型声明">类型声明</h3>
+<p>JavaScript 的类型分为两种：原始数据类型（Primitive data types）和对象类型（Object types）。</p>
+<p>原始数据类型包括：布尔值、数值、字符串、null、undefined 以及 ES6 中的新类型 Symbol。</p>
+<p>在 TypeScript 中，声明上述各种变量稍有不同。</p>
+<h4 id="boolean">Boolean</h4>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">isDone</span><span style="color: #ABB2BF">:</span><span style="color: #E5C07B">boolean</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">false</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">// 声明一个变量，这个变量是一个boolen</span></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">createdByNewBoolean</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">boolean</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">Boolean</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// index.ts(1,5): error TS2322: Type 'Boolean' is not assignable to type 'boolean'。 new Boolean() 返回的是一个 Boolean 对象。</span></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">createdByBoolean</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">boolean</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">Boolean</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 直接调用 Boolean 也可以返回一个 boolean 类型：</span></span></code></pre>
+<h4 id="number">Number</h4>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">decLiteral</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">number</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">6</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">hexLiteral</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">number</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">0xf00d</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// ES6 中的二进制表示法</span></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">binaryLiteral</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">number</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">0b1010</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// ES6 中的八进制表示法</span></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">octalLiteral</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">number</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">0o744</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">notANumber</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">number</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">NaN</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">infinityNumber</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">number</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">Infinity</span><span style="color: #ABB2BF">;</span></span></code></pre>
+<h4 id="string">String</h4>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">myName</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'Tom'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">myAge</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">number</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">25</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// 模板字符串</span></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">sentence</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">`Hello, my name is </span><span style="color: #C678DD">${</span><span style="color: #E06C75">myName</span><span style="color: #C678DD">}</span><span style="color: #98C379">.</span></span>
+<span class="line"><span style="color: #98C379">I'll be </span><span style="color: #C678DD">${</span><span style="color: #E06C75">myAge</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">+</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">1</span><span style="color: #C678DD">}</span><span style="color: #98C379"> years old next month.`</span><span style="color: #ABB2BF">;</span></span></code></pre>
+<h4 id="void">Void</h4>
+<p>JavaScript 没有空值（Void）的概念，在 TypeScirpt 中，可以用 void 表示没有任何返回值的函数：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">alertName</span><span style="color: #ABB2BF">(): </span><span style="color: #E5C07B">void</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #61AFEF">alert</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'My name is Tom'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>声明一个 void 类型的变量没有什么用，因为你只能将它赋值为 undefined 和 null：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">unusable</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">void</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">undefined</span><span style="color: #ABB2BF">;</span></span></code></pre>
+<h4 id="null-和-undefined">Null 和 Undefined</h4>
+<p>在 TypeScript 中，可以使用 null 和 undefined 来定义这两个原始数据类型：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">u</span><span style="color: #ABB2BF">: undefined </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">undefined</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">n</span><span style="color: #ABB2BF">: null </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">null</span><span style="color: #ABB2BF">;</span></span></code></pre>
+<p>undefined 类型的变量只能被赋值为 undefined，null 类型的变量只能被赋值为 null。</p>
+<p>与 void 的区别是，undefined 和 null 是所有类型的子类型。也就是说 undefined 类型的变量，可以赋值给 number 类型的变量：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">// 这样不会报错</span></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">num</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">number</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">undefined</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #7F848E">// 这样也不会报错</span></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">u</span><span style="color: #ABB2BF">: undefined;</span></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">num</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">number</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">u</span><span style="color: #ABB2BF">;</span></span></code></pre>
+<p>而 void 类型的变量不能赋值给 number 类型的变量：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">u</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">void</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">num</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">number</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">u</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// index.ts(2,5): error TS2322: Type 'void' is not assignable to type 'number'.</span></span></code></pre>
+<h4 id="任意值">任意值</h4>
+<p>TypeScript 提供了一个 any 类型，表示允许赋值为任意类。声明一个变量为任意值之后，对它的任何操作，返回的内容的类型都是任意值。要注意的是： 变量如果在声明的时候，未指定其类型，那么它会被识别为任意值类型。</p>
+<p>如果是一个普通类型，在赋值过程中改变类型是不被允许的：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">myFavoriteNumber</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'seven'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E06C75">myFavoriteNumber</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">7</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// index.ts(2,1): error TS2322: Type 'number' is not assignable to type 'string'.</span></span></code></pre>
+<p>但如果是 any 类型，则允许被赋值为任意类型。</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">myFavoriteNumber</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">any</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'seven'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E06C75">myFavoriteNumber</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">7</span><span style="color: #ABB2BF">;</span></span></code></pre>
+<h4 id="聪明的类型推导">聪明的类型推导</h4>
+<p>如果没有明确的指定类型，那么 TypeScript 会依照类型推论（Type Inference）的规则推断出一个类型。</p>
+<p>以下代码虽然没有指定类型，但是会在编译的时候报错：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">myFavoriteNumber</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'seven'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E06C75">myFavoriteNumber</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">7</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// index.ts(2,1): error TS2322: Type 'number' is not assignable to type 'string'.</span></span></code></pre>
+<p>事实上，它等价于：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">myFavoriteNumber</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'seven'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E06C75">myFavoriteNumber</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">7</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// index.ts(2,1): error TS2322: Type 'number' is not assignable to type 'string'.</span></span></code></pre>
+<p>TypeScript 会在没有明确的指定类型的时候推测出一个类型，这就是类型推论。</p>
+<p>如果定义的时候没有赋值，不管之后有没有赋值，都会被推断成 any 类型而完全不被类型检查：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">myFavoriteNumber</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E06C75">myFavoriteNumber</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'seven'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #E06C75">myFavoriteNumber</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">7</span><span style="color: #ABB2BF">;</span></span></code></pre>
+    </article>
+
+    <ul class="tags-container astro-LRLIQ33U">
+      <li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/TypeScript" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">TypeScript</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="max-w-screen-2xl mt-auto astro-RWWC6FBJ">
+  <div class="footer-wrapper astro-RWWC6FBJ">
+    <div class="social-icons flex astro-PHLHVEKU">
+  <a type="button" href="https://github.com/zhanglun" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title=" Astro blog facile on Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.instagram.com/zhanglun1410/" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Instagram">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+    <circle cx="12" cy="12" r="3"></circle>
+    <line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
+  </svg>
+</a>
+
+<a type="button" href="mailto:zhanglun1410@gmail.com" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Send an email to Astro blog facile">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3 7 12 13 21 7"></polyline>
+    </svg>
+</a>
+
+<a type="button" href="https://twitter.com/zhanglun1410" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-RWWC6FBJ">
+      <span class="astro-RWWC6FBJ">Copyright &#169; 2023</span>
+      <span class="separator astro-RWWC6FBJ">&nbsp;|&nbsp;</span>
+      <span class="astro-RWWC6FBJ">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

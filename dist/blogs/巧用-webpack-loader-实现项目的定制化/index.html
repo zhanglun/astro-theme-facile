@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://https/astro-theme-facile/blogs/%E5%B7%A7%E7%94%A8-webpack-loader-%E5%AE%9E%E7%8E%B0%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%AE%9A%E5%88%B6%E5%8C%96/">
+    <meta name="generator" content="Astro v1.9.1">
+
+    <!-- General Meta Tags -->
+    <title>巧用 webpack loader 实现项目的定制化</title>
+    <meta name="title" content="巧用 webpack loader 实现项目的定制化">
+    <meta name="description" content="背景
+有这样的需求：项目交付的版本要求支持针对客户定制产品的LOGO、登录界面的背景。">
+    <meta name="author" content="zhanglun">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="巧用 webpack loader 实现项目的定制化">
+    <meta property="og:description" content="背景
+有这样的需求：项目交付的版本要求支持针对客户定制产品的LOGO、登录界面的背景。">
+    <meta property="og:url" content="https://https/astro-theme-facile/blogs/%E5%B7%A7%E7%94%A8-webpack-loader-%E5%AE%9E%E7%8E%B0%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%AE%9A%E5%88%B6%E5%8C%96/">
+    <meta property="og:image" content="https://https/%E5%B7%A7%E7%94%A8%20webpack%20loader%20%E5%AE%9E%E7%8E%B0%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%AE%9A%E5%88%B6%E5%8C%96.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://https/astro-theme-facile/blogs/%E5%B7%A7%E7%94%A8-webpack-loader-%E5%AE%9E%E7%8E%B0%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%AE%9A%E5%88%B6%E5%8C%96/">
+    <meta property="twitter:title" content="巧用 webpack loader 实现项目的定制化">
+    <meta property="twitter:description" content="背景
+有这样的需求：项目交付的版本要求支持针对客户定制产品的LOGO、登录界面的背景。">
+    <meta property="twitter:image" content="https://https/astropaper-og.jpg">
+
+    <!-- Google Font -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    /> -->
+
+    
+
+    <script src="/toggle-theme.js"></script>
+  <link rel="stylesheet" href="/astro-theme-facile/assets/about.f0b2d10e.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.7bc150a9.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.5beba882.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/about.2a036302.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.f0163f61.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.80516c5d.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.4fac2f80.css" /><script type="module">const e=document.querySelector(".hamburger-menu"),n=document.querySelector("#menu-items")?.classList,t=document.querySelector(".icon-container")?.classList,o=document.querySelector("#first-line")?.classList,a=document.querySelector("#second-line ")?.classList,s=document.querySelector("#third-line")?.classList;e.addEventListener("click",function(r){e?.getAttribute("aria-expanded")==="false"?(e?.setAttribute("aria-expanded","true"),e?.setAttribute("aria-label","Close Menu"),n?.remove("display-none"),t?.remove("flex"),t?.add("relative"),o?.add("rotate-45","absolute","bottom-1/2"),s?.add("display-none"),a?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(e?.setAttribute("aria-expanded","false"),e?.setAttribute("aria-label","Open Menu"),n?.add("display-none"),t?.add("flex"),t?.remove("relative"),o?.remove("rotate-45","absolute","bottom-1/2"),s?.remove("display-none"),a?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});
+</script></head>
+  <body>
+    <header class="astro-ZEJXROEC">
+  <a id="skip-to-content" href="#main-content" class="astro-ZEJXROEC">Skip to content</a>
+  <div class="nav-container astro-ZEJXROEC">
+    <div class="top-nav-wrap astro-ZEJXROEC">
+      <a href="/" class="logo astro-ZEJXROEC">
+        Astro blog facile
+      </a>
+      <nav id="nav-menu" class="astro-ZEJXROEC">
+        <button class="hamburger-menu focus-outline astro-ZEJXROEC" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
+          <div class="icon-container flex astro-ZEJXROEC">
+            <div id="first-line" class="astro-ZEJXROEC"></div>
+            <div id="second-line" class="astro-ZEJXROEC"></div>
+            <div id="third-line" class="astro-ZEJXROEC"></div>
+          </div>
+        </button>
+        <ul id="menu-items" class="display-none sm:flex astro-ZEJXROEC">
+          <li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/">
+                  <span class="astro-ZEJXROEC">首页</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/blogs">
+                  <span class="astro-ZEJXROEC">博文</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/categories">
+                  <span class="astro-ZEJXROEC">分类</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/archives">
+                  <span class="astro-ZEJXROEC">归档</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/labs">
+                  <span class="astro-ZEJXROEC">实验室</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/about">
+                  <span class="astro-ZEJXROEC">关于我</span>
+                </a>
+              </li>
+          <li class="astro-ZEJXROEC">
+            <a type="button" href="/astro-theme-facile/search" tabindex="0" class="group focus-outline p-3 sm:p-1  astro-ZEJXROEC astro-2C5NGGNE" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100 astro-ZEJXROEC"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-ZEJXROEC"></path>
+              </svg>
+</a>
+
+
+          </li>
+          <li class="astro-ZEJXROEC">
+            <button id="theme-btn" class="focus-outline astro-ZEJXROEC" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-ZEJXROEC">
+                    <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-ZEJXROEC">
+                    <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-LRLIQ33U">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-LRLIQ33U" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-LRLIQ33U"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-LRLIQ33U"></path>
+      </svg><span class="astro-LRLIQ33U">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-LRLIQ33U">
+    <h1 class="post-title astro-LRLIQ33U">巧用 webpack loader 实现项目的定制化</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-LRLIQ33U"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base" aria-hidden="true"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="sr-only">Posted on:</span><span class="italic text-base">January 26, 2019<span aria-hidden="true"> | </span><span class="sr-only"> at </span>08:39 PM</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-LRLIQ33U">
+      <h2 id="背景">背景</h2>
+<p>有这样的需求：项目交付的版本要求支持针对客户定制产品的LOGO、登录界面的背景。</p>
+<!--more--> 
+<h2 id="简单分析">简单分析</h2>
+<p>手动替换文件再编译这种蠢到极点的方法肯定是无法接受的。如果你说采用分支的方式来对付这种需求，我觉得也是不太现实。分支虽然好用，但是不要瞎用。项目在交付时需要避免交付的代码中包含其他客户的资源和信息。这意味着，通过配置文件等在运行时加载的形式是行不通。</p>
+<p>想来想去，问题的本质无非就是解决项目编译输出时CSS可以使用我们指定的图片文件，而我们需要将这个过程自动化。</p>
+<h2 id="粗暴的方案">粗暴的方案</h2>
+<p>先来一种简单而又直接的方案：直接替换。其步骤如下：</p>
+<ol>
+<li>将图片资源放入指定的目录中，按项目(客户)区分</li>
+<li>执行替换图片资源的脚本，使用指定的资源替换</li>
+<li>执行项目的编译命令</li>
+</ol>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">// node ./pre-packaging.js it</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"path"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"fs"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">project</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">process</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">argv</span><span style="color: #ABB2BF">[</span><span style="color: #D19A66">2</span><span style="color: #ABB2BF">];</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">distPath</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">resolve</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"./src/static/images"</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 源代码目录</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">resourcePath</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">resolve</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"./resources"</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">project</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">// 项目静态文件目录</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">copyDir</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">src</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">dist</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">try</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">accessSync</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">dist</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">constants</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">R_OK</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">|</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">constants</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">W_OK</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">  } </span><span style="color: #C678DD">catch</span><span style="color: #ABB2BF"> (</span><span style="color: #E06C75">err</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">mkdirSync</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">dist</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">copyFile</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> (</span><span style="color: #E06C75">src</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">dist</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">createReadStream</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">src</span><span style="color: #ABB2BF">).</span><span style="color: #61AFEF">pipe</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">createWriteStream</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">dist</span><span style="color: #ABB2BF">));</span></span>
+<span class="line"><span style="color: #ABB2BF">  };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">dirList</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">readdirSync</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">src</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">dirList</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">forEach</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">item</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">currentPath</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">resolve</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">src</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">item</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">currentDistPath</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">resolve</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">dist</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">item</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">statSync</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">currentPath</span><span style="color: #ABB2BF">).</span><span style="color: #61AFEF">isDirectory</span><span style="color: #ABB2BF">()) {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #61AFEF">copyDir</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">currentPath</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">currentDistPath</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">    } </span><span style="color: #C678DD">else</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">src</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">currentPath</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">dist</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">currentDistPath</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #61AFEF">copyFile</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">src</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">dist</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">  });</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #61AFEF">copyDir</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">resourcePath</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">distPath</span><span style="color: #ABB2BF">);</span></span></code></pre>
+<p>看起来我们的问题已经得到解决。但是你仔细想想，便会发现，这种简单粗暴的方案存在多个不足之处。</p>
+<ol>
+<li>侵入性强。每次自定义版本构建之后都修改项目中的图片资源，这些修改很容易被同步到远端。</li>
+<li>拓展性差。自定义的图片资源必须严格按照源码中的约定，比如图片格式，图片尺寸。每一张图片都需要在代码中提供相应的插槽。</li>
+<li>功能单一。只能修改图片的引用，当其他的样式需要调整时便无能为力。</li>
+<li>体验性差。将构建过程拆分为准备静态资源和编译两个过程。</li>
+</ol>
+<h2 id="我们需要优雅">我们需要优雅</h2>
+<p>如此丑陋的方案是无法接受的，是否有更好的方案？此时我们回到问题：如何实现同一个项目针对不同客户定制界面的Logo和登录背景？</p>
+<p>我们需要修改的是什么？CSS!</p>
+<p>既想修改CSS样式，又想不对源码进行修改，那只有采用CSS样式具有的覆盖规则来实现。源文件中设置默认样式，约定使用的 CSS 选择器，通过编译将新的样式文件和源文件合并，所有的样式打包输出。这种方式有诸多好处：</p>
+<ol>
+<li>侵入性弱。只需要在项目仓库中维护对应的资源，不影响源代码，交付时也不会包含多余的资源。</li>
+<li>拓展性强。自定义的图片资源不在依赖源码，可以使用任意的图片格式。</li>
+<li>功能丰富。可以额外增加自定义样式，不限于需求中的Logo和背景。</li>
+<li>体验好。在编译阶段加载指定的样式，一步到位。</li>
+</ol>
+<p>说到前端的编译打包，自然想到Webpack。可以从 Webpack Loader入手，实现上述过程。</p>
+<h2 id="webpack-loader">Webpack Loader</h2>
+<p>在 Webpack 的生态中，Loader 用于对模块的源代码进行转换。Loader 可以使你在 import 或”加载”模块时预处理文件。因此，Loader 类似于其他构建工具中“任务(task)”，并提供了处理前端构建步骤的强大方法。Loader 可以将文件从不同的语言（如 TypeScript）转换为 JavaScript，或将内联图像转换为 data URL。</p>
+<p>Webpack Loader的编写可参考<a href="https://webpack.docschina.org/contribute/writing-a-loader/">官方文档</a>，有非常详细的说明。</p>
+<p>以常见的一段 Webpack 配置为例：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E5C07B">module</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">entry</span><span style="color: #ABB2BF">: [...],</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">output</span><span style="color: #ABB2BF">: {...},</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">module</span><span style="color: #ABB2BF">: {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">rules</span><span style="color: #ABB2BF">: [</span></span>
+<span class="line"><span style="color: #ABB2BF">      ...,</span></span>
+<span class="line"><span style="color: #ABB2BF">      {</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E06C75">test</span><span style="color: #ABB2BF">:</span><span style="color: #E06C75"> /</span><span style="color: #56B6C2">\.</span><span style="color: #E06C75">less</span><span style="color: #C678DD">$</span><span style="color: #E06C75">/</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E06C75">use</span><span style="color: #ABB2BF">: [</span></span>
+<span class="line"><span style="color: #ABB2BF">          {</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">loader</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'style-loader'</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">          },</span></span>
+<span class="line"><span style="color: #ABB2BF">          {</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">loader</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'css-loader'</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">          },</span></span>
+<span class="line"><span style="color: #ABB2BF">          {</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">loader</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'less-loader'</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">          }</span></span>
+<span class="line"><span style="color: #ABB2BF">        ];</span></span>
+<span class="line"><span style="color: #ABB2BF">      }</span></span>
+<span class="line"><span style="color: #ABB2BF">      ...,</span></span>
+<span class="line"><span style="color: #ABB2BF">    ],</span></span>
+<span class="line"><span style="color: #ABB2BF">  },</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span></code></pre>
+<p>上述配置在执行过程中，less文件的编译会按照如下顺序 (<a href="https://webpack.docschina.org/contribute/writing-a-loader/#%E5%A4%8D%E6%9D%82%E7%94%A8%E6%B3%95">Webpack Loader 执行顺序</a>)：</p>
+<p><img src="./1.png" alt="IMAGE"></p>
+<p>在整个编译过程中，我们可以在每一个loader的开始前和结束后合并我们自定义样式，如下图所示：</p>
+<p><img src="./2.png" alt="IMAGE"></p>
+<p>在less-loader之前加入自定义的CSS样式是最好的时机，为什么呢？有两点：</p>
+<ol>
+<li>同时支持原生 CSS 和 Less 两种文件。</li>
+<li>在整个编译开始之前加入，对编译的整个过程没有影响。新增的样式同样享受完整编译过程。</li>
+</ol>
+<p>编译过程修改为如下图所示：</p>
+<p><img src="./3.png" alt="IMAGE"></p>
+<h2 id="开发一个-merge-loader">开发一个 merge-loader</h2>
+<p>在目前的场景中，merge-loader 只需要一个参数：自定义样式的文件路径。所以 Webpack 配置文件可以修改为：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E5C07B">module</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">entry</span><span style="color: #ABB2BF">: [...],</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">output</span><span style="color: #ABB2BF">: {...},</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">module</span><span style="color: #ABB2BF">: {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">rules</span><span style="color: #ABB2BF">: [</span></span>
+<span class="line"><span style="color: #ABB2BF">      ...,</span></span>
+<span class="line"><span style="color: #ABB2BF">      {</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E06C75">test</span><span style="color: #ABB2BF">:</span><span style="color: #E06C75"> /</span><span style="color: #56B6C2">\.</span><span style="color: #E06C75">less</span><span style="color: #C678DD">$</span><span style="color: #E06C75">/</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E06C75">use</span><span style="color: #ABB2BF">: [</span></span>
+<span class="line"><span style="color: #ABB2BF">          {</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">loader</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'style-loader'</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">          },</span></span>
+<span class="line"><span style="color: #ABB2BF">          {</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">loader</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'css-loader'</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">          },</span></span>
+<span class="line"><span style="color: #ABB2BF">          {</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">loader</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'less-loader'</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">          }，</span></span>
+<span class="line"><span style="color: #ABB2BF">          {</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">loader</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">resolve</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">__dirname</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'./loader/merge-less.js'</span><span style="color: #ABB2BF">), </span><span style="color: #7F848E">// 自定义loader文件的路径</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">options</span><span style="color: #ABB2BF">: {</span></span>
+<span class="line"><span style="color: #ABB2BF">              </span><span style="color: #E06C75">style</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">resolve</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">root</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'client/statics/projects/it/style.less'</span><span style="color: #ABB2BF">),</span></span>
+<span class="line"><span style="color: #ABB2BF">            },</span></span>
+<span class="line"><span style="color: #ABB2BF">          }</span></span>
+<span class="line"><span style="color: #ABB2BF">        ];</span></span>
+<span class="line"><span style="color: #ABB2BF">      }</span></span>
+<span class="line"><span style="color: #ABB2BF">      ...,</span></span>
+<span class="line"><span style="color: #ABB2BF">    ],</span></span>
+<span class="line"><span style="color: #ABB2BF">  },</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span></code></pre>
+<p>merge-loader中的逻辑如下：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> { </span><span style="color: #E5C07B">getOptions</span><span style="color: #ABB2BF"> } </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'loader-utils'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E5C07B">module</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> (</span><span style="color: #E06C75">source</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">options</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">getOptions</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">this</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> { </span><span style="color: #E5C07B">style</span><span style="color: #ABB2BF"> } </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">options</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #7F848E">// 读取样式文件，返回字符串</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">readFileSync</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">style</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #7F848E">// 合并到原始文件，返回给下一个loader</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">source</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">+=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">string</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">source</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span></code></pre>
+<p>你以为这样就结束了？不，上述逻辑有两个问题还需优化：</p>
+<ol>
+<li>当样式中存在图片的引用时，以字符串形式拼接在源码样式中会遇到图片路径错误的问题</li>
+<li>只要文件通过了规则<code>/\.less&#x26;/</code>的匹配，就会执行一次merge操作。含有<code>&#x3C;style lang="less">&#x3C;/style></code> 的vue文件也会触发这个规则(虽然重复引用不会增加代码量)。</li>
+</ol>
+<p>这两个问题的解法如下：</p>
+<ol>
+<li>使用 <code>@import "path/of/style"</code> 方式 merge 样式文件。其他的处理交给后面的loader，保证文件和图片路径引用正确。</li>
+<li>增加一个参数<code>target</code>，指定一个文件作为 merge 的对象。</li>
+</ol>
+<p>这样一来，loader的逻辑修改如下：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> { </span><span style="color: #E5C07B">getOptions</span><span style="color: #ABB2BF"> } </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'loader-utils'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E5C07B">module</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> (</span><span style="color: #E06C75">source</span><span style="color: #ABB2BF">， </span><span style="color: #E06C75">meta</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">options</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">getOptions</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">this</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> { </span><span style="color: #E5C07B">style</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">target</span><span style="color: #ABB2BF"> } </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">options</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E06C75">meta</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">// file: 'test.vue'</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">// sourceRoot: 'client'</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> { </span><span style="color: #E5C07B">file</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">sourceRoot</span><span style="color: #ABB2BF"> } </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">meta</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E06C75">target</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">===</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">join</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">sourceRoot</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">file</span><span style="color: #ABB2BF">)) {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">`</span><span style="color: #56B6C2">\n</span><span style="color: #98C379">@import "</span><span style="color: #C678DD">${</span><span style="color: #E06C75">style</span><span style="color: #C678DD">}</span><span style="color: #98C379">";</span><span style="color: #56B6C2">\n</span><span style="color: #98C379">`</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E06C75">source</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">+=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">string</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">source</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span></code></pre>
+<p>Webpack 配置文件中loader部分修改如下：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E5C07B">module</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">entry</span><span style="color: #ABB2BF">: [...],</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">output</span><span style="color: #ABB2BF">: {...},</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">module</span><span style="color: #ABB2BF">: {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">rules</span><span style="color: #ABB2BF">: [</span></span>
+<span class="line"><span style="color: #ABB2BF">      ...,</span></span>
+<span class="line"><span style="color: #ABB2BF">      {</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E06C75">test</span><span style="color: #ABB2BF">:</span><span style="color: #E06C75"> /</span><span style="color: #56B6C2">\.</span><span style="color: #E06C75">less</span><span style="color: #C678DD">$</span><span style="color: #E06C75">/</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E06C75">use</span><span style="color: #ABB2BF">: [</span></span>
+<span class="line"><span style="color: #ABB2BF">          {</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">loader</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'style-loader'</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">          },</span></span>
+<span class="line"><span style="color: #ABB2BF">          {</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">loader</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'css-loader'</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">          },</span></span>
+<span class="line"><span style="color: #ABB2BF">          {</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">loader</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'less-loader'</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">          }，</span></span>
+<span class="line"><span style="color: #ABB2BF">          {</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">loader</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">resolve</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">__dirname</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'./loader/merge-less.js'</span><span style="color: #ABB2BF">), </span><span style="color: #7F848E">// 自定义loader文件的路径</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #E06C75">options</span><span style="color: #ABB2BF">: {</span></span>
+<span class="line"><span style="color: #ABB2BF">              </span><span style="color: #E06C75">style</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">resolve</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">root</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'client/statics/projects/it/style.less'</span><span style="color: #ABB2BF">),</span></span>
+<span class="line"><span style="color: #ABB2BF">            },</span></span>
+<span class="line"><span style="color: #ABB2BF">          }</span></span>
+<span class="line"><span style="color: #ABB2BF">        ];</span></span>
+<span class="line"><span style="color: #ABB2BF">      }</span></span>
+<span class="line"><span style="color: #ABB2BF">      ...,</span></span>
+<span class="line"><span style="color: #ABB2BF">    ],</span></span>
+<span class="line"><span style="color: #ABB2BF">  },</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span></code></pre>
+<h2 id="优化-loader">优化 Loader</h2>
+<p>最后利用 <a href="https://webpack.docschina.org/contribute/writing-a-loader/#loader-%E5%B7%A5%E5%85%B7%E5%BA%93-loader-utilities-">Loader 工具库</a>来优化代码</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'fs'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'path'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">loaderUtils</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'loader-utils'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">validateOptions</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'schema-utils'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">schema</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">type</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'object'</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">properties</span><span style="color: #ABB2BF">: {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">style</span><span style="color: #ABB2BF">: {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E06C75">type</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'string'</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    },</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">target</span><span style="color: #ABB2BF">: {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E06C75">type</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'string'</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    },</span></span>
+<span class="line"><span style="color: #ABB2BF">  },</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">required</span><span style="color: #ABB2BF">: [ </span><span style="color: #98C379">'style'</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'target'</span><span style="color: #ABB2BF"> ],</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E5C07B">module</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">exports</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> (</span><span style="color: #E06C75">source</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">meta</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">options</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">loaderUtils</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">getOptions</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">this</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #7F848E">// 验证 options 参数</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #61AFEF">validateOptions</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">schema</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">options</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'Loader options'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">style</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">target</span><span style="color: #ABB2BF"> } </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">options</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #7F848E">/*</span></span>
+<span class="line"><span style="color: #7F848E">   * Loader 原则之一：不要在模块代码中插入绝对路径，因为当项目根路径变化时，文件绝对路径也会变化</span></span>
+<span class="line"><span style="color: #7F848E">   * 使用 stringifyReques 将绝对路径转换成相对路径</span></span>
+<span class="line"><span style="color: #7F848E">   */</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">style</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">loaderUtils</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">stringifyRequest</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">this</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">style</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E06C75">meta</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> { </span><span style="color: #E5C07B">file</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">sourceRoot</span><span style="color: #ABB2BF"> } </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">meta</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E06C75">target</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">===</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">join</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">sourceRoot</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">file</span><span style="color: #ABB2BF">)) {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">`</span><span style="color: #56B6C2">\n</span><span style="color: #98C379"> @import </span><span style="color: #C678DD">${</span><span style="color: #E06C75">style</span><span style="color: #C678DD">}</span><span style="color: #98C379">;</span><span style="color: #56B6C2">\n</span><span style="color: #98C379">`</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E06C75">source</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">+=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">string</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">source</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h2 id="结束">结束</h2>
+<p>至此，已经用一种比较优雅的方式实现了项目Logo等样式的定制化，其优势在于：</p>
+<ol>
+<li>侵入性弱。只需要在项目仓库中维护对应的资源，不影响源代码，交付时也不会包含多余的资源。</li>
+<li>拓展性强。自定义的图片资源不在依赖源码，可以使用任意的图片格式。</li>
+<li>功能丰富。可以额外增加自定义样式，不限于需求中的Logo和背景。</li>
+<li>体验好。在编译阶段加载指定的样式，一步到位。</li>
+</ol>
+<p>如果同学们有其他的实现方式，欢迎讨论~~</p>
+    </article>
+
+    <ul class="tags-container astro-LRLIQ33U">
+      <li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/Webpack" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">Webpack</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="max-w-screen-2xl mt-auto astro-RWWC6FBJ">
+  <div class="footer-wrapper astro-RWWC6FBJ">
+    <div class="social-icons flex astro-PHLHVEKU">
+  <a type="button" href="https://github.com/zhanglun" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title=" Astro blog facile on Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.instagram.com/zhanglun1410/" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Instagram">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+    <circle cx="12" cy="12" r="3"></circle>
+    <line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
+  </svg>
+</a>
+
+<a type="button" href="mailto:zhanglun1410@gmail.com" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Send an email to Astro blog facile">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3 7 12 13 21 7"></polyline>
+    </svg>
+</a>
+
+<a type="button" href="https://twitter.com/zhanglun1410" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-RWWC6FBJ">
+      <span class="astro-RWWC6FBJ">Copyright &#169; 2023</span>
+      <span class="separator astro-RWWC6FBJ">&nbsp;|&nbsp;</span>
+      <span class="astro-RWWC6FBJ">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

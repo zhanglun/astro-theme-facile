@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://https/astro-theme-facile/blogs/%E6%88%91%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8Fweb%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0-media-queries-%E5%88%9D%E6%8E%A2/">
+    <meta name="generator" content="Astro v1.9.1">
+
+    <!-- General Meta Tags -->
+    <title>我的响应式web开发实践笔记-Media Queries 初探</title>
+    <meta name="title" content="我的响应式web开发实践笔记-Media Queries 初探">
+    <meta name="description" content="
+很久以前就接触到了响应式Web开发这回事，自己也玩弄过一阵。">
+    <meta name="author" content="zhanglun">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="我的响应式web开发实践笔记-Media Queries 初探">
+    <meta property="og:description" content="
+很久以前就接触到了响应式Web开发这回事，自己也玩弄过一阵。">
+    <meta property="og:url" content="https://https/astro-theme-facile/blogs/%E6%88%91%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8Fweb%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0-media-queries-%E5%88%9D%E6%8E%A2/">
+    <meta property="og:image" content="https://https/%E6%88%91%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8Fweb%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0-Media%20Queries%20%E5%88%9D%E6%8E%A2.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://https/astro-theme-facile/blogs/%E6%88%91%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8Fweb%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0-media-queries-%E5%88%9D%E6%8E%A2/">
+    <meta property="twitter:title" content="我的响应式web开发实践笔记-Media Queries 初探">
+    <meta property="twitter:description" content="
+很久以前就接触到了响应式Web开发这回事，自己也玩弄过一阵。">
+    <meta property="twitter:image" content="https://https/astropaper-og.jpg">
+
+    <!-- Google Font -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    /> -->
+
+    
+
+    <script src="/toggle-theme.js"></script>
+  <link rel="stylesheet" href="/astro-theme-facile/assets/about.f0b2d10e.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.7bc150a9.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.5beba882.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/about.2a036302.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.f0163f61.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.80516c5d.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.4fac2f80.css" /><script type="module">const e=document.querySelector(".hamburger-menu"),n=document.querySelector("#menu-items")?.classList,t=document.querySelector(".icon-container")?.classList,o=document.querySelector("#first-line")?.classList,a=document.querySelector("#second-line ")?.classList,s=document.querySelector("#third-line")?.classList;e.addEventListener("click",function(r){e?.getAttribute("aria-expanded")==="false"?(e?.setAttribute("aria-expanded","true"),e?.setAttribute("aria-label","Close Menu"),n?.remove("display-none"),t?.remove("flex"),t?.add("relative"),o?.add("rotate-45","absolute","bottom-1/2"),s?.add("display-none"),a?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(e?.setAttribute("aria-expanded","false"),e?.setAttribute("aria-label","Open Menu"),n?.add("display-none"),t?.add("flex"),t?.remove("relative"),o?.remove("rotate-45","absolute","bottom-1/2"),s?.remove("display-none"),a?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});
+</script></head>
+  <body>
+    <header class="astro-ZEJXROEC">
+  <a id="skip-to-content" href="#main-content" class="astro-ZEJXROEC">Skip to content</a>
+  <div class="nav-container astro-ZEJXROEC">
+    <div class="top-nav-wrap astro-ZEJXROEC">
+      <a href="/" class="logo astro-ZEJXROEC">
+        Astro blog facile
+      </a>
+      <nav id="nav-menu" class="astro-ZEJXROEC">
+        <button class="hamburger-menu focus-outline astro-ZEJXROEC" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
+          <div class="icon-container flex astro-ZEJXROEC">
+            <div id="first-line" class="astro-ZEJXROEC"></div>
+            <div id="second-line" class="astro-ZEJXROEC"></div>
+            <div id="third-line" class="astro-ZEJXROEC"></div>
+          </div>
+        </button>
+        <ul id="menu-items" class="display-none sm:flex astro-ZEJXROEC">
+          <li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/">
+                  <span class="astro-ZEJXROEC">首页</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/blogs">
+                  <span class="astro-ZEJXROEC">博文</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/categories">
+                  <span class="astro-ZEJXROEC">分类</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/archives">
+                  <span class="astro-ZEJXROEC">归档</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/labs">
+                  <span class="astro-ZEJXROEC">实验室</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/about">
+                  <span class="astro-ZEJXROEC">关于我</span>
+                </a>
+              </li>
+          <li class="astro-ZEJXROEC">
+            <a type="button" href="/astro-theme-facile/search" tabindex="0" class="group focus-outline p-3 sm:p-1  astro-ZEJXROEC astro-2C5NGGNE" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100 astro-ZEJXROEC"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-ZEJXROEC"></path>
+              </svg>
+</a>
+
+
+          </li>
+          <li class="astro-ZEJXROEC">
+            <button id="theme-btn" class="focus-outline astro-ZEJXROEC" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-ZEJXROEC">
+                    <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-ZEJXROEC">
+                    <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-LRLIQ33U">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-LRLIQ33U" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-LRLIQ33U"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-LRLIQ33U"></path>
+      </svg><span class="astro-LRLIQ33U">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-LRLIQ33U">
+    <h1 class="post-title astro-LRLIQ33U">我的响应式web开发实践笔记-Media Queries 初探</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-LRLIQ33U"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base" aria-hidden="true"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="sr-only">Posted on:</span><span class="italic text-base">October 10, 2014<span aria-hidden="true"> | </span><span class="sr-only"> at </span>08:30 PM</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-LRLIQ33U">
+      <blockquote>
+<p>很久以前就接触到了响应式Web开发这回事，自己也玩弄过一阵。当时没有整理成笔记，现在在重构自己的在线简历以及hexo主题制作过程中涉及到，就顺手整理成一个系列吧。</p>
+</blockquote>
+<p>响应式web设计并非新的技术，只不过将已有的开发技巧（弹性布局、弹性图片和媒体查询等）整合在了一起，</p>
+<h3 id="先来说说媒体查询media-queries">先来说说媒体查询（Media Queries）</h3>
+<p>早在 HTML4 和 CSS2 的时代，就已经支持采用不同的样式表来适配不同的媒体设备类型。比如，一个文档在屏幕上和打印时可能使用不同的样式表。在 HTML4中，可以这么写：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">link</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">rel</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"stylesheet"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">type</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"text/css"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">media</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"screen"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">href</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"sans-serif.css"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">link</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">rel</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"stylesheet"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">type</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"text/css"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">media</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"print"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">href</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"serif.css"</span><span style="color: #ABB2BF">></span></span></code></pre>
+<p>在内联的 CSS 样式中，可以像这样指定一部分CSS样式块应用在指定的媒体设备上：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> screen {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">*</span><span style="color: #ABB2BF"> { font-family: </span><span style="color: #D19A66">sans-serif</span><span style="color: #ABB2BF"> }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>媒体类型就不在此列举了。如果想让多个媒体设备采用同一套样式，只需在media属性中添加媒体类型的名称，用逗号分开就可以了：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">link</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">rel</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"stylesheet"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">type</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"text/css"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">media</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"screen, print, resolution > 90dpi"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">href</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"serif.css"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">style</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> screen {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E06C75">*</span><span style="color: #ABB2BF"> { font-family: </span><span style="color: #D19A66">sans-serif</span><span style="color: #ABB2BF"> }</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">style</span><span style="color: #ABB2BF">></span></span></code></pre>
+<p>而CSS3 中的媒体查询（Media Queries）就是建立在 HTML4 的媒体查询的语法机制之上，其语法符合 HTML4 中保留的媒体类型语法。HTML4 中的 <code>media</code> 属性同样存在于 XHTML 和 一般的 XML 中。但是，媒体查询的解析规则不兼容 HTML4 的解析规则，因此，适用于 CSS 中的媒体查询。</p>
+<p>CSS3 中的媒体查询一个媒体类型和零个或者多个检查特定媒体功能的状况的表达式组成。
+这些表达式会被解析成真或假。如果媒体查询中的媒体类型与文档要展示的设备相符则查询结果为真，并且媒体查询中的所有表达式为真。媒体类型默认情况是 <code>all</code></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">link</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">rel</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"stylesheet"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">media</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"screen and (max-width: 800px)"</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">href</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"example.css"</span><span style="color: #ABB2BF"> /></span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">@import url(color.css) screen and (color);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">style</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> screen </span><span style="color: #56B6C2">and</span><span style="color: #ABB2BF"> (max-width: </span><span style="color: #D19A66">600</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #D19A66">.facet_sidebar</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">        display: </span><span style="color: #D19A66">none</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">      }</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">style</span><span style="color: #ABB2BF">></span></span></code></pre>
+<p>当媒体查询为真时，相关的样式表或样式规则就会按照正常的级联规则被应用。即使媒体查询返回假， &#x3C;\link> 标签上带有媒体查询的样式表 仍将被下载 （只不过不会被应用）。</p>
+<p>可以这么理解：媒体查询无非就是检查当前用户代理是何种设备，设备的某些参数：媒体类型（media type） + CSS属性。</p>
+<h3 id="media-queries支持的属性">Media Queries支持的属性</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>属性</th><th>值</th><th>MIN/MAX</th><th>描述</th></tr></thead><tbody><tr><td>color</td><td>整数</td><td>yes</td><td>每种色彩的字节数</td></tr><tr><td>color-index</td><td>整数</td><td>yes</td><td>色彩表中的色彩数</td></tr><tr><td>device-aspect-ratio</td><td>整数/整数</td><td>yes</td><td>宽高比例</td></tr><tr><td>device-height</td><td>length</td><td>yes</td><td>设备屏幕的输出高度</td></tr><tr><td>device-width</td><td>length</td><td>yes</td><td>设备屏幕的输出宽度</td></tr><tr><td>height</td><td>length</td><td>yes</td><td>渲染界面的高度</td></tr><tr><td>width</td><td>length</td><td>yes</td><td>渲染界面的宽度</td></tr><tr><td>grid</td><td>整数</td><td>no</td><td>是否是基于格栅的设备</td></tr><tr><td>monochrome</td><td>整数</td><td>yes</td><td>单色帧缓冲器中每像素字节</td></tr><tr><td>resolution</td><td>分辨率(“dpi/dpcm”)</td><td>yes</td><td>分辨率</td></tr><tr><td>scan</td><td>Progressive interlaced</td><td>no</td><td>tv媒体类型的扫描方式</td></tr><tr><td>orientation</td><td>Portrait/landscape</td><td>no</td><td>横屏或竖屏</td></tr></tbody></table>
+<h3 id="best-breakpoints">best breakpoints</h3>
+<p>我现在需要解决的问题是：针对不同屏幕大小的设备的的代码块的媒体查询判断条件该如何书写，在 stackoverflow 上看到的<a href="http://stackoverflow.com/questions/6370690/media-queries-how-to-target-desktop-tablet-and-mobile">回答</a>，the best breakpoints:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">style</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> (min-width:</span><span style="color: #D19A66">320</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) { </span><span style="color: #7F848E">/* smartphones, iPhone, portrait 480x320 phones */</span><span style="color: #ABB2BF"> }</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> (min-width:</span><span style="color: #D19A66">481</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) { </span><span style="color: #7F848E">/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */</span><span style="color: #ABB2BF"> }</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> (min-width:</span><span style="color: #D19A66">641</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) { </span><span style="color: #7F848E">/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */</span><span style="color: #ABB2BF"> }</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> (min-width:</span><span style="color: #D19A66">961</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) { </span><span style="color: #7F848E">/* tablet, landscape iPad, lo-res laptops ands desktops */</span><span style="color: #ABB2BF"> }</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> (min-width:</span><span style="color: #D19A66">1025</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) { </span><span style="color: #7F848E">/* big landscape tablets, laptops, and desktops */</span><span style="color: #ABB2BF"> }</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> (min-width:</span><span style="color: #D19A66">1281</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) { </span><span style="color: #7F848E">/* hi-res laptops and desktops */</span><span style="color: #ABB2BF"> }</span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">style</span><span style="color: #ABB2BF">></span></span></code></pre>
+<h3 id="如何在-sass-中使用编写媒体查询模块">如何在 sass 中使用编写媒体查询模块</h3>
+<p>可以参考这篇文章：<a href="http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32">Responsive Web Design in Sass: Using media queries in Sass 3.2</a>
+首先，最简单的是使用 CSS 的语法：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">// set a variable for the font size</span></span>
+<span class="line"><span style="color: #E06C75">$h1-size</span><span style="color: #ABB2BF">: </span><span style="color: #D19A66">36</span><span style="color: #C678DD">px</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E06C75">h1</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  font-size: </span><span style="color: #E06C75">$h1-size</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// this will only affect wide screens</span></span>
+<span class="line"><span style="color: #C678DD">@media screen </span><span style="color: #7F848E">and</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">(</span><span style="color: #ABB2BF">min-width: </span><span style="color: #D19A66">1024</span><span style="color: #C678DD">px</span><span style="color: #61AFEF">)</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">h1</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    font-size: </span><span style="color: #E06C75">$h1-size</span><span style="color: #ABB2BF"> * </span><span style="color: #D19A66">1.5</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">// </span><span style="color: #C678DD">编译后：</span></span>
+<span class="line"><span style="color: #E06C75">h1</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  font-size: </span><span style="color: #D19A66">36</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> screen </span><span style="color: #56B6C2">and</span><span style="color: #ABB2BF"> (min-width: </span><span style="color: #D19A66">1024</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">h1</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    font-size: </span><span style="color: #D19A66">54</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>同时，sass 为 CSS 的书写提供了是一个相当杀手级功能：当你在其它选择器中嵌套 <code>@media</code> 时，如果在嵌套的 @media 中添加的属性，sass 会向上一层层查找选择器，将@media中添加的属属性应用在查找到的选择器上，并将其插入到 @media 的代码块中：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #D19A66">.profile-pic</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    float: </span><span style="color: #D19A66">left</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    width: </span><span style="color: #D19A66">250</span><span style="color: #C678DD">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">a</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">        color: </span><span style="color: #D19A66">black</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">@media screen </span><span style="color: #7F848E">and</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">(</span><span style="color: #ABB2BF">max-width: </span><span style="color: #D19A66">320</span><span style="color: #C678DD">px</span><span style="color: #61AFEF">)</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">            width: </span><span style="color: #D19A66">100</span><span style="color: #C678DD">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">            color: </span><span style="color: #D19A66">red</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">        }</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">@media screen </span><span style="color: #7F848E">and</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">(</span><span style="color: #ABB2BF">min-width: </span><span style="color: #D19A66">1200</span><span style="color: #C678DD">px</span><span style="color: #61AFEF">)</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">            float: </span><span style="color: #D19A66">none</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">            color: </span><span style="color: #D19A66">blue</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">        }</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">// </span><span style="color: #C678DD">编译后：</span></span>
+<span class="line"><span style="color: #D19A66">.profile-pic</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    float: </span><span style="color: #D19A66">left</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    width: </span><span style="color: #D19A66">250</span><span style="color: #E06C75">px</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #D19A66">.profile-pic</span><span style="color: #C678DD"> </span><span style="color: #E06C75">a</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    color: </span><span style="color: #D19A66">black</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> screen </span><span style="color: #56B6C2">and</span><span style="color: #ABB2BF"> (max-width: </span><span style="color: #D19A66">320</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #D19A66">.profile-pic</span><span style="color: #C678DD"> </span><span style="color: #E06C75">a</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">        width: </span><span style="color: #D19A66">100</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">        color: </span><span style="color: #D19A66">red</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> screen </span><span style="color: #56B6C2">and</span><span style="color: #ABB2BF"> (min-width: </span><span style="color: #D19A66">1200</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #D19A66">.profile-pic</span><span style="color: #C678DD"> </span><span style="color: #E06C75">a</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">        float: </span><span style="color: #D19A66">none</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">        color: </span><span style="color: #D19A66">blue</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>其实这个东西也是很好理解的，就不过多解释了，省得啰嗦。但是要记住：还有很多种变化的写法，比如在query中使用变量，在代码块中使用 <code>@extend</code>.etc。多用用就好了</p>
+<h3 id="关于-min-widthmin-height-和-max-widthmax-height-的补充20141018">关于 min-width/min-height 和 max-width/max-height 的补充：2014/10/18</h3>
+<p>min-width(height): 最小宽度(高度)；在媒体查询中作为检查条件时，指的是渲染界面的最小宽度（高度）。也就是说当宽度（高度）大于给定的数值时才使用这一块代码块（没有使用的 Media Queries 代码块也会加载）；相反地，max-width(height) 意思就是：当宽度（高度）小于给定的数值时才使用这一块代码块。指定的数值是一个临界值。</p>
+<p>有意思的东西来了！</p>
+<p>看下面的代码：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #D19A66">.container</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">    background:</span><span style="color: #D19A66">white</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> screen </span><span style="color: #56B6C2">and</span><span style="color: #ABB2BF"> (min-width:</span><span style="color: #D19A66">320</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) { </span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #D19A66">.container</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">        background:</span><span style="color: #D19A66">red</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> screen </span><span style="color: #56B6C2">and</span><span style="color: #ABB2BF"> (min-width:</span><span style="color: #D19A66">481</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) { </span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #D19A66">.container</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">        background:</span><span style="color: #D19A66">blue</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>根据CSS的解析规则，过程如下：</p>
+<ol>
+<li>container的背景色为white；</li>
+<li>当宽度大于320px时，container的背景色为red；</li>
+<li>当宽度大于481px时，container的背景色为blue；</li>
+</ol>
+<p>这可能是你想要的顺序，但是如果 你这样：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #D19A66">.container</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">    background:</span><span style="color: #D19A66">white</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> screen </span><span style="color: #56B6C2">and</span><span style="color: #ABB2BF"> (max-width:</span><span style="color: #D19A66">320</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) { </span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #D19A66">.container</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">        background:</span><span style="color: #D19A66">red</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> screen </span><span style="color: #56B6C2">and</span><span style="color: #ABB2BF"> (max-width:</span><span style="color: #D19A66">481</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) { </span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #D19A66">.container</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">        background:</span><span style="color: #D19A66">blue</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>根据CSS的解析规则，过程如下：</p>
+<ol>
+<li>container的背景色为white；</li>
+<li>当宽度小于320px时，container的背景色为red；</li>
+<li>当宽度小于481px时，container的背景色为blue；</li>
+</ol>
+<p>好问题来了，小于320 不就是 小于 481 了嘛？后面样式直接覆盖了前面的啊！所以在小于481px的渲染宽度中，颜色都是blue。</p>
+<p>同样的问题：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #D19A66">.container</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">    background:</span><span style="color: #D19A66">white</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> screen </span><span style="color: #56B6C2">and</span><span style="color: #ABB2BF"> (min-width:</span><span style="color: #D19A66">481</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) { </span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #D19A66">.container</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">        background:</span><span style="color: #D19A66">blue</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">@media</span><span style="color: #ABB2BF"> screen </span><span style="color: #56B6C2">and</span><span style="color: #ABB2BF"> (min-width:</span><span style="color: #D19A66">321</span><span style="color: #E06C75">px</span><span style="color: #ABB2BF">) { </span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #D19A66">.container</span><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">        background:</span><span style="color: #D19A66">red</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>根据CSS的解析规则，过程如下：</p>
+<ol>
+<li>container的背景色为white；</li>
+<li>当宽度大于481px时，container的背景色为blue；</li>
+<li>当宽度大于321px时，container的背景色为red；</li>
+</ol>
+<p>其结果显而易见，后面的样式（当宽度大于321px时）直接覆盖了前面的（当宽度大于481px时），所以在大于321px的渲染宽度中，颜色都是red。这也是我们不想看到的结果。</p>
+<p>为了避免出现上面这混乱的结果，我个人认为可以酱紫：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">max大的。min小的。  </span></span>
+<span class="line"><span style="color: #abb2bf"></span></span>
+<span class="line"><span style="color: #abb2bf">使用max时，值从大到小，依次是，`小于1024px`, `小于961px`, `小于641px`.etc。这是一种桌面端优先的方式，先考虑渲染宽度大的设备。</span></span>
+<span class="line"><span style="color: #abb2bf"></span></span>
+<span class="line"><span style="color: #abb2bf">使用min时，值从小到大，依次是，`大于320px`, `大于481px`, `小于641px`.etc。这是一种移动端优先的方式，先考虑渲染宽度小的设备。</span></span>
+<span class="line"><span style="color: #abb2bf"></span></span>
+<span class="line"><span style="color: #abb2bf">如果这样理解的话，我感觉自己不会混乱了~~</span></span></code></pre>
+<p>参考：</p>
+<p>css3-mediaqueries<a href="http://www.w3.org/TR/css3-mediaqueries/">http://www.w3.org/TR/css3-mediaqueries/</a><br>
+前端观察<a href="http://www.qianduan.net/media-type-and-media-query.html">http://www.qianduan.net/media-type-and-media-query.html</a><br>
+W3cPlus<a href="http://www.w3cplus.com/content/css3-media-queries">http://www.w3cplus.com/content/css3-media-queries</a></p>
+    </article>
+
+    <ul class="tags-container astro-LRLIQ33U">
+      <li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/CSS" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">CSS</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="max-w-screen-2xl mt-auto astro-RWWC6FBJ">
+  <div class="footer-wrapper astro-RWWC6FBJ">
+    <div class="social-icons flex astro-PHLHVEKU">
+  <a type="button" href="https://github.com/zhanglun" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title=" Astro blog facile on Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.instagram.com/zhanglun1410/" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Instagram">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+    <circle cx="12" cy="12" r="3"></circle>
+    <line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
+  </svg>
+</a>
+
+<a type="button" href="mailto:zhanglun1410@gmail.com" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Send an email to Astro blog facile">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3 7 12 13 21 7"></polyline>
+    </svg>
+</a>
+
+<a type="button" href="https://twitter.com/zhanglun1410" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-RWWC6FBJ">
+      <span class="astro-RWWC6FBJ">Copyright &#169; 2023</span>
+      <span class="separator astro-RWWC6FBJ">&nbsp;|&nbsp;</span>
+      <span class="astro-RWWC6FBJ">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

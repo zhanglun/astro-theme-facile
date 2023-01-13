@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://https/astro-theme-facile/blogs/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%A8%8D%E5%BE%AE%E5%A4%8D%E6%9D%82%E7%9A%84simplelist/">
+    <meta name="generator" content="Astro v1.9.1">
+
+    <!-- General Meta Tags -->
+    <title>实现一个稍微复杂的simplelist</title>
+    <meta name="title" content="实现一个稍微复杂的simplelist">
+    <meta name="description" content="使用过一些清单类的应用程序，像 WunderList, Google Keep等，用来记录一些计划和安排，也试着将自己的计划安排同笔记一起整理在 Evernote 中，但是无论哪种方式用起来总觉得少了点什么，如果两者的一些功能能够结合起来，就很完美了。">
+    <meta name="author" content="zhanglun">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="实现一个稍微复杂的simplelist">
+    <meta property="og:description" content="使用过一些清单类的应用程序，像 WunderList, Google Keep等，用来记录一些计划和安排，也试着将自己的计划安排同笔记一起整理在 Evernote 中，但是无论哪种方式用起来总觉得少了点什么，如果两者的一些功能能够结合起来，就很完美了。">
+    <meta property="og:url" content="https://https/astro-theme-facile/blogs/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%A8%8D%E5%BE%AE%E5%A4%8D%E6%9D%82%E7%9A%84simplelist/">
+    <meta property="og:image" content="https://https/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%A8%8D%E5%BE%AE%E5%A4%8D%E6%9D%82%E7%9A%84simplelist.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://https/astro-theme-facile/blogs/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%A8%8D%E5%BE%AE%E5%A4%8D%E6%9D%82%E7%9A%84simplelist/">
+    <meta property="twitter:title" content="实现一个稍微复杂的simplelist">
+    <meta property="twitter:description" content="使用过一些清单类的应用程序，像 WunderList, Google Keep等，用来记录一些计划和安排，也试着将自己的计划安排同笔记一起整理在 Evernote 中，但是无论哪种方式用起来总觉得少了点什么，如果两者的一些功能能够结合起来，就很完美了。">
+    <meta property="twitter:image" content="https://https/astropaper-og.jpg">
+
+    <!-- Google Font -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    /> -->
+
+    
+
+    <script src="/toggle-theme.js"></script>
+  <link rel="stylesheet" href="/astro-theme-facile/assets/about.f0b2d10e.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.7bc150a9.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.5beba882.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/about.2a036302.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.f0163f61.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.80516c5d.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.4fac2f80.css" /><script type="module">const e=document.querySelector(".hamburger-menu"),n=document.querySelector("#menu-items")?.classList,t=document.querySelector(".icon-container")?.classList,o=document.querySelector("#first-line")?.classList,a=document.querySelector("#second-line ")?.classList,s=document.querySelector("#third-line")?.classList;e.addEventListener("click",function(r){e?.getAttribute("aria-expanded")==="false"?(e?.setAttribute("aria-expanded","true"),e?.setAttribute("aria-label","Close Menu"),n?.remove("display-none"),t?.remove("flex"),t?.add("relative"),o?.add("rotate-45","absolute","bottom-1/2"),s?.add("display-none"),a?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(e?.setAttribute("aria-expanded","false"),e?.setAttribute("aria-label","Open Menu"),n?.add("display-none"),t?.add("flex"),t?.remove("relative"),o?.remove("rotate-45","absolute","bottom-1/2"),s?.remove("display-none"),a?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});
+</script></head>
+  <body>
+    <header class="astro-ZEJXROEC">
+  <a id="skip-to-content" href="#main-content" class="astro-ZEJXROEC">Skip to content</a>
+  <div class="nav-container astro-ZEJXROEC">
+    <div class="top-nav-wrap astro-ZEJXROEC">
+      <a href="/" class="logo astro-ZEJXROEC">
+        Astro blog facile
+      </a>
+      <nav id="nav-menu" class="astro-ZEJXROEC">
+        <button class="hamburger-menu focus-outline astro-ZEJXROEC" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
+          <div class="icon-container flex astro-ZEJXROEC">
+            <div id="first-line" class="astro-ZEJXROEC"></div>
+            <div id="second-line" class="astro-ZEJXROEC"></div>
+            <div id="third-line" class="astro-ZEJXROEC"></div>
+          </div>
+        </button>
+        <ul id="menu-items" class="display-none sm:flex astro-ZEJXROEC">
+          <li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/">
+                  <span class="astro-ZEJXROEC">首页</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/blogs">
+                  <span class="astro-ZEJXROEC">博文</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/categories">
+                  <span class="astro-ZEJXROEC">分类</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/archives">
+                  <span class="astro-ZEJXROEC">归档</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/labs">
+                  <span class="astro-ZEJXROEC">实验室</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/about">
+                  <span class="astro-ZEJXROEC">关于我</span>
+                </a>
+              </li>
+          <li class="astro-ZEJXROEC">
+            <a type="button" href="/astro-theme-facile/search" tabindex="0" class="group focus-outline p-3 sm:p-1  astro-ZEJXROEC astro-2C5NGGNE" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100 astro-ZEJXROEC"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-ZEJXROEC"></path>
+              </svg>
+</a>
+
+
+          </li>
+          <li class="astro-ZEJXROEC">
+            <button id="theme-btn" class="focus-outline astro-ZEJXROEC" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-ZEJXROEC">
+                    <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-ZEJXROEC">
+                    <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-LRLIQ33U">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-LRLIQ33U" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-LRLIQ33U"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-LRLIQ33U"></path>
+      </svg><span class="astro-LRLIQ33U">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-LRLIQ33U">
+    <h1 class="post-title astro-LRLIQ33U">实现一个稍微复杂的simplelist</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-LRLIQ33U"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base" aria-hidden="true"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="sr-only">Posted on:</span><span class="italic text-base">September 26, 2016<span aria-hidden="true"> | </span><span class="sr-only"> at </span>02:40 AM</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-LRLIQ33U">
+      <p>使用过一些清单类的应用程序，像 WunderList, Google Keep等，用来记录一些计划和安排，也试着将自己的计划安排同笔记一起整理在 Evernote 中，但是无论哪种方式用起来总觉得少了点什么，如果两者的一些功能能够结合起来，就很完美了。</p>
+<!--more-->
+<p>“todo”和“note”之间的关系本来就很微妙，一个“todo”写得详细点不就成了“note”吗？于是自己写了一个稍微复杂一点的清单程序，今天将项目总结整理在此。</p>
+<p>我试着将 todo和 note 结合，可以像 WunderList 一样记录计划，又可以 Evernote 一样管理笔记。在开发过程中，反复调整和修改，最终发现：其实我只是做了一个支持 markdown 的 简易版WunderList :(。不管怎么样，能坚持下来就是值得鼓励的。整个工程前后端分离，后端实现不在此介绍</p>
+<p><a href="https://github.com/zhanglun/bluerobin">前端代码地址</a>，
+<a href="https://github.com/zhanglun/dockersite">后端代码地址</a>，
+<a href="http://zhanglun.github.io/bluerobin/">在线预览</a>。</p>
+<p>接下来，我简单介绍一下 simplelist 的前端实现过程。<strong>注意，下面介绍的一些过程不是一蹴而就，是反复修改和整理得出的，比如技术选择和组件的划分。</strong></p>
+<h3 id="编写代码的前期准备工作">编写代码的前期准备工作</h3>
+<p>有三点</p>
+<ol>
+<li>确定需要实现的功能</li>
+<li>确定界面</li>
+<li>确定技术实现的方案</li>
+</ol>
+<p>功能和界面先放一边，介绍一下采用的技术方案。其实也没啥可介绍的，前端老司机花样多，但是主流的套路也就那么几种，我选择“套路のVue”。Vue+ Vuex+ Vue-Router，其他配件像 Less，Webpack等大家也应该都清楚。用户登陆注册及接口的实现不在本文章的讨论中，下次再讲。</p>
+<h3 id="组件划分很关键">组件划分很关键</h3>
+<p>在 React 的组件化的划分方式中，将组件分成两种：Container Components和Presentational Components，容器组件和 UI组件。<strong>容器组件负责数据和业务逻辑的处理，携带相关的内部状态，与数据有频繁的交互， UI组件只负责 UI 的呈现，没有任何的数据和逻辑的处理，组件的数据从容器组件传递进来（在 React中数据由 this.props 提供）</strong>。如果一个组件既有 UI 又有业务逻辑，可以试着将它拆分成两个：一个容器组件，包着一个UI 组件。前者负责与外部的通信，将数据传给后者，由后者渲染出视图。</p>
+<p>个人比较喜欢这种方式，组件变得纯粹。不过似乎在 Vue 生态圈中没有设计这方面的介绍，在后面我打算尝试使用这种方式，不过现在还是使用相对粗暴一点的方式来划分。</p>
+<!--![clipboard.png](http://7xnrrd.com1.z0.glb.clouddn.com/69e6d8817e6736eca54a1c4de7605c6a.png) -->
+<p>这是 WunderList 的界面，简单的分析之后，可以将其划分成如下形式，再详细一点的话可以看下图，如果坚持容器组件和 UI组件的形式开发的话，相对较复杂一点，而我选择先从简单的入手。想必你应该看过<a href="http://todomvc.com/">TodoMVC</a>，而这样也是simplelist 的最简单也是最核心的功能。所以在实际操作过程中，我先将输入框和单个任务这两个组件实现。</p>
+<!--![clipboard.png](http://7xnrrd.com1.z0.glb.clouddn.com/523fa36927e62c3405235fec5e256b2b.png) -->
+<h3 id="vuex">Vuex</h3>
+<p>Vuex 是一个专门为 Vue.js 应用所设计的集中式状态管理架构。它借鉴了 Flux 和 Redux 的设计思想，但简化了概念，并且采用了一种为能更好发挥 Vue.js 数据响应机制而专门设计的实现。</p>
+<p>在单独使用 Vue.js 的时候，通常会把状态储存在组件的内部。整个应用的数据和状态都是散落在各个组件。这样并没有有什么问题，组件的数据组建自己管理。有时候状态的一部分需要共享给其他的组件，此时使用事件系统，让一个组件把一些状态“发送”到其他组件，但是当项目一步步扩大时，事件流将变得繁杂，不利于调试和维护。此时 Vuex 可以帮助我们实现状态的管理。</p>
+<p>Vuex 的四个核心概念分别是：</p>
+<ol>
+<li>The state tree：Vuex 使用单一状态树，用一个对象就包含了全部的应用层级状态，作为一个『唯一数据源(SSOT)』而存在。每个应用将仅仅包含一个 store 实例。单状态树让我们能够直接地定位任一特定的状态片段，在调试的过程中也能轻易地取得整个当前应用状态的快照。数据流都是单向的。</li>
+<li>Getters：用来从 store 获取 Vue 组件数据。</li>
+<li>Mutators：事件处理器用来驱动状态的变化，只有 mutation 可以改变状态。</li>
+<li>Actions：可以给组件使用的函数，用来派发 Mutation。</li>
+</ol>
+<p>Vuex 规定，属于应用层级的状态只能通过 Mutation 中的方法来修改，而派发 Mutation 中的事件只能通过 action。从组件出发，组件中调用 action，在 action 这一层级我们可以和后台数据交互，比如获取初始化的数据源，或者中间数据的过滤等。然后在 action 中去派发 Mutation。Mutation 去触发状态的改变，状态的改变，将触发视图的更新。</p>
+<!--![clipboard.png](http://7xnrrd.com1.z0.glb.clouddn.com/6c8f34ec28ec5c0492af7c23fafe7b58.png) -->
+<p>配合 Vuex 这样的数据管理架构，我只需要关心组件的状态变化，数据的变化和流通全部交给 Vuex。我需要维护一个数组，数组中每一个元素代表一个任务，输入框和任务上的编辑删除等操作，本质上都是对一个数组的操作。</p>
+<h3 id="给任务加上分类">给任务加上分类</h3>
+<p>我已经说过了，我要做的是复杂的 simplelist。所以，在完成了最简单的增删改的功能之后，要加上任务的自己的归属了。每个任务都归属于一个清单，有唯一的清单 id（list_id）。就像 WunderList 一样，左侧清单列表，右侧任务列表。这时候需要用到单页引用中必不可少的路由装置了。</p>
+<p>从简单的开始，除了登录和注册（目前整合在应用中，更好的做法应该是登录注册作为两个单独的页面，这里只是个人 demo，暂不考虑），暂且只有一种路由状态，用来指向对应的清单，例如：<code>/lists/:id</code>。<strong>下面是伪代码</strong></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">id</span><span style="color: #ABB2BF">=</span><span style="color: #98C379">"app"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  &#x3C;</span><span style="color: #E06C75">router-view</span><span style="color: #ABB2BF">>&#x3C;/</span><span style="color: #E06C75">router-view</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">ListItem</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">  {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">template</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">`&#x3C;div class="item">{{item.title}}&#x3C;/div>`</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">props</span><span style="color: #ABB2BF">: [</span><span style="color: #98C379">'item'</span><span style="color: #ABB2BF">],</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">ListContainer</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">template</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">`&#x3C;div class="list"></span></span>
+<span class="line"><span style="color: #98C379">      &#x3C;h2>List {{ $route.params.id }}&#x3C;/h2></span></span>
+<span class="line"><span style="color: #98C379">		&#x3C;div class="item-list"></span></span>
+<span class="line"><span style="color: #98C379">			&#x3C;list-item v-for="item in list" :item='item'>&#x3C;/list-item> </span></span>
+<span class="line"><span style="color: #98C379">		&#x3C;/div></span></span>
+<span class="line"><span style="color: #98C379">    &#x3C;/div>`</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">components</span><span style="color: #ABB2BF">: {</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #98C379">'list-item'</span><span style="color: #ABB2BF">: </span><span style="color: #E06C75">ListItem</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">	},</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">router</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">VueRouter</span><span style="color: #ABB2BF">({</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">routes</span><span style="color: #ABB2BF">: [</span></span>
+<span class="line"><span style="color: #ABB2BF">    { </span><span style="color: #E06C75">path</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'/lists/:id'</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">component</span><span style="color: #ABB2BF">: </span><span style="color: #E06C75">ListContainer</span><span style="color: #ABB2BF"> }</span></span>
+<span class="line"><span style="color: #ABB2BF">  ]</span></span>
+<span class="line"><span style="color: #ABB2BF">})</span></span></code></pre>
+<p>然后绑定好 <code>&#x3C;router-link></code>，路由切换就算完成了。但是光这样还不行，最关键的清单数据管理还没有加上。其实清单的数据状态管理与任务的管理大同小异，就不在此复述，你可以试着捋一捋。</p>
+<h3 id="弹层组件的管理">弹层组件的管理</h3>
+<p>在创建和编辑清单的时候，需要弹出一个 modal 来方便操作（参照 WunderList）。这个时候就涉及到一个问题：这种定位不是很清晰的模块，该怎么来管理？</p>
+<p>在我看来，这种类型模块大致有两类，一类是全局共享，可能在很多不同的组件中都需要调用，这种全局的我认为可以单独拿出来放在同一个地方供应用调用。另一类是只属于某一个组件，只会在固定的组件中被调用，这类模块推荐直接写在组件中，方便管理，最好是写在顶级组件中，避免一些全七八糟的样式冲突（目前我遇到的主要还是层叠顺序的问题）。</p>
+<p>思路清晰之后，可以很顺利的完成清单的创建和编辑功能。</p>
+<p>说到这，一个复杂的 simplelist 的基本结构和功能已经出现了。那么问题来了，你学到了吗？</p>
+    </article>
+
+    <ul class="tags-container astro-LRLIQ33U">
+      <li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/前端" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">前端</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="max-w-screen-2xl mt-auto astro-RWWC6FBJ">
+  <div class="footer-wrapper astro-RWWC6FBJ">
+    <div class="social-icons flex astro-PHLHVEKU">
+  <a type="button" href="https://github.com/zhanglun" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title=" Astro blog facile on Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.instagram.com/zhanglun1410/" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Instagram">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+    <circle cx="12" cy="12" r="3"></circle>
+    <line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
+  </svg>
+</a>
+
+<a type="button" href="mailto:zhanglun1410@gmail.com" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Send an email to Astro blog facile">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3 7 12 13 21 7"></polyline>
+    </svg>
+</a>
+
+<a type="button" href="https://twitter.com/zhanglun1410" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-RWWC6FBJ">
+      <span class="astro-RWWC6FBJ">Copyright &#169; 2023</span>
+      <span class="separator astro-RWWC6FBJ">&nbsp;|&nbsp;</span>
+      <span class="astro-RWWC6FBJ">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

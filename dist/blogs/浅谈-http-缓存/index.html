@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://https/astro-theme-facile/blogs/%E6%B5%85%E8%B0%88-http-%E7%BC%93%E5%AD%98/">
+    <meta name="generator" content="Astro v1.9.1">
+
+    <!-- General Meta Tags -->
+    <title>浅谈 HTTP 缓存</title>
+    <meta name="title" content="浅谈 HTTP 缓存">
+    <meta name="description" content="说到缓存大家可能觉得很简单。">
+    <meta name="author" content="zhanglun">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="浅谈 HTTP 缓存">
+    <meta property="og:description" content="说到缓存大家可能觉得很简单。">
+    <meta property="og:url" content="https://https/astro-theme-facile/blogs/%E6%B5%85%E8%B0%88-http-%E7%BC%93%E5%AD%98/">
+    <meta property="og:image" content="https://https/%E6%B5%85%E8%B0%88%20HTTP%20%E7%BC%93%E5%AD%98.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://https/astro-theme-facile/blogs/%E6%B5%85%E8%B0%88-http-%E7%BC%93%E5%AD%98/">
+    <meta property="twitter:title" content="浅谈 HTTP 缓存">
+    <meta property="twitter:description" content="说到缓存大家可能觉得很简单。">
+    <meta property="twitter:image" content="https://https/astropaper-og.jpg">
+
+    <!-- Google Font -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    /> -->
+
+    
+
+    <script src="/toggle-theme.js"></script>
+  <link rel="stylesheet" href="/astro-theme-facile/assets/about.f0b2d10e.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.7bc150a9.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.5beba882.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/about.2a036302.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.f0163f61.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.80516c5d.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.4fac2f80.css" /><script type="module">const e=document.querySelector(".hamburger-menu"),n=document.querySelector("#menu-items")?.classList,t=document.querySelector(".icon-container")?.classList,o=document.querySelector("#first-line")?.classList,a=document.querySelector("#second-line ")?.classList,s=document.querySelector("#third-line")?.classList;e.addEventListener("click",function(r){e?.getAttribute("aria-expanded")==="false"?(e?.setAttribute("aria-expanded","true"),e?.setAttribute("aria-label","Close Menu"),n?.remove("display-none"),t?.remove("flex"),t?.add("relative"),o?.add("rotate-45","absolute","bottom-1/2"),s?.add("display-none"),a?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(e?.setAttribute("aria-expanded","false"),e?.setAttribute("aria-label","Open Menu"),n?.add("display-none"),t?.add("flex"),t?.remove("relative"),o?.remove("rotate-45","absolute","bottom-1/2"),s?.remove("display-none"),a?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});
+</script></head>
+  <body>
+    <header class="astro-ZEJXROEC">
+  <a id="skip-to-content" href="#main-content" class="astro-ZEJXROEC">Skip to content</a>
+  <div class="nav-container astro-ZEJXROEC">
+    <div class="top-nav-wrap astro-ZEJXROEC">
+      <a href="/" class="logo astro-ZEJXROEC">
+        Astro blog facile
+      </a>
+      <nav id="nav-menu" class="astro-ZEJXROEC">
+        <button class="hamburger-menu focus-outline astro-ZEJXROEC" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
+          <div class="icon-container flex astro-ZEJXROEC">
+            <div id="first-line" class="astro-ZEJXROEC"></div>
+            <div id="second-line" class="astro-ZEJXROEC"></div>
+            <div id="third-line" class="astro-ZEJXROEC"></div>
+          </div>
+        </button>
+        <ul id="menu-items" class="display-none sm:flex astro-ZEJXROEC">
+          <li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/">
+                  <span class="astro-ZEJXROEC">首页</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/blogs">
+                  <span class="astro-ZEJXROEC">博文</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/categories">
+                  <span class="astro-ZEJXROEC">分类</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/archives">
+                  <span class="astro-ZEJXROEC">归档</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/labs">
+                  <span class="astro-ZEJXROEC">实验室</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/about">
+                  <span class="astro-ZEJXROEC">关于我</span>
+                </a>
+              </li>
+          <li class="astro-ZEJXROEC">
+            <a type="button" href="/astro-theme-facile/search" tabindex="0" class="group focus-outline p-3 sm:p-1  astro-ZEJXROEC astro-2C5NGGNE" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100 astro-ZEJXROEC"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-ZEJXROEC"></path>
+              </svg>
+</a>
+
+
+          </li>
+          <li class="astro-ZEJXROEC">
+            <button id="theme-btn" class="focus-outline astro-ZEJXROEC" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-ZEJXROEC">
+                    <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-ZEJXROEC">
+                    <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-LRLIQ33U">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-LRLIQ33U" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-LRLIQ33U"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-LRLIQ33U"></path>
+      </svg><span class="astro-LRLIQ33U">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-LRLIQ33U">
+    <h1 class="post-title astro-LRLIQ33U">浅谈 HTTP 缓存</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-LRLIQ33U"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base" aria-hidden="true"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="sr-only">Posted on:</span><span class="italic text-base">March 9, 2019<span aria-hidden="true"> | </span><span class="sr-only"> at </span>11:41 PM</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-LRLIQ33U">
+      <p>说到缓存大家可能觉得很简单。“不就是检查资源是否有缓存，如果有就加以利用”，“可以节约服务器资源呗”。如果再深入一点，有的cache-control, last-modified, etag 之类的名词，但如果真的考究一下这些字段的细节，恐怕大多数人也说不清楚。遂做了一番整理，希望对大家有所帮助</p>
+<!--more-->
+<h2 id="http-缓存">HTTP 缓存</h2>
+<p>HTTP 缓存是一种保存资源副本并在下次请求时直接使用该副本的技术。最为常见的是，浏览器在本地缓存 HTML 页面、图片等静态资源文件静态文件。</p>
+<blockquote>
+<p>A HTTP cache is an information technology for the temporary storage (caching) of web documents, such as HTML pages and images, to reduce server lag. A web cache system stores copies of documents passing through it; subsequent requests may be satisfied from the cache if certain conditions are met. A web cache system can refer either to an appliance, or to a computer program.
+摘自 Wiki百科 <a href="https://www.wikiwand.com/en/Web_cache">Web cache - Wikiwand</a></p>
+</blockquote>
+<p>合理利用缓存可以实现：</p>
+<ol>
+<li>减少冗余数据的传输，节约网络费用</li>
+<li>缓解了网络瓶颈的问题，节约带宽</li>
+<li>降低服务器压力，服务器可以更快的响应</li>
+<li>减少网络延迟，提升站点的访问速度</li>
+</ol>
+<p><img src="./1.png" alt="59818e08.png"></p>
+<p>如图所示HTTP缓存存在于浏览器和Web代理中。当然在服务器内部，也存在着各种缓存，比如本地缓存GuavaCache/Ehcache，分布式缓存Memcached/Redis等，但这不是本文要讨论的HTTP缓存。</p>
+<p><strong>为了方便描述，下文将用“缓存”代替“HTTP 缓存”</strong></p>
+<h2 id="缓存的分类">缓存的分类</h2>
+<p>在我看来，无论按照什么场景或者维度来划分，HTTP缓存本质上就是两类：客户端缓存和服务端缓存。</p>
+<p>为什么这么说呢？因为在两台计算机之间使用HTTP协议通信时，在一条通信线路上，必定一端是客户端，一端是服务端。</p>
+<p>HTTP协议规定，请求从客户端发出，最后服务端响应。换言之，HTTP协议是能够明显区分哪一端是客户端，哪一段是服务端的。</p>
+<p>像 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching_FAQ#%E5%90%84%E7%A7%8D%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%BC%93%E5%AD%98">MDN文章：HTTP 缓存 - HTTP | MDN</a> 中提到的私有缓存和共享缓存是从网络的拓扑结构层面来解释。</p>
+<p>至于网上大部分博文中提到的“强缓存”， “协商缓存”，我没有在任何文档中找到这两个关键词的定义，如果有知道的同学，欢迎留言。</p>
+<p>由于前端开发人员多与浏览器打交道，所以日常工作中大多时候会用 “浏览器缓存”来代替“客户端缓存”，这一点无伤大雅。</p>
+<h2 id="http-的简单介绍">HTTP 的简单介绍</h2>
+<p>在具体解释HTTP首部字段对缓存的控制规则之前，简单介绍一些与 HTTP 协议有关的内容，作为后续内容的铺垫。</p>
+<h3 id="http-协议">HTTP 协议</h3>
+<blockquote>
+<p>HTTP协议是 Hyper Text Transfer Protocol（超文本传输协议）的缩写,是用于从万维网（WWW:World Wide Web ）服务器传输超文本到客户端的传送协议。</p>
+</blockquote>
+<h3 id="http-报文">HTTP 报文</h3>
+<p>HTTP 报文是HTTP协议传输的数据单元，即一次请求或者一次响应时，发送给对方的数据块。HTPP报文包含了将要发送的完整的数据信息。</p>
+<p><img src="./2.png" alt="57450782.png"></p>
+<p>HTTP 报文分为<strong>请求报文</strong>和<strong>响应报文</strong>。</p>
+<p><img src="./3.png" alt="2a108fe1.png"></p>
+<p><img src="./4.png" alt="20394b00.png"></p>
+<p>请求报文和响应报文中必定包含 HTTP 首部，为客户端和服务端分别处理请求和响应提供所需要的信息。首部字段类型按照实际用途分为四种：</p>
+<ol>
+<li>通用首部字段 (General Heaer Fields) - 请求报文和响应报文双方都会使用的首部</li>
+<li>请求首部字段 (Request Header Fields) - 发送请求报文时使用的首部</li>
+<li>响应首部字段 (Resposne Header Fields) - 返回响应报文时使用的首部</li>
+<li>实体首部字段 (Entity Header Fields) - 报文实体部分使用的首部</li>
+</ol>
+<p><img src="./5.png" alt="7c478d42.png"></p>
+<p>开发者工具中的 Network选项中，可以查看请求的具体信息
+<img src="./6.png" alt="a4104786.png"></p>
+<h2 id="缓存的工作机制">缓存的工作机制</h2>
+<p>对于一条GET请求的基本缓存处理过程包括七个步骤。</p>
+<ol>
+<li>发送 – 缓存从网络中读取即将的请求报文</li>
+<li>解析 – 缓存对报文进行解析，提取出URL和各种首部</li>
+<li>查询 – 缓存查看是否有本地副本可用，如果没有，就获取一份副本，并保存在本地</li>
+<li>新鲜度检测 – 缓存查看已缓存副本是否足够新鲜，如果不是，就询问服务器是否有任何更新</li>
+<li>创建响应 – 缓存会用新的首部和已缓存主体来构建一条响应报文</li>
+<li>返回 – 服务器通过网络将响应发回给客户端</li>
+</ol>
+<p>这里的缓存可以是本地客户端缓存，也可以是代理缓存之类的缓存服务器。服务器可能是源服务器也可能是缓存服务器、客户端可以能是浏览器也可能是缓存服务器</p>
+<h3 id="新鲜度检测和服务器再验证">新鲜度检测和服务器再验证</h3>
+<p>什么是新鲜度检测？要知道，不是所有的缓存副本都与服务器上的文档一致。毕竟，不同场景下，文档都有其变化的原则。比如说，一份报告可能每个月更新一次，在线报纸每天都有新的内容，而金融类的数据可能每过几秒钟就发生变化，如果缓存总是提供老的数据，反而变得毫无用处。</p>
+<p>文档副本在被缓存的一段时间内，都认为文档是“新鲜的”，缓存可以在不联系服务器的情况下，直接提供文档的副本，在客户端的体现为:<code>from cache</code>。当缓存的保留的时间过长，超过了限值，就认为文档“过时了”。在使用这个文档之前，缓存需要与服务端确认，文档是否发生变化，而这就是服务端再验证。</p>
+<p>HTTP 提供称之为<code>文档过期(document expiration)</code> 和 <code>服务器再验证(server revalidation)</code>的机制。可以在不要求服务器记住哪些文档拥有缓存的情况下，还能够了保证缓存与服务器之间的充分一致，</p>
+<p>下图是一个GET请求的缓存流程图</p>
+<p><img src="./7.png" alt="65a807b1.png"></p>
+<p>接下来解释该图中几个关键点的具体工作机制。</p>
+<h4 id="文档过期">文档过期</h4>
+<p>通过通用首部 <code>Cache-Control</code> 和 <code>Expires</code>，HTTP 让服务器对每个文档附加一个“过期时间”，这些首部表示在多长的时间内可以将这些内容视为新鲜的。就像是给食物加上过期时间一样。</p>
+<p><img src="./8.png" alt="9ef1d5bc.png"></p>
+<p><code>Expires</code> 和 <code>Cache-Control: max-age</code> 所做的事情本质上都是过期日期。但前者使用的是绝对时间，定义的是过期的时间，超过这个时间，文档将被视为“过时了”。后者使用的是相对时间，定义的是缓存的使用时间，从第一次生成文档到文档不再新鲜，无法使用位置的最大合法生存时间，单位为秒。</p>
+<p>比如你在2019年3月1日买了一瓶牛奶，<code>Expires</code> 告诉你在3月15日后过期，而<code>Cache-Control:max-age</code> 告诉你是1209600秒 (14 * 24 * 60 * 60) 后过期。</p>
+<p><strong><code>Expires</code> 是来自HTTP/1.0版本的首部，目前存在的意义主要是向下兼容。</strong></p>
+<h4 id="服务器再验证">服务器再验证</h4>
+<p>当缓存的新鲜度不再，意味着到了核对的时间了，缓存需要询问服务器原始文档是否发生了变化。这个过程只有两种结果：</p>
+<ol>
+<li>内容发生了变化，缓存将会获取一份新的文档副本，代替原来的副本，然后文档发给客户端</li>
+<li>内容没有发生变化，缓存获取新的首部，首部中包含新的过期时间，然后更新缓存中的首部</li>
+</ol>
+<p>这种机制的好处在于：按需校验，在保证缓存自动更新的前提下还能够节约服务器资源。</p>
+<p>HTTP提供了一些特殊的条件首部，当一个GET请求在请求首部中带上条件首部时，只有当条件为True时，服务器才会返回对象。</p>
+<h5 id="if-modified-since-date">If-Modified-Since: [Date]</h5>
+<p>如果再指定日期后文档被修改了，条件判定为 True，请求成功后，新的文档将会被缓存，新首部会包含一个新的过期日期。反之响应报文的状态码 <code>304 Not Mofified</code>，不返回文档的主体。</p>
+<p>与响应首部中的<code>Last-Modified</code>配合使用。文档请求成功返回时，服务器将文档的的最后修改日期以<code>Last-Modified</code>加在响应报文中。当缓存进行验证时，将用这个值作为<code>If-Modified-Since</code>首部的字段值：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">If-Modified-Since: &#x3C;cached last-modified date></span></span></code></pre>
+<p>如果此时文档内容被修改，修改日期就会有所不同，条件判定为True。</p>
+<p><img src="./9.png" alt="209f1f80.png"></p>
+<p>用 Node.js 来简单实现这个过程：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">http</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"http"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">url</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"url"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"fs"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">require</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"path"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">mimeList</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">css</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"text/css"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">gif</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"image/gif"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">html</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"text/html"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">ico</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"image/x-icon"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">jpeg</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"image/jpeg"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">jpg</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"image/jpeg"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">js</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"text/javascript"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">json</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"application/json"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">pdf</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"application/pdf"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">png</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"image/png"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">svg</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"image/svg+xml"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">swf</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"application/x-shockwave-flash"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">tiff</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"image/tiff"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">txt</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"text/plain"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">wav</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"audio/x-wav"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">wma</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"audio/x-ms-wma"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">wmv</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"video/x-ms-wmv"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">xml</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"text/xml"</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Expires</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">maxAge</span><span style="color: #ABB2BF">: </span><span style="color: #D19A66">60</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">*</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">60</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">*</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">24</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">*</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">365</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">server</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">http</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">createServer</span><span style="color: #ABB2BF">((</span><span style="color: #E06C75">req</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">res</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">pathname</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">url</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">parse</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">req</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">url</span><span style="color: #ABB2BF">).</span><span style="color: #E06C75">pathname</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">//解析路径</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">resourcePath</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">join</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">__dirname</span><span style="color: #ABB2BF"> , </span><span style="color: #E06C75">pathname</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">suffix</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">extname</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">pathname</span><span style="color: #ABB2BF">).</span><span style="color: #61AFEF">slice</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">//获取后缀</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">contentType</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">mimeList</span><span style="color: #ABB2BF">[</span><span style="color: #E06C75">suffix</span><span style="color: #ABB2BF">];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">existsSync</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">resourcePath</span><span style="color: #ABB2BF">)) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">//判断资源是否存在，存在则读取</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">stat</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">resourcePath</span><span style="color: #ABB2BF">, </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">err</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">stat</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #7F848E">// stat.mtime 返回 文件最后修改的时间</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">lastModified</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">stat</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">mtime</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">toUTCString</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">ifModifiedSince</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"If-Modified-Since"</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">toLowerCase</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">expires</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">Date</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">setHeader</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"Last-Modified"</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">lastModified</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">setHeader</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"Content-Type"</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">contentType</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">setHeader</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"Expires"</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">expires</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">toUTCString</span><span style="color: #ABB2BF">());</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">setHeader</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"Cache-Control"</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">"max-age="</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">+</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Expires</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">maxAge</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">expires</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">setTime</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">expires</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">getTime</span><span style="color: #ABB2BF">() </span><span style="color: #56B6C2">+</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Expires</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">maxAge</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">*</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">1000</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #7F848E">// 服务端的lastModified 与请求中携带的 “If-Modified-Since”的字段值对比</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E5C07B">req</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">headers</span><span style="color: #ABB2BF">[</span><span style="color: #E06C75">ifModifiedSince</span><span style="color: #ABB2BF">] </span><span style="color: #56B6C2">&#x26;&#x26;</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">lastModified</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">==</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">req</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">headers</span><span style="color: #ABB2BF">[</span><span style="color: #E06C75">ifModifiedSince</span><span style="color: #ABB2BF">]) {</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #7F848E">//实现304逻辑</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">writeHead</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">304</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">"Not Modified"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #7F848E">// 注意：此处没有返回资源</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">end</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #ABB2BF">      } </span><span style="color: #C678DD">else</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">resource</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">createReadStream</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">resourcePath</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">writeHead</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">200</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">"Ok"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E5C07B">resource</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">pipe</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">res</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">      }</span></span>
+<span class="line"><span style="color: #ABB2BF">    });</span></span>
+<span class="line"><span style="color: #ABB2BF">  } </span><span style="color: #C678DD">else</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">writeHead</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">404</span><span style="color: #ABB2BF">, { </span><span style="color: #98C379">"Content-Type"</span><span style="color: #ABB2BF">: </span><span style="color: #E06C75">contentType</span><span style="color: #ABB2BF"> });</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">write</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"No Found"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">end</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E5C07B">server</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">listen</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">8080</span><span style="color: #ABB2BF">, </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"Server Listen: http://localhost:8080"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">});</span></span></code></pre>
+<ol>
+<li>在第一次请求时，因为本地没有缓存，node server 返回状态码 200和实体文件，响应首部增加 <code>Last-Modified</code></li>
+<li>command+R 刷新页面(此时浏览器会给请求加上一个Cache-Control: max-age=0)。在第二次请求时，请求报文增加 <code>If-Modified-Since</code>，值为第一次请求时返回的<code>Last-Modified</code>。因为文件的最后修改时间没有发生变化，server 返回 304。</li>
+<li>重新编辑资源文件，再次刷新访问，请求报文依旧增加 <code>If-Modified-Since</code>，值为第一次请求时返回的 <code>Last-Modified</code>。此时 server 判定缓存失效，返回状态码 200和资源内容</li>
+</ol>
+<h5 id="if-none-match-etag">If-None-Match: [ETag]</h5>
+<p>有些情况下，仅使用最后修改时间来做验证是不够的：</p>
+<ul>
+<li>有时候文档被重写，内容没有变化，但是修改时间变化</li>
+<li>有时候文档修改的内容不重要，对使用也没有影响</li>
+<li>有的服务器无法准确判断最后修改时间</li>
+<li>有的场景下文档的数据需要精确亚秒级别，比如实时监控。而 Last-Modified 只能精确到秒</li>
+</ul>
+<p>为了解决这个问题，引入了ETag(实体标签)作为版本标识符。ETag 是根据资源本身的特征经过计算得到的一个值，用来标识一个资源。并不像 Last-Modified 那样直接依赖修改时间而是依赖资源，所以要更加可靠和灵活。ETag在响应返回的时候附加在报文中，当文档发生了修改之后，可以修改对应的ETag来表名这是一个新的版本。缓存可以通过<code>If-None-Match</code>的校验结果来判断使用缓存还是重新获取文档。</p>
+<p><img src="./10.png" alt="054048af.png"></p>
+<p>ETag的生成规则没有严格规定包括，文档内容的hash值，对最后修改时间的hash值，甚至是约定的版本号。作为服务器再验证机制中的一环，有强弱之分</p>
+<p>强校验的ETag匹配要求两个资源内容的每个字节需完全相同，包括所有其他实体字段（如Content-Language）不发生变化。一个强校验ETag校验符的表示形式：“22FAA065-2664-4197-9C5E-C92EA03D0A16”。</p>
+<p>弱校验的ETag匹配要求两个资源在语义上相等，不需要每个字节相同。一个弱校验ETag校验符的表现形式：w/”22FAA065-2664-4197-9C5E-C92EA03D0A16”。</p>
+<p>同样用Node.js 来简单实现：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">server</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">http</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">createServer</span><span style="color: #ABB2BF">((</span><span style="color: #E06C75">req</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">res</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">pathname</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">url</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">parse</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">req</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">url</span><span style="color: #ABB2BF">).</span><span style="color: #E06C75">pathname</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">//解析路径</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">resourcePath</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">join</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">__dirname</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">pathname</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">suffix</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">path</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">extname</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">pathname</span><span style="color: #ABB2BF">).</span><span style="color: #61AFEF">slice</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">//获取后缀</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">contentType</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">mimeList</span><span style="color: #ABB2BF">[</span><span style="color: #E06C75">suffix</span><span style="color: #ABB2BF">];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">existsSync</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">resourcePath</span><span style="color: #ABB2BF">)) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">//判断资源是否存在，存在则读取</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">stat</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">resourcePath</span><span style="color: #ABB2BF">, </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">err</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">stat</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">resource</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">fs</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">readFileSync</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">resourcePath</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">hash</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">crypto</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">createHash</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"sha1"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">tag</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">hash</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">update</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">resource</span><span style="color: #ABB2BF">).</span><span style="color: #61AFEF">digest</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"base64"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">tag</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">setHeader</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'ETag'</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">tag</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E5C07B">req</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">headers</span><span style="color: #ABB2BF">[</span><span style="color: #98C379">"if-none-match"</span><span style="color: #ABB2BF">] </span><span style="color: #56B6C2">===</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">tag</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">writeHead</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">304</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">end</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">      }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">writeHead</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">200</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">end</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">resource</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #7F848E">// res.writeHead(200, "Ok");</span></span>
+<span class="line"><span style="color: #ABB2BF">    });</span></span>
+<span class="line"><span style="color: #ABB2BF">  } </span><span style="color: #C678DD">else</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">writeHead</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">404</span><span style="color: #ABB2BF">, { </span><span style="color: #98C379">"Content-Type"</span><span style="color: #ABB2BF">: </span><span style="color: #E06C75">contentType</span><span style="color: #ABB2BF"> });</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">write</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"No Found"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">end</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #E5C07B">server</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">listen</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">8080</span><span style="color: #ABB2BF">, </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"Server Listen: http://localhost:8080"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">});</span></span></code></pre>
+<ol>
+<li>在第一次请求时，因为本地没有缓存，node server 返回状态码 200和实体文件，响应首部增加 <code>ETag</code></li>
+<li>command+R 刷新页面(此时浏览器会给请求加上一个Cache-Control: max-age=0)。在第二次请求时，请求报文增加 <code>If-None-Match</code>，值为第一次请求时返回的<code>ETag</code>。因为文件的内容没有发生变化，server 返回 304。</li>
+<li>重新编辑资源文件，再次刷新访问，请求报文依旧增加 <code>ETag</code>，值为第一次请求时返回的 <code>ETag</code>。此时server获取到的ETag值已经发生了变化，判定缓存失效，返回状态码 200和资源内容</li>
+</ol>
+<h5 id="if-unmodified-since-date">If-Unmodified-Since: Date</h5>
+<p>类似于If-Modified-Since，意义相反。区别是当服务器资源条件不满足时，不是返回 304 Not Modified，而是返回 412 Precondition Failed。</p>
+<h5 id="if-match-etag">If-Match: ETag</h5>
+<p>和If-None-Match 相反</p>
+<p>说了这么多，再回到之前 GET 请求的缓存流程，结合刚才的解释，可以重新绘制一个流程图：</p>
+<p><img src="./11.png" alt="704be86d.png"></p>
+<h3 id="与缓存相关的首部">与缓存相关的首部</h3>
+<p>总结一下目前涉及到的一些与缓存相关的首部字段，方便大家理解和体会：</p>
+<p><img src="./12.png" alt="24cb815b.png"></p>
+<p>内容有些许枯燥，但还是希望能够帮助大家理解</p>
+<p><strong>参考资料</strong></p>
+<ol>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching_FAQ#%E5%90%84%E7%A7%8D%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%BC%93%E5%AD%98">HTTP 缓存 - HTTP | MDN</a></li>
+<li><a href="https://blog.fundebug.com/2019/01/08/browser-cache-mechanism/">浏览器缓存机制 | Fundebug博客</a></li>
+<li><a href="https://swiftcachelite.swiftserve.com/different-types-of-caching-and-their-differences/">Different Types of Caching and Their Differences - SwiftCache Lite</a></li>
+<li><a href="https://stackoverflow.com/questions/49547/how-to-control-web-page-caching-across-all-browsers">http - How to control web page caching, across all browsers? - Stack Overflow</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching">HTTP Caching  |  Web Fundamentals  |  Google Developers</a></li>
+<li><a href="https://www.wikiwand.com/en/HTTP_ETag">HTTP ETag - Wikiwand</a></li>
+</ol>
+    </article>
+
+    <ul class="tags-container astro-LRLIQ33U">
+      <li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/HTTP" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">HTTP</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="max-w-screen-2xl mt-auto astro-RWWC6FBJ">
+  <div class="footer-wrapper astro-RWWC6FBJ">
+    <div class="social-icons flex astro-PHLHVEKU">
+  <a type="button" href="https://github.com/zhanglun" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title=" Astro blog facile on Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.instagram.com/zhanglun1410/" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Instagram">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+    <circle cx="12" cy="12" r="3"></circle>
+    <line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
+  </svg>
+</a>
+
+<a type="button" href="mailto:zhanglun1410@gmail.com" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Send an email to Astro blog facile">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3 7 12 13 21 7"></polyline>
+    </svg>
+</a>
+
+<a type="button" href="https://twitter.com/zhanglun1410" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-RWWC6FBJ">
+      <span class="astro-RWWC6FBJ">Copyright &#169; 2023</span>
+      <span class="separator astro-RWWC6FBJ">&nbsp;|&nbsp;</span>
+      <span class="astro-RWWC6FBJ">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

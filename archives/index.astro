@@ -12,7 +12,6 @@ const posts = await Astro.glob<Frontmatter>("../../contents/blog/**/*.md");
 const posts2 = await Astro.glob<Frontmatter>("../../contents/notion/**/*.md");
 
 let yearGroup = getUniqueYears([...posts, ...posts2]);
-
 ---
 
 <Layout title={`Archives | ${SITE.title}`}>

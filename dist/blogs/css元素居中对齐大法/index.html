@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://https/astro-theme-facile/blogs/css%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD%E5%AF%B9%E9%BD%90%E5%A4%A7%E6%B3%95/">
+    <meta name="generator" content="Astro v1.9.1">
+
+    <!-- General Meta Tags -->
+    <title>CSS元素居中对齐大法</title>
+    <meta name="title" content="CSS元素居中对齐大法">
+    <meta name="description" content="
+原文标题：Centering in CSS: A Complete Guide
+原文链接：http://css-tricks.com/centering-css-complete-guide/
+
+
+在CSS-tricks上看到一篇关于CSS居中的文章，综合和大部分的CSS居中的解决方案，暂且称作“CSS元素居中大法”好了。">
+    <meta name="author" content="zhanglun">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="CSS元素居中对齐大法">
+    <meta property="og:description" content="
+原文标题：Centering in CSS: A Complete Guide
+原文链接：http://css-tricks.com/centering-css-complete-guide/
+
+
+在CSS-tricks上看到一篇关于CSS居中的文章，综合和大部分的CSS居中的解决方案，暂且称作“CSS元素居中大法”好了。">
+    <meta property="og:url" content="https://https/astro-theme-facile/blogs/css%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD%E5%AF%B9%E9%BD%90%E5%A4%A7%E6%B3%95/">
+    <meta property="og:image" content="https://https/CSS%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD%E5%AF%B9%E9%BD%90%E5%A4%A7%E6%B3%95.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://https/astro-theme-facile/blogs/css%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD%E5%AF%B9%E9%BD%90%E5%A4%A7%E6%B3%95/">
+    <meta property="twitter:title" content="CSS元素居中对齐大法">
+    <meta property="twitter:description" content="
+原文标题：Centering in CSS: A Complete Guide
+原文链接：http://css-tricks.com/centering-css-complete-guide/
+
+
+在CSS-tricks上看到一篇关于CSS居中的文章，综合和大部分的CSS居中的解决方案，暂且称作“CSS元素居中大法”好了。">
+    <meta property="twitter:image" content="https://https/astropaper-og.jpg">
+
+    <!-- Google Font -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    /> -->
+
+    
+
+    <script src="/toggle-theme.js"></script>
+  <link rel="stylesheet" href="/astro-theme-facile/assets/about.f0b2d10e.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.7bc150a9.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.5beba882.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/about.2a036302.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.f0163f61.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.80516c5d.css" />
+<link rel="stylesheet" href="/astro-theme-facile/assets/_slug_.4fac2f80.css" /><script type="module">const e=document.querySelector(".hamburger-menu"),n=document.querySelector("#menu-items")?.classList,t=document.querySelector(".icon-container")?.classList,o=document.querySelector("#first-line")?.classList,a=document.querySelector("#second-line ")?.classList,s=document.querySelector("#third-line")?.classList;e.addEventListener("click",function(r){e?.getAttribute("aria-expanded")==="false"?(e?.setAttribute("aria-expanded","true"),e?.setAttribute("aria-label","Close Menu"),n?.remove("display-none"),t?.remove("flex"),t?.add("relative"),o?.add("rotate-45","absolute","bottom-1/2"),s?.add("display-none"),a?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(e?.setAttribute("aria-expanded","false"),e?.setAttribute("aria-label","Open Menu"),n?.add("display-none"),t?.add("flex"),t?.remove("relative"),o?.remove("rotate-45","absolute","bottom-1/2"),s?.remove("display-none"),a?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});
+</script></head>
+  <body>
+    <header class="astro-ZEJXROEC">
+  <a id="skip-to-content" href="#main-content" class="astro-ZEJXROEC">Skip to content</a>
+  <div class="nav-container astro-ZEJXROEC">
+    <div class="top-nav-wrap astro-ZEJXROEC">
+      <a href="/" class="logo astro-ZEJXROEC">
+        Astro blog facile
+      </a>
+      <nav id="nav-menu" class="astro-ZEJXROEC">
+        <button class="hamburger-menu focus-outline astro-ZEJXROEC" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
+          <div class="icon-container flex astro-ZEJXROEC">
+            <div id="first-line" class="astro-ZEJXROEC"></div>
+            <div id="second-line" class="astro-ZEJXROEC"></div>
+            <div id="third-line" class="astro-ZEJXROEC"></div>
+          </div>
+        </button>
+        <ul id="menu-items" class="display-none sm:flex astro-ZEJXROEC">
+          <li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/">
+                  <span class="astro-ZEJXROEC">首页</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/blogs">
+                  <span class="astro-ZEJXROEC">博文</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/categories">
+                  <span class="astro-ZEJXROEC">分类</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/archives">
+                  <span class="astro-ZEJXROEC">归档</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/labs">
+                  <span class="astro-ZEJXROEC">实验室</span>
+                </a>
+              </li><li class="astro-ZEJXROEC">
+                <a class=" astro-ZEJXROEC" href="/astro-theme-facile/about">
+                  <span class="astro-ZEJXROEC">关于我</span>
+                </a>
+              </li>
+          <li class="astro-ZEJXROEC">
+            <a type="button" href="/astro-theme-facile/search" tabindex="0" class="group focus-outline p-3 sm:p-1  astro-ZEJXROEC astro-2C5NGGNE" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100 astro-ZEJXROEC"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-ZEJXROEC"></path>
+              </svg>
+</a>
+
+
+          </li>
+          <li class="astro-ZEJXROEC">
+            <button id="theme-btn" class="focus-outline astro-ZEJXROEC" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-ZEJXROEC">
+                    <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-ZEJXROEC">
+                    <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-ZEJXROEC"></path>
+                  </svg>
+                </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-LRLIQ33U">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-LRLIQ33U" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-LRLIQ33U"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-LRLIQ33U"></path>
+      </svg><span class="astro-LRLIQ33U">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-LRLIQ33U">
+    <h1 class="post-title astro-LRLIQ33U">CSS元素居中对齐大法</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-LRLIQ33U"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base" aria-hidden="true"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="sr-only">Posted on:</span><span class="italic text-base">October 1, 2014<span aria-hidden="true"> | </span><span class="sr-only"> at </span>04:34 AM</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-LRLIQ33U">
+      <blockquote>
+<p>原文标题：Centering in CSS: A Complete Guide<br>
+原文链接：<a href="http://css-tricks.com/centering-css-complete-guide/">http://css-tricks.com/centering-css-complete-guide/</a></p>
+</blockquote>
+<blockquote>
+<p>在CSS-tricks上看到一篇关于CSS居中的文章，综合和大部分的CSS居中的解决方案，暂且称作“CSS元素居中大法”好了。</p>
+</blockquote>
+<p>大家一直在吐槽的很多，其中就有关于CSS元素居中的问题。为什么这个问题看起来这么难以处理。在我看来，并不是这个问题太难，而是有太多不同的解决方案，因此很难知道哪一个是合适自己的。</p>
+<p>所以让我们来做一个决策树，希望能够让CSS的元素居中问题变得简单。</p>
+<p>##水平方向居中</p>
+<p>###inline 和 inline-* 元素的水平方向居中</p>
+<p>你可以很轻松的将一个块级元素中的inline或者类inline元素居中：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">.center-children{</span></span>
+<span class="line"><span style="color: #abb2bf">	text-align:center;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span></code></pre>
+<p>HTML:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">&#x3C;header></span></span>
+<span class="line"><span style="color: #abb2bf">	This text is centered.</span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/header></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;nav role='navigation'></span></span>
+<span class="line"><span style="color: #abb2bf">	&#x3C;a href="#0">One&#x3C;/a></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;a href="#0">Two&#x3C;/a></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;a href="#0">Three&#x3C;/a></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;a href="#0">Four&#x3C;/a></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/nav></span></span></code></pre>
+<p>CSS:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">header, nav {</span></span>
+<span class="line"><span style="color: #abb2bf">    text-align: center;</span></span>
+<span class="line"><span style="color: #abb2bf">    background: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    margin: 20px 0;</span></span>
+<span class="line"><span style="color: #abb2bf">	padding: 10px;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">nav a {</span></span>
+<span class="line"><span style="color: #abb2bf">    text-decoration: none;</span></span>
+<span class="line"><span style="color: #abb2bf">    background: #333;</span></span>
+<span class="line"><span style="color: #abb2bf">    border-radius: 5px;</span></span>
+<span class="line"><span style="color: #abb2bf">    color: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    padding: 3px 8px;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span></code></pre>
+<!--![single-line-inline](http://ncuey-crispelite.stor.sinaapp.com/single-line-inline.png) -->
+<p><strong>注意：</strong> 这个方法对inline, inline-block, inline-table, inline-flex元素都有效</p>
+<p>###块级元素的水平方向居中</p>
+<p>将一个定宽的块级元素的左外边距和右外边距设为<code>auto</code>，就是这么的easy</p>
+<p>HTML:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">&#x3C;main></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;div class="center"></span></span>
+<span class="line"><span style="color: #abb2bf">    	I'm a block level element and am centered.</span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;/div></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/main></span></span></code></pre>
+<p>CSS:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">body {</span></span>
+<span class="line"><span style="color: #abb2bf">	background: #f06d06;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">main {</span></span>
+<span class="line"><span style="color: #abb2bf">	background: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    margin: 20px 0;</span></span>
+<span class="line"><span style="color: #abb2bf">    padding: 10px;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">.center {</span></span>
+<span class="line"><span style="color: #abb2bf">    margin: 0 auto;</span></span>
+<span class="line"><span style="color: #abb2bf">    width: 200px;</span></span>
+<span class="line"><span style="color: #abb2bf">    background: black;</span></span>
+<span class="line"><span style="color: #abb2bf">    padding: 20px;</span></span>
+<span class="line"><span style="color: #abb2bf">    color: white;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span></code></pre>
+<!--![single-block](http://ncuey-crispelite.stor.sinaapp.com/single-block-center.png) -->
+<p>如果想让多个块级元素在同一行中水平居中时，最好的处理方式就是修改块级元素的 display 的属性值。一种方式是将display的值设置为<code>inline-block</code>，另一种是<code>flexbox</code>。</p>
+<p>HTML：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">&#x3C;main class="inline-block-center"></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;div></span></span>
+<span class="line"><span style="color: #abb2bf">   		I'm an element that is block-like with my siblings and we're centered in a row.</span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;/div></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;div></span></span>
+<span class="line"><span style="color: #abb2bf">        I'm an element that is block-like with my siblings and we're centered in a row. I have more content in me than my siblings do.</span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;/div></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;div></span></span>
+<span class="line"><span style="color: #abb2bf">    	I'm an element that is block-like with my siblings and we're centered in a row.</span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;/div></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/main></span></span>
+<span class="line"><span style="color: #abb2bf"></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;!--flexbox--></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;main class="flex-center"></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;div></span></span>
+<span class="line"><span style="color: #abb2bf">        I'm an element that is block-like with my siblings and we're centered in a row.</span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;/div></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;div></span></span>
+<span class="line"><span style="color: #abb2bf">        I'm an element that is block-like with my siblings and we're centered in a row. I have more content in me than my siblings do.</span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;/div></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;div></span></span>
+<span class="line"><span style="color: #abb2bf">        I'm an element that is block-like with my siblings and we're centered in a row.</span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;/div></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/main></span></span></code></pre>
+<p>CSS:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">body {</span></span>
+<span class="line"><span style="color: #abb2bf">    background: #f06d06;</span></span>
+<span class="line"><span style="color: #abb2bf">    font-size: 80%;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">main {</span></span>
+<span class="line"><span style="color: #abb2bf">    background: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    margin: 20px 0;</span></span>
+<span class="line"><span style="color: #abb2bf">    padding: 10px;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">main div {</span></span>
+<span class="line"><span style="color: #abb2bf">    background: black;</span></span>
+<span class="line"><span style="color: #abb2bf">    color: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    padding: 15px;</span></span>
+<span class="line"><span style="color: #abb2bf">    max-width: 125px;</span></span>
+<span class="line"><span style="color: #abb2bf">    margin: 5px;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">.inline-block-center {</span></span>
+<span class="line"><span style="color: #abb2bf">    text-align: center;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">.inline-block-center div {</span></span>
+<span class="line"><span style="color: #abb2bf">    display: inline-block;</span></span>
+<span class="line"><span style="color: #abb2bf">    text-align: left;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">.flex-center {</span></span>
+<span class="line"><span style="color: #abb2bf">    display: flex;</span></span>
+<span class="line"><span style="color: #abb2bf">    justify-content: center;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span></code></pre>
+<!--![multiple-block](http://ncuey-crispelite.stor.sinaapp.com/mulity-block-center.png) -->
+<p>##垂直方向居中</p>
+<p>关于垂直方向上的居中，需要用到一下小trickers</p>
+<p>###inline 和 inline-* 元素的垂直方向居中
+####单行的内联元素垂直居中</p>
+<p>最简单的一种，上内边距和下内边距相等：</p>
+<p>HTML:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">&#x3C;main></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;a href="#0">We're&#x3C;/a></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;a href="#0">Centered&#x3C;/a></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;a href="#0">Bits of&#x3C;/a></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;a href="#0">Text&#x3C;/a></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/main></span></span></code></pre>
+<p>CSS:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">main {</span></span>
+<span class="line"><span style="color: #abb2bf">    background: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    margin: 20px 0;</span></span>
+<span class="line"><span style="color: #abb2bf">    padding: 50px;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">main a {</span></span>
+<span class="line"><span style="color: #abb2bf">    background: black;</span></span>
+<span class="line"><span style="color: #abb2bf">    color: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    padding: 40px 30px;</span></span>
+<span class="line"><span style="color: #abb2bf">    text-decoration: none;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span></code></pre>
+<!--![v-single-line](http://ncuey-crispelite.stor.sinaapp.com/v-single-line.png) -->
+<p>因为某些原因不能使用这种简单粗暴的方法（这种方法也有其局限性），或者你想垂直居中没有元素包裹的文本的时候，利用<code>line-height</code>属性。将容器的<code>line-height</code>的值设置为与容器高度相同的值，就能很轻松的居中文本。</p>
+<p>HTML:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">&#x3C;main></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;div></span></span>
+<span class="line"><span style="color: #abb2bf">        I'm a centered line.</span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;/div></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/main></span></span></code></pre>
+<p>CSS:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">main {</span></span>
+<span class="line"><span style="color: #abb2bf">    background: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    margin: 20px 0;</span></span>
+<span class="line"><span style="color: #abb2bf">    padding: 40px;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">main div {</span></span>
+<span class="line"><span style="color: #abb2bf">    background: black;</span></span>
+<span class="line"><span style="color: #abb2bf">    color: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    height: 100px;</span></span>
+<span class="line"><span style="color: #abb2bf">    line-height: 100px;</span></span>
+<span class="line"><span style="color: #abb2bf">    padding: 20px;</span></span>
+<span class="line"><span style="color: #abb2bf">    width: 50%;</span></span>
+<span class="line"><span style="color: #abb2bf">    white-space: nowrap;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span></code></pre>
+<!--![line-height](http://ncuey-crispelite.stor.sinaapp.com/v-single-lineheight.png) -->
+<p>####多行的内联元素垂直居中</p>
+<p>上下内边距相等的方法同样可以用在多行的处理上，但是就像前面所说的，这种方法有局限性。当元素是一个表格单元或者通过CSS的设置表现成一个单元格时，这种方法就不奏效了。在这种情况下，使用<code>vertical-align</code>属性来解决这个问题</p>
+<p>HTML:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">&#x3C;table></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;tr></span></span>
+<span class="line"><span style="color: #abb2bf">    	&#x3C;td></span></span>
+<span class="line"><span style="color: #abb2bf">        	I'm vertically centered multiple lines of text in a real table cell.</span></span>
+<span class="line"><span style="color: #abb2bf">        &#x3C;/td></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;/tr></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/table></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;div class="center-table"></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;p>I'm vertically centered multiple lines of text in a CSS-created table layout.&#x3C;/p></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/div></span></span></code></pre>
+<p>CSS:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">body {</span></span>
+<span class="line"><span style="color: #abb2bf">    background: #f06d06;</span></span>
+<span class="line"><span style="color: #abb2bf">    font-size: 80%;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">table {</span></span>
+<span class="line"><span style="color: #abb2bf">    background: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    width: 240px;</span></span>
+<span class="line"><span style="color: #abb2bf">    border-collapse: separate;</span></span>
+<span class="line"><span style="color: #abb2bf">    margin: 20px;</span></span>
+<span class="line"><span style="color: #abb2bf">    height: 250px;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">table td {</span></span>
+<span class="line"><span style="color: #abb2bf">    background: black;</span></span>
+<span class="line"><span style="color: #abb2bf">    color: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    padding: 20px;</span></span>
+<span class="line"><span style="color: #abb2bf">    border: 10px solid white;</span></span>
+<span class="line"><span style="color: #abb2bf">    /* 单元格自带 vertical-align: middle; */</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">.center-table {</span></span>
+<span class="line"><span style="color: #abb2bf">    display: table;</span></span>
+<span class="line"><span style="color: #abb2bf">    height: 250px;</span></span>
+<span class="line"><span style="color: #abb2bf">    background: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    width: 240px;</span></span>
+<span class="line"><span style="color: #abb2bf">    margin: 20px;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">.center-table p {</span></span>
+<span class="line"><span style="color: #abb2bf">    display: table-cell; // 将p表现成一个单元格</span></span>
+<span class="line"><span style="color: #abb2bf">    margin: 0;</span></span>
+<span class="line"><span style="color: #abb2bf">    background: black;</span></span>
+<span class="line"><span style="color: #abb2bf">    color: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    padding: 20px;</span></span>
+<span class="line"><span style="color: #abb2bf">    border: 10px solid white;</span></span>
+<span class="line"><span style="color: #abb2bf">    vertical-align: middle; // 添加单元格默认的属性</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span></code></pre>
+<!--![nu-table-cell](http://ncuey-crispelite.stor.sinaapp.com/mu-table-cell.png) -->
+<p>如果不能使用“表格大法”，可以试试flexbox。一个flex-child在flex-parent中垂直居中松松的。</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">.flex-center-vertically {</span></span>
+<span class="line"><span style="color: #abb2bf">    display: flex;</span></span>
+<span class="line"><span style="color: #abb2bf">    justify-content: center;</span></span>
+<span class="line"><span style="color: #abb2bf">    flex-direction: column;</span></span>
+<span class="line"><span style="color: #abb2bf">    height: 400px;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span></code></pre>
+<p>完整的demo</p>
+<p>HTML:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">&#x3C;div class="flex-center"></span></span>
+<span class="line"><span style="color: #abb2bf">	&#x3C;p>I'm vertically centered multiple lines of text in a flexbox container.&#x3C;/p></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/div></span></span></code></pre>
+<p>CSS:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">body {</span></span>
+<span class="line"><span style="color: #abb2bf">    background: #f06d06;</span></span>
+<span class="line"><span style="color: #abb2bf">    font-size: 80%;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">div {</span></span>
+<span class="line"><span style="color: #abb2bf">    background: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    width: 240px;</span></span>
+<span class="line"><span style="color: #abb2bf">    margin: 20px;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">.flex-center {</span></span>
+<span class="line"><span style="color: #abb2bf">    background: black;</span></span>
+<span class="line"><span style="color: #abb2bf">    color: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    border: 10px solid white;</span></span>
+<span class="line"><span style="color: #abb2bf">    display: flex;</span></span>
+<span class="line"><span style="color: #abb2bf">    flex-direction: column;</span></span>
+<span class="line"><span style="color: #abb2bf">    justify-content: center;</span></span>
+<span class="line"><span style="color: #abb2bf">    height: 200px;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">.flex-center p {</span></span>
+<span class="line"><span style="color: #abb2bf">    margin: 0;</span></span>
+<span class="line"><span style="color: #abb2bf">    padding: 20px;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span></code></pre>
+<!--![mu-flex-center](http://ncuey-crispelite.stor.sinaapp.com/mu-flex-center.png) -->
+<p>flex-parent元素必须指定一个固定高度。</p>
+<p>还有一种称之为“幽灵元素”的技术，可以在上述方法不适用的情况下使用。其实现原理是：在container容器中放置一个<code>height:100%</code>的伪元素，然后文本与这个伪元素垂直对齐。核心代码：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">.ghost-center {</span></span>
+<span class="line"><span style="color: #abb2bf">	position: relative;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">.ghost-center::before {</span></span>
+<span class="line"><span style="color: #abb2bf">    content: " ";</span></span>
+<span class="line"><span style="color: #abb2bf">    display: inline-block;</span></span>
+<span class="line"><span style="color: #abb2bf">    height: 100%;</span></span>
+<span class="line"><span style="color: #abb2bf">    width: 1%;</span></span>
+<span class="line"><span style="color: #abb2bf">    vertical-align: middle;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">.ghost-center p {</span></span>
+<span class="line"><span style="color: #abb2bf">    display: inline-block;</span></span>
+<span class="line"><span style="color: #abb2bf">    vertical-align: middle;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span></code></pre>
+<p>完整的demo：</p>
+<p>HTML:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">&#x3C;div class="ghost-center"></span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;p>I'm vertically centered multiple lines of text in a container. Centered with a ghost pseudo element&#x3C;/p> </span></span>
+<span class="line"><span style="color: #abb2bf">    &#x3C;p>I'm vertically centered multiple lines of text in a container. Centered with a ghost pseudo elementI'm vertically centered multiple lines of text in a container. Centered with a ghost pseudo elementI'm vertically centered multiple lines of text in a container. Centered with a ghost pseudo element&#x3C;/p></span></span>
+<span class="line"><span style="color: #abb2bf">&#x3C;/div></span></span></code></pre>
+<p>CSS:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">body {</span></span>
+<span class="line"><span style="color: #abb2bf">    background: #f06d06;</span></span>
+<span class="line"><span style="color: #abb2bf">    font-size: 80%;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">div {</span></span>
+<span class="line"><span style="color: #abb2bf">    background: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    height: 360px;</span></span>
+<span class="line"><span style="color: #abb2bf">    margin: 20px;</span></span>
+<span class="line"><span style="color: #abb2bf">    color: white;</span></span>
+<span class="line"><span style="color: #abb2bf">    resize: vertical;</span></span>
+<span class="line"><span style="color: #abb2bf">    overflow: auto;</span></span>
+<span class="line"><span style="color: #abb2bf">    padding: 20px;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">.ghost-center::before {</span></span>
+<span class="line"><span style="color: #abb2bf">    content: "";</span></span>
+<span class="line"><span style="color: #abb2bf">    display: inline-block;</span></span>
+<span class="line"><span style="color: #abb2bf">    height: 100%;</span></span>
+<span class="line"><span style="color: #abb2bf">    width: 10px; // 为了效果明显 设置了一个固定的宽度 增加了背景色</span></span>
+<span class="line"><span style="color: #abb2bf">    background:red;</span></span>
+<span class="line"><span style="color: #abb2bf">    vertical-align: middle;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">.ghost-center p {</span></span>
+<span class="line"><span style="color: #abb2bf">    display: inline-block;</span></span>
+<span class="line"><span style="color: #abb2bf">    vertical-align: middle;</span></span>
+<span class="line"><span style="color: #abb2bf">    width: 190px;</span></span>
+<span class="line"><span style="color: #abb2bf">    margin: 0;</span></span>
+<span class="line"><span style="color: #abb2bf">    padding: 20px;</span></span>
+<span class="line"><span style="color: #abb2bf">    background: black;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span></code></pre>
+<!--![presudo-element-center](http://ncuey-crispelite.stor.sinaapp.com/presudo-element-center.png) -->
+<p>你可以试着修改伪元素的高度~~</p>
+<p>####单个块级元素的垂直方向居中</p>
+<p>在页面的布局中，其高度未知是很正常的，有很多原因。当宽度改变的时候，内容中的文本回流改变高度；变化的文本样式也可能改变高度；变化的文本数量也会改变高度；一些按比例放置的元素，比如图片，当它调整大小的时候，高度也会变化；等等。</p>
+<p>如果知道元素的高度。可以使用定位来垂直居中：</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">.parent {</span></span>
+<span class="line"><span style="color: #abb2bf">	position: relative;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">.child {</span></span>
+<span class="line"><span style="color: #abb2bf">    position: absolute;</span></span>
+<span class="line"><span style="color: #abb2bf">    top: 50%;</span></span>
+<span class="line"><span style="color: #abb2bf">    height: 100px;</span></span>
+<span class="line"><span style="color: #abb2bf">    margin-top: -50px; </span></span>
+<span class="line"><span style="color: #abb2bf">    // 这里实际上元素高度的一半，如果没有使用box-sizing:border-box;则需要计算padding和border</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span></code></pre>
+<p>如果不知道元素的高度，也有办法。先定位再平移</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">.parent {</span></span>
+<span class="line"><span style="color: #abb2bf">	position: relative;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span>
+<span class="line"><span style="color: #abb2bf">.child {</span></span>
+<span class="line"><span style="color: #abb2bf">    position: absolute;</span></span>
+<span class="line"><span style="color: #abb2bf">    top: 50%;</span></span>
+<span class="line"><span style="color: #abb2bf">    transform: translateY(-50%);</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span></code></pre>
+<p>当top:50%时，元素的顶部与其包裹的容器高度一半的位置处对齐。利用transform在Y轴上平移时，默认情况下参考点是元素的正中心，向上平移50%的距离其实就是元素的高度一半。</p>
+<!--![](http://ncuey-crispelite.stor.sinaapp.com/2014-10-03_195015.png) -->
+<p>当然如果使用flexbox也是很简单，不必大惊小怪</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">.parent {</span></span>
+<span class="line"><span style="color: #abb2bf">    display: flex;</span></span>
+<span class="line"><span style="color: #abb2bf">    flex-direction: column;</span></span>
+<span class="line"><span style="color: #abb2bf">	justify-content: center;</span></span>
+<span class="line"><span style="color: #abb2bf">}</span></span></code></pre>
+<p>##水平方向和垂直方向同时居中</p>
+<p>前面分开介绍了水平方向和垂直方向上CSS元素居中的解决方案。我们可以组合上面的方法，提出两个方向上同时居中对齐的解决方案。但是我发现一般来说可以分成三类</p>
+<p>###固定大小的元素两个方向上的居中对齐</p>
+<p>在两个方向上定位之后，水平方向上添加值为宽度的一半的负margin，在垂直方向上添加值为高度一般的负margin。</p>
+<p>这很好理解，无需做过多解释</p>
+<p>###大小未知的元素两个方向上的居中对齐</p>
+<p>这个可以说其实就是上面介绍的方法的拓展，只不过也是增加了一个水平方向的处理而已，自己想想~~</p>
+<p>###第三类：flexbox</p>
+<p>第三类就是可以称之上万能的的CSS3中的flexbox</p>
+<p>##结论</p>
+<p>酱紫，你就可以轻松解决CSS的元素居中问题了。拜拜了，CSS Center。</p>
+    </article>
+
+    <ul class="tags-container astro-LRLIQ33U">
+      <li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/译文" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">译文</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/CSS" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">CSS</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-LRJCSWN2">
+  <a href="/tags/笔记" class="pr-1 text-sm group astro-LRJCSWN2">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-LRJCSWN2"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-LRJCSWN2"></path>
+    </svg>
+    &nbsp;<span class="astro-LRJCSWN2">笔记</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="max-w-screen-2xl mt-auto astro-RWWC6FBJ">
+  <div class="footer-wrapper astro-RWWC6FBJ">
+    <div class="social-icons flex astro-PHLHVEKU">
+  <a type="button" href="https://github.com/zhanglun" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title=" Astro blog facile on Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.instagram.com/zhanglun1410/" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Instagram">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+    <circle cx="12" cy="12" r="3"></circle>
+    <line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
+  </svg>
+</a>
+
+<a type="button" href="mailto:zhanglun1410@gmail.com" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Send an email to Astro blog facile">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3 7 12 13 21 7"></polyline>
+    </svg>
+</a>
+
+<a type="button" href="https://twitter.com/zhanglun1410" tabindex="0" class="group link-button astro-PHLHVEKU astro-2C5NGGNE" title="Astro blog facile on Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-RWWC6FBJ">
+      <span class="astro-RWWC6FBJ">Copyright &#169; 2023</span>
+      <span class="separator astro-RWWC6FBJ">&nbsp;|&nbsp;</span>
+      <span class="astro-RWWC6FBJ">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+
