@@ -12,9 +12,9 @@ export interface Props {
 const { activeNav } = Astro.props;
 ---
 
-<header>
+<header class="sticky top-0 z-10 backdrop-blur bg-[#fff] bg-opacity-95">
   <a id="skip-to-content" href="#main-content">Skip to content</a>
-  <div class="nav-container">
+  <div class="nav-container context">
     <div class="top-nav-wrap">
       <a href="/" class="logo">
         {

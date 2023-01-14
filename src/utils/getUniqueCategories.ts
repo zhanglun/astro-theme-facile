@@ -13,6 +13,7 @@ const getUniqueCategories = (posts: MarkdownInstance<Frontmatter>[]) => {
           self.indexOf(value) === index && value
       );
   });
+  
   return categories;
 };
 

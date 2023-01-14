@@ -93,6 +93,10 @@
     @apply hidden;
   }
 
+  .context {
+    @apply max-w-full mx-auto px-5 w-full sm:px-6 md:px-16;
+  }
+
   /* ===== scrollbar ===== */
   html {
     overflow-y: scroll;

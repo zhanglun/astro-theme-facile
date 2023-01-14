@@ -30,7 +30,7 @@ const FormattedDatetime = ({ datetime }: { datetime: string }) => {
 
   const date = myDatetime.toLocaleDateString([], {
     year: "numeric",
-    month: "long",
+    month: "numeric",
     day: "numeric",
   });
 
