@@ -18,7 +18,7 @@ export interface Props {
 
 export async function getStaticPaths() {
   const posts: MarkdownInstance<Frontmatter>[] = await Astro.glob(
-    "../../contents/**/*.md"
+    "../../contents/{blog,notion}/**/*.md"
   );
 
   const categories = getUniqueCategories(posts);
@@ -36,10 +36,9 @@ export async function getStaticPaths() {
 }
 
 const { category } = Astro.props;
-console.log("🚀 ~ file: [category].astro:40 ~ category", category)
 
 const posts: MarkdownInstance<Frontmatter>[] = await Astro.glob(
-  "../../contents/**/*.md"
+  "../../contents/{blog,notion}/**/*.md"
 );
 
 const categoryPosts = getPostsByCategory(posts, category);

@@ -10,6 +10,18 @@ const getPostsByCategory = (
     slufigyAll(
       [].concat(post?.frontmatter?.categories as []).filter(_ => _)
     ).includes(category)
-  );
+  ).sort((a, b) => {
+    console.log("🚀 ~ file: getPostsByCategory.ts:14 ~ ).sort ~ a", a)
+    const l = new Date(a.frontmatter.date);
+    const r = new Date(b.frontmatter.date); 
+
+    if (l > r) {
+      return -1
+    } else if (l < r) {
+      return 1
+    } else {
+      return 0
+    }
+  });
 
 export default getPostsByCategory;
