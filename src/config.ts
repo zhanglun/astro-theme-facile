@@ -15,32 +15,27 @@ export const SITE = {
 export const MENU = [
   {
     id: "home",
-    name: "首页",
+    name: "Home",
     url: "/",
   },
   {
     id: "blogs",
-    name: "博文",
+    name: "Blogs",
     url: "/blogs",
   },
   {
     id: "categories",
-    name: "分类",
+    name: "Categories",
     url: "/categories",
   },
   {
-    id: "archives",
-    name: "归档",
-    url: "/archives",
-  },
-  {
     id: "labs",
-    name: "实验室",
+    name: "Labs",
     url: "/labs",
   },
   {
     id: "about",
-    name: "关于我",
+    name: "About",
     url: "/about",
   },
 ];

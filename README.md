@@ -38,7 +38,6 @@ Inside of astro-theme-facile, you'll see the following folders and files:
 │   └── favicon.svg
 │   └── astro-theme-facile-og.jpg
 │   └── robots.txt
-│   └── toggle-theme.js
 ├── src/
 │   ├── assets/
 │   │   └── socialIcons.ts

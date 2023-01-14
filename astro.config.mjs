@@ -3,12 +3,12 @@ import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
+import AstroMdImages from 'astro-md-image-integration';
 import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://zhanglun.github.io",
-  base: "/",
   integrations: [
     tailwind({
       config: {
@@ -17,6 +17,9 @@ export default defineConfig({
     }),
     react(),
     sitemap(),
+    AstroMdImages({
+      root: './src/contents',
+    })
   ],
   markdown: {
     remarkPlugins: [
