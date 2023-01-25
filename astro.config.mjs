@@ -8,7 +8,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://zhanglun.github.io",
+  site: "https://zhanglun.github.io/",
   integrations: [
     tailwind({
       config: {
@@ -35,6 +35,5 @@ export default defineConfig({
       theme: "one-dark-pro",
       wrap: true,
     },
-    extendDefaultPlugins: true,
   },
 });
