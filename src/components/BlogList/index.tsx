@@ -68,8 +68,8 @@ export const BlogList = (props: Props) => {
             className="leading-none flex items-center cursor-pointer group"
             onClick={() => viewMore()}
           >
-            <span className="mr-2 relative group-hover:after:scale-x-100 group-hover:underline
-            after:content-[' '] after:block after:absolute after:bottom-[-2px] after:w-full after:h-[1px] after:bg-[currentColor] after:scale-x-0 after:origin-right after:transition-transform
+            <span className="mr-2 text-sm relative group-hover:after:scale-x-100 group-hover:underline
+            after:content-[' '] after:block after:absolute after:bottom-[1px] after:w-full after:h-[1px] after:bg-[currentColor] after:scale-x-0 after:origin-right after:transition-transform
             ">VIEW MORE BLOGS</span>
             <CircleArrow
               size={1}

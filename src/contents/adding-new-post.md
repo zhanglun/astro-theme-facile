@@ -19,7 +19,9 @@ Here are some rules/recommendations, tips & ticks for creating new posts in Astr
 
 ## Frontmatter
 
-Frontmatter is the main place to store some important information about the post (article). Frontmatter lies at the top of the article and is written in YAML format. Read more about frontmatter and its usage in [astro documentation](https://docs.astro.build/en/guides/markdown-content/).
+![relative image](./OHR.FalklandKings_ZH-CN6891102487_1920x1080.jpg)
+
+Frontmattedddr is the main place to store some important information about the post (article). Frontmatter lies at the top of the article and is written in YAML format. Read more about frontmatter and its usage in [astro documentation](https://docs.astro.build/en/guides/markdown-content/).
 
 Here is the list of frontmatter property for each post.
 
