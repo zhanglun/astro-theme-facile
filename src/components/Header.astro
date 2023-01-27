@@ -51,7 +51,7 @@ const { activeNav } = Astro.props;
                   class={activeNav === item.id ? "active" : ""}
                   href={import.meta.env.BASE_URL.slice(0, -1) + item.url}
                 >
-                  <span>{item.name}</span>
+                  <span class="font-bold">{item.name}</span>
                 </a>
               </li>
             ))
@@ -130,8 +130,24 @@ const { activeNav } = Astro.props;
     @apply col-span-2 flex justify-center items-center;
   }
   nav ul li a {
-    @apply px-4 py-3 w-full text-center sm:px-2 sm:py-1 sm:my-0 font-medium hover:text-skin-accent;
+    @apply px-4 py-3 w-full text-center sm:px-2 sm:py-1 sm:my-0 font-medium hover:text-skin-accent relative text-neutral-900;
   }
+  nav ul li a:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 100%;
+    width: 0.25rem;
+    height: 0.25rem;
+    left: 50%;
+    margin-top: 0.5rem;
+    border-radius: 1rem;
+    background-color: currentColor;
+    transform: translateX(-50%) scale(.2);
+    opacity: 0;
+    @apply transition-all;
+  }
+
   nav ul li:nth-child(4) a {
     @apply w-auto;
   }
@@ -140,7 +156,9 @@ const { activeNav } = Astro.props;
     @apply col-span-1;
   }
   nav a.active {
-    @apply underline underline-offset-4 decoration-wavy decoration-2;
+  }
+  nav a:hover {
+    @applytext-neutral-600 !important;
   }
   nav a.active svg {
     @apply fill-skin-accent;

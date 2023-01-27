@@ -12,9 +12,9 @@ export function ArticleItem({ href, frontmatter, rawContent }: Props) {
   const { title } = frontmatter;
 
   return (
-    <li>
+    <li className="mt-12">
       <article
-        className="border-b border-[#e2e2e2] group"
+        className="border-b border-stone-200 group"
         itemScope
         itemType="http://schema.org/Article"
       >
