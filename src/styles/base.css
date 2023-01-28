@@ -66,9 +66,11 @@
     prose-figcaption:!text-skin-base prose-figcaption:opacity-70
     prose-code:bg-skin-card prose-code:bg-opacity-75 
     prose-code:!text-skin-base prose-code:p-1 prose-code:rounded
+    prose-code:font-code
     prose-code:after:!content-[''] prose-code:before:!content-['']
     prose-strong:!text-skin-base prose-table:text-skin-base 
     prose-pre:!text-skin-base prose-a:!text-skin-base 
+    prose-pre:font-code
     prose-hr:!border-skin-line prose-li:marker:!text-skin-accent 
     prose-blockquote:!border-l-skin-accent prose-blockquote:border-opacity-50;
   }
