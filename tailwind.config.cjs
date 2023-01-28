@@ -63,7 +63,7 @@ module.exports = {
       },
       fontFamily: {
         mono: [
-          "-apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial!important",
+          "-apple-system,system-ui, Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,Helvetica Neue, Noto Serif SC,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial!important",
         ],
       },
     },
