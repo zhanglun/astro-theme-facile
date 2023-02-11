@@ -66,7 +66,7 @@ module.exports = {
           "-apple-system,system-ui, Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,Helvetica Neue, Noto Serif SC,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial",
         ],
         code: [
-          "Menlo,Monaco,Consolas,Courier New,monospace"
+          "DM Mono,Menlo,Andale Mono,Ubuntu Mono,Monaco,Consolas,Courier New,monospace"
         ],
       },
     },
